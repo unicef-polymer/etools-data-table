@@ -27,7 +27,12 @@
           background-color: var(--list-secondary-color);
         };
       }
-
+      iron-icon {
+        color: var(--list-icon-color);
+      }
+      iron-icon:hover {
+        color: var(--list-icon-hover-color);
+      }
       #table-footer {
         @apply(--layout-horizontal);
         @apply(--layout-center);
@@ -36,6 +41,15 @@
         padding: 0 14px;
         height: 56px;
         background-color: var(--list-bg-color, #FFFFFF);
+      }
+      #table-footer paper-icon-button {
+        color: var(--list-disabled-icon-color, rgba(0, 0, 0, 0.64));
+      }
+      #table-footer paper-icon-button:not([disabled]) {
+        color: var(--list-icon-color, #2b2b2b);
+      }
+      #table-footer paper-icon-button:not([disabled]):hover {
+        color: var(--list-icon-hover-color, rgba(0, 0, 0, 0.87));
       }
 
       #rows {

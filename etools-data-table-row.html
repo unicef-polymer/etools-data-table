@@ -18,11 +18,11 @@
           width: calc(100% - 96px);
         }
         display: block;
-        border-bottom: 1px solid var(--list-divider-color, rgba(0, 0, 0, 0.12));
+        border-bottom: 1px solid var(--list-divider-color, #9D9D9D);
       }
 
       :host(:hover) paper-material {
-        background-color: var(--list-second-bg-color);
+        background-color: var(--list-second-bg-color, #eeeeee);
         @apply(--hover-setting);
       }
 
@@ -31,7 +31,7 @@
         @apply(--layout-center);
         padding-right: 24px;
         font-size: 13px;
-        color: var(--list-text-color, rgba(0, 0, 0, 0.87));
+        color: var(--list-text-color, #2b2b2b);
         background-color: var(--list-bg-color, #FFFFFF);
       }
 
@@ -49,13 +49,16 @@
       }
 
       iron-icon {
-        color: var(--list-icon-color, rgba(0, 0, 0, 0.54));
+        color: var(--list-icon-color, #2b2b2b);
+      }
+      iron-icon:hover {
+        color: var(--list-icon-hover-color, rgba(0, 0, 0, 0.87));
       }
 
       #collapse-wrapper {
         padding: 15px 24px 15px 72px;
-        background-color: var(--list-second-bg-color);
-        border-top: 1px solid var(--list-divider-color, rgba(0, 0, 0, 0.12));
+        background-color: var(--list-second-bg-color, #eeeeee);
+        border-top: 1px solid var(--list-divider-color, #9D9D9D);
       }
 
     </style>

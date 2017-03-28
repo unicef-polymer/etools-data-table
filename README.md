@@ -76,20 +76,16 @@ Etools data table UI
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--layout-flex` |  | ``
-`--layout-horizontal` |  | ``
-`--layout-center` |  | ``
-`--layout-wrap` |  | ``
-`--layout-end-justified` |  | ``
-
-`--list-primary-color` |  | ``
-`--list-secondary-color` |  | ``
-`--list-text-color` |  | ``
-`--list-secondary-text-color` |  | ``
-`--list-bg-color` |  | ``
-`--list-divider-color` |  | ``
-`--list-icon-hover-color` |  | ``
-`--list-icon-color` |  | ``
+`--list-primary-color` | Color of links and button texts | `#40c4ff`
+`--list-secondary-color` | Color of dropdown selected element background | `#ffffff`
+`--list-divider-color` | Color of borders and dividers | `#9D9D9D`
+`--list-bg-color` | Primary background color | `#ffffff`
+`--list-second-bg-color` | Background on hover and of details box | `#eeeeee`
+`--list-text-color` | Primary text color | `#2b2b2b`
+`--list-secondary-text-color` | Text color for the titles | `#757575`
+`--list-icon-color` | Icon color | `#2b2b2b`
+`--list-icon-hover-color` | Icon hover color | `rgba(0, 0, 0, 0.87)`
+`--list-disabled-icon-color` | Disabled icon color | `rgba(0, 0, 0, 0.64)`
 
 
 ## Install
