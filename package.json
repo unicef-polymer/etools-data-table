@@ -1,5 +1,5 @@
 {
-  "name": "etools-behaviors",
+  "name": "etools-data-table",
   "devDependencies": {
     "eslint": "^3.19.0",
     "eslint-config-google": "^0.7.0",
