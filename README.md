@@ -13,6 +13,7 @@ Etools data table UI
 #### etools-data-table-row
  * details-opened - Boolean, default: false
  * no-collapse - Boolean, default: false
+ * no-animation - Boolean, default: false
 #### etools-data-table-footer
  * page-size - Number
  * page-number - Number
