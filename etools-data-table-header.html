@@ -22,9 +22,8 @@
         padding: 0 24px;
         height: 118px;
         background-color: var(--list-bg-color, #FFFFFF);
-        @apply(--data-table-header);
+        @apply --data-table-header;
       }
-
 
       #title {
         width: 100%;
@@ -32,7 +31,7 @@
         line-height: 64px;
         font-size: 20px;
         color: var(--list-text-color, #2b2b2b);
-        @apply(--header-title);
+        @apply --header-title;
       }
 
       #columns {
@@ -40,7 +39,7 @@
         @apply(--layout-center);
         margin-left: 48px;
         height: 56px;
-        @apply(--header-columns);
+        @apply --header-columns;
       }
 
     </style>
@@ -68,16 +67,16 @@
 
         sortOrder: {
           type: Object,
-          observer: '_sortOrderChanged',
+          observer: '_sortOrderChanged'
         },
 
         _lastSelectedCol: {
-          type: Object,
+          type: Object
         },
 
         noTitle: {
           type: Boolean,
-          observer: '_noTitle',
+          observer: '_noTitle'
         },
         noCollapse: {
           type: Boolean,
