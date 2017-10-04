@@ -71,7 +71,7 @@
       <slot name="row-data"></slot>
     </paper-material>
 
-    <iron-collapse id="details" opened="{{detailsOpened}}">
+    <iron-collapse id="details" opened="{{detailsOpened}}" no-animation="[[noAnimation]]">
       <div id="collapse-wrapper">
         <slot name="row-data-details"></slot>
       </div>
@@ -90,6 +90,10 @@
         noCollapse: {
           type: Boolean,
           observer: '_noCollapse'
+        },
+        noAnimation: {
+          type: Boolean,
+          value: false
         }
       },
 
