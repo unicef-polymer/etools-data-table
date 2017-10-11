@@ -27,12 +27,15 @@
           background-color: var(--list-secondary-color);
         };
       }
+
       iron-icon {
         color: var(--list-icon-color);
       }
+
       iron-icon:hover {
         color: var(--list-icon-hover-color);
       }
+
       #table-footer {
         @apply(--layout-horizontal);
         @apply(--layout-center);
@@ -42,12 +45,15 @@
         height: 56px;
         background-color: var(--list-bg-color, #FFFFFF);
       }
+
       #table-footer paper-icon-button {
         color: var(--list-disabled-icon-color, rgba(0, 0, 0, 0.64));
       }
+
       #table-footer paper-icon-button:not([disabled]) {
         color: var(--list-icon-color, #2b2b2b);
       }
+
       #table-footer paper-icon-button:not([disabled]):hover {
         color: var(--list-icon-hover-color, rgba(0, 0, 0, 0.87));
       }
@@ -74,8 +80,6 @@
           display: none;
         };
       }
-
-
     </style>
 
     <div id="table-footer">
@@ -92,13 +96,17 @@
 
       <span id="range">[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]]</span>
 
-      <paper-icon-button icon="first-page" on-tap="_firstPage" disabled$="[[_pageBackDisabled(pageNumber)]]"></paper-icon-button>
+      <paper-icon-button icon="first-page" on-tap="_firstPage"
+                         disabled$="[[_pageBackDisabled(pageNumber)]]"></paper-icon-button>
 
-      <paper-icon-button icon="chevron-left" on-tap="_pageLeft" disabled$="[[_pageBackDisabled(pageNumber)]]"></paper-icon-button>
+      <paper-icon-button icon="chevron-left" on-tap="_pageLeft"
+                         disabled$="[[_pageBackDisabled(pageNumber)]]"></paper-icon-button>
 
-      <paper-icon-button icon="chevron-right" on-tap="_pageRight" disabled$="[[_pageForwardDisabled(pageNumber, totalPages)]]"></paper-icon-button>
+      <paper-icon-button icon="chevron-right" on-tap="_pageRight"
+                         disabled$="[[_pageForwardDisabled(pageNumber, totalPages)]]"></paper-icon-button>
 
-      <paper-icon-button icon="last-page" on-tap="_lastPage" disabled$="[[_pageForwardDisabled(pageNumber, totalPages)]]"></paper-icon-button>
+      <paper-icon-button icon="last-page" on-tap="_lastPage"
+                         disabled$="[[_pageForwardDisabled(pageNumber, totalPages)]]"></paper-icon-button>
 
     </div>
 
@@ -164,7 +172,7 @@
       },
 
       _computeTotalPages: function(pageSize, totalResults) {
-        var result = 1;
+        let result = 1;
         if (pageSize < totalResults) {
           result = Math.ceil(totalResults / pageSize);
         }
@@ -172,8 +180,8 @@
       },
 
       _computeVisibleRange: function(pageNumber, pageSize, totalResults, totalPages) {
-        var start = 1;
-        var end = totalResults;
+        let start = 1;
+        let end = totalResults;
 
         if (pageNumber !== 1) {
           start = (pageNumber - 1) * pageSize + 1;
