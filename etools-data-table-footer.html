@@ -41,9 +41,9 @@
         @apply(--layout-center);
         @apply(--layout-end-justified);
 
-        padding: 0 16px;
+        padding: 0 8px 0 16px;
         height: 48px;
-        background-color: var(--list-bg-color, #FFFFFF);
+        background-color: var(--list-bg-color, #ffffff);
       }
 
       #table-footer paper-icon-button {
@@ -87,10 +87,9 @@
 
       <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink>
         <paper-menu class="dropdown-content" attr-for-selected="name" selected="{{pageSize}}">
-          <paper-item name="5">5</paper-item>
-          <paper-item name="10">10</paper-item>
-          <paper-item name="25">25</paper-item>
-          <paper-item name="50">50</paper-item>
+          <template is="dom-repeat" items="[[pageSizeOptions]]">
+            <paper-item name="[[item]]">[[item]]</paper-item>
+          </template>
         </paper-menu>
       </paper-dropdown-menu>
 
@@ -125,6 +124,11 @@
           notify: true
         },
 
+        pageSizeOptions: {
+          type: Array,
+          value: [5, 10, 25, 50]
+        },
+
         pageNumber: {
           type: Number,
           notify: true
@@ -143,7 +147,7 @@
           type: Array,
           notify: true,
           computed: '_computeVisibleRange(pageNumber, pageSize, totalResults, totalPages)'
-        },
+        }
 
       },
 
