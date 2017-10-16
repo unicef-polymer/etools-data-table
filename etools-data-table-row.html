@@ -18,7 +18,11 @@
           width: calc(100% - 96px);
         };
         display: block;
-        border-bottom: 1px solid var(--list-divider-color, #9D9D9D);
+        border-bottom: 1px solid var(--list-divider-color, #9d9d9d);
+      }
+
+      :host([no-collapse]) paper-material:hover {
+        background: var(--list-bg-color, #ffffff);
       }
 
       paper-material:hover {
@@ -32,18 +36,22 @@
         padding-right: 24px;
         font-size: 13px;
         color: var(--list-text-color, #2b2b2b);
-        background-color: var(--list-bg-color, #FFFFFF);
+        background-color: var(--list-bg-color, #ffffff);
+      }
+
+      :host([no-collapse]) paper-material ::slotted(*) {
+        width: 100%
       }
 
       paper-material ::slotted(*) {
-        @apply(--row-width);
         text-overflow: ellipsis;
+        @apply(--row-width);
       }
 
       #iconWrapper {
         height: 48px;
         line-height: 48px;
-        padding: 0 24px;
+        padding: 0 16px;
         cursor: pointer;
         width: 24px;
       }
@@ -51,15 +59,25 @@
       iron-icon {
         color: var(--list-icon-color, #2b2b2b);
       }
+
       iron-icon:hover {
         color: var(--list-icon-hover-color, rgba(0, 0, 0, 0.87));
       }
 
       #collapse-wrapper {
-        padding: 16px 24px 15px 72px;
+        padding: 16px 24px 16px 58px;
         background-color: var(--list-second-bg-color, #eeeeee);
-        border-top: 1px solid var(--list-divider-color, #9D9D9D);
-	      @apply(--list-row-collapse-wrapper);
+        border-top: 1px solid var(--list-divider-color, #9d9d9d);
+        @apply(--list-row-collapse-wrapper);
+      }
+
+      :host([no-collapse]) #details,
+      :host([no-collapse]) #iconWrapper {
+        display: none;
+      }
+
+      :host([no-collapse]) #wrapper {
+        padding: 0 24px;
       }
 
     </style>
@@ -90,7 +108,7 @@
         },
         noCollapse: {
           type: Boolean,
-          observer: '_noCollapse'
+          reflectToAttribute: true
         },
         noAnimation: {
           type: Boolean,
@@ -100,16 +118,8 @@
 
       _toggleRowDetails: function() {
         this.$.details.toggle();
-      },
-      // disables collapsable content when no-collapse attribute set
-      _noCollapse: function() {
-        this.$.details.style.display = 'none';
-        this.$.wrapper.style.padding = '0 24px';
-        this.$.iconWrapper.style.display = 'none';
-        this.customStyle['--hover-setting'] = 'background : transparent';
-        this.customStyle['--row-width'] = 'width : 100%';
-        this.updateStyles();
       }
+
     });
   </script>
 
