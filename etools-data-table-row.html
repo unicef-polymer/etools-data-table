@@ -27,17 +27,16 @@
 
       paper-material:hover {
         background-color: var(--list-second-bg-color, #eeeeee);
-        @apply --hover-setting;
+        @apply(--hover-setting);
       }
 
       paper-material {
-        @apply --layout-horizontal;
-        @apply --layout-center;
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
         padding-right: 24px;
         font-size: 13px;
         color: var(--list-text-color, #2b2b2b);
         background-color: var(--list-bg-color, #ffffff);
-        @apply --list-row-wrapper;
       }
 
       :host([no-collapse]) paper-material ::slotted(*) {
@@ -46,7 +45,7 @@
 
       paper-material ::slotted(*) {
         text-overflow: ellipsis;
-        @apply --row-width;
+        @apply(--row-width);
       }
 
       #iconWrapper {
@@ -69,7 +68,7 @@
         padding: 16px 24px 16px 58px;
         background-color: var(--list-second-bg-color, #eeeeee);
         border-top: 1px solid var(--list-divider-color, #9d9d9d);
-        @apply --list-row-collapse-wrapper;
+        @apply(--list-row-collapse-wrapper);
       }
 
       :host([no-collapse]) #details,
@@ -79,7 +78,6 @@
 
       :host([no-collapse]) #wrapper {
         padding: 0 24px;
-        @apply --list-row-no-collapse;
       }
 
     </style>
