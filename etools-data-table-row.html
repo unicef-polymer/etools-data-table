@@ -25,6 +25,11 @@
         background: var(--list-bg-color, #ffffff);
       }
 
+      :host([secondary-bg-on-hover]) paper-material:hover {
+        background-color: var(--list-second-bg-color, #eeeeee);
+        @apply --hover-setting;
+      }
+
       paper-material:hover {
         background-color: var(--list-second-bg-color, #eeeeee);
         @apply --hover-setting;
