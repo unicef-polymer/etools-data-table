@@ -11,8 +11,8 @@
     <style>
 
       :host {
-        @apply(--layout-horizontal);
-        @apply(--layout-center);
+        @apply --layout-horizontal;
+        @apply --layout-center;
 
         height: 56px;
         font-size: 12px;
@@ -30,6 +30,7 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        @apply --list-column-label;
       }
 
       #icon-wrapper, iron-icon {
