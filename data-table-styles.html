@@ -8,15 +8,6 @@
   <template>
 
     <style>
-
-      :host {
-        @apply(--layout-flex);
-      }
-
-      :host([hidden]) {
-        display: none;
-      }
-
       a {
         color: var(--list-primary-color, #0099ff);
       }
@@ -40,8 +31,8 @@
       }
       *[slot="row-data"],
       *[slot="row-data-details"] {
-        @apply(--layout-horizontal);
-        @apply(--layout-flex);
+        @apply --layout-horizontal;
+        @apply --layout-flex;
       }
 
       *[slot="row-data"] .col-data {
