@@ -13,7 +13,7 @@ Etools data table UI
 #### etools-data-table-row
  * details-opened - Boolean, default: false
  * no-collapse - Boolean, default: false
- * secondary-bg-on-hover - Boolean, default: false - By default the no-collapse property will also remove the highlighting on mouse over. Set this to true to reinstate the highlighting.
+ * secondary-bg-on-hover - Boolean, default: false - By default the no-collapse property will also remove the highlighting on mouse over. Set this to true to keep the highlighting.
  * no-animation - Boolean, default: false
 #### etools-data-table-footer
  * page-size - Number
