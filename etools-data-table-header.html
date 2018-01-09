@@ -1,4 +1,4 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../paper-material/paper-material.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <!--
@@ -69,60 +69,65 @@
   </template>
 
   <script>
+    'use strict'
+    class EtoolsDataTableHeader extends Polymer.Element {
 
-    Polymer({
+      static get is() {
+        return 'etools-data-table-header';
+      }
 
-      is: 'etools-data-table-header',
+      static get properties() {
+        return {
+          sortOrder: {
+            type: Object,
+            observer: '_sortOrderChanged'
+          },
 
-      properties: {
+          _lastSelectedCol: {
+            type: Object
+          },
 
-        sortOrder: {
-          type: Object,
-          observer: '_sortOrderChanged'
-        },
+          noTitle: {
+            type: Boolean,
+            reflectToAttribute: true
+          },
+          noCollapse: {
+            type: Boolean,
+            reflectToAttribute: true
+          },
+          label: {
+            type: String
+          }
+        };
+      }
 
-        _lastSelectedCol: {
-          type: Object
-        },
+      ready() {
+        super.ready();
+        this.addEventListener('sort-changed', this._handleSortChanged);
+      }
 
-        noTitle: {
-          type: Boolean,
-          reflectToAttribute: true
-        },
-        noCollapse: {
-          type: Boolean,
-          reflectToAttribute: true
-        },
-        label: {
-          type: String
-        }
-      },
-
-      listeners: {
-        'sort-changed': '_handleSortChanged'
-      },
-
-      _handleSortChanged: function(e) {
-        let column = Polymer.dom(e).localTarget;
+      _handleSortChanged(e) {
+        let column = e.target;
         this._clearSelected(column);
         this.set('sortOrder.field', e.detail.field);
         this.set('sortOrder.direction', e.detail.field);
-      },
+      }
 
-      _sortOrderChanged: function(sortOrder) {
+      _sortOrderChanged(sortOrder) {
         let column = this.queryEffectiveChildren('*[field="' + sortOrder.field + '"]');
         this._clearSelected(column);
         column.set('selected', true);
         column.set('direction', sortOrder.direction);
-      },
+      }
 
-      _clearSelected: function(column) {
+      _clearSelected(column) {
         if (this._lastSelectedCol && this._lastSelectedCol !== column) {
           this._lastSelectedCol.set('selected', null);
         }
         this._lastSelectedCol = column;
       }
-    });
+    }
+    customElements.define(EtoolsDataTableHeader.is, EtoolsDataTableHeader);
 
   </script>
 

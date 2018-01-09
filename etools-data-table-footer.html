@@ -1,7 +1,7 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../paper-material/paper-material.html">
 <link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
-<link rel="import" href="../paper-menu/paper-menu.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <!--
@@ -86,11 +86,11 @@
       <span id="rows">Rows per page:</span>
 
       <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink>
-        <paper-menu class="dropdown-content" attr-for-selected="name" selected="{{pageSize}}">
+        <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{pageSize}}">
           <template is="dom-repeat" items="[[pageSizeOptions]]">
-            <paper-item name="[[item]]">[[item]]</paper-item>
+            <paper-item name$="[[item]]">[[item]]</paper-item>
           </template>
-        </paper-menu>
+        </paper-listbox>
       </paper-dropdown-menu>
 
       <span id="range">[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]]</span>
@@ -112,78 +112,80 @@
   </template>
 
   <script>
+    'use strict'
+    class EtoolsDataTableFooter extends Polymer.Element {
 
-    Polymer({
+      static get is() {
+        return 'etools-data-table-footer';
+      }
 
-      is: 'etools-data-table-footer',
+      static get properties() {
+        return {
+          pageSize: {
+            type: String,
+            notify: true
+          },
 
-      properties: {
+          pageSizeOptions: {
+            type: Array,
+            value: [5, 10, 25, 50]
+          },
 
-        pageSize: {
-          type: String,
-          notify: true
-        },
+          pageNumber: {
+            type: Number,
+            notify: true
+          },
 
-        pageSizeOptions: {
-          type: Array,
-          value: [5, 10, 25, 50]
-        },
+          totalResults: {
+            type: Number
+          },
 
-        pageNumber: {
-          type: Number,
-          notify: true
-        },
+          totalPages: {
+            type: Number,
+            computed: '_computeTotalPages(pageSize, totalResults)',
+          },
 
-        totalResults: {
-          type: Number
-        },
+          visibleRange: {
+            type: Array,
+            notify: true,
+            computed: '_computeVisibleRange(pageNumber, pageSize, totalResults, totalPages)'
+          }
+        };
+      }
 
-        totalPages: {
-          type: Number,
-          computed: '_computeTotalPages(pageSize, totalResults)',
-        },
-
-        visibleRange: {
-          type: Array,
-          notify: true,
-          computed: '_computeVisibleRange(pageNumber, pageSize, totalResults, totalPages)'
-        }
-
-      },
-
-      _pageLeft: function() {
+      _pageLeft() {
         if (this.pageNumber > 1) {
           this.set('pageNumber', this.pageNumber - 1);
         }
-      },
+      }
 
-      _pageRight: function() {
+      _pageRight() {
         if (this.pageNumber < this.totalPages) {
           this.set('pageNumber', this.pageNumber + 1);
         }
-      },
+      }
 
-      _firstPage: function() {
+      _firstPage() {
         if (this.pageNumber > 1) {
           this.set('pageNumber', 1);
         }
-      },
+      }
 
-      _lastPage: function() {
+      _lastPage() {
         if (this.pageNumber < this.totalPages) {
           this.set('pageNumber', this.totalPages);
         }
-      },
+      }
 
-      _computeTotalPages: function(pageSize, totalResults) {
+      _computeTotalPages(pageSize, totalResults) {
         let result = 1;
         if (pageSize < totalResults) {
           result = Math.ceil(totalResults / pageSize);
         }
         return result;
-      },
+      }
 
-      _computeVisibleRange: function(pageNumber, pageSize, totalResults, totalPages) {
+      _computeVisibleRange(pageNumber, pageSize, totalResults, totalPages) {
         let start = 1;
         let end = totalResults;
 
@@ -195,18 +197,17 @@
         }
 
         return [start, end];
-      },
-
-      _pageBackDisabled: function(pageNumber) {
-        return pageNumber === 1;
-      },
-
-      _pageForwardDisabled: function(pageNumber, totalPages) {
-        return pageNumber === totalPages;
       }
 
-    });
+      _pageBackDisabled(pageNumber) {
+        return pageNumber === 1;
+      }
 
+      _pageForwardDisabled(pageNumber, totalPages) {
+        return pageNumber === totalPages;
+      }
+    }
+    customElements.define(EtoolsDataTableFooter.is, EtoolsDataTableFooter);
   </script>
 
 </dom-module>

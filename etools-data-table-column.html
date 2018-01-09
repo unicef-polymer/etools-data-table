@@ -1,4 +1,5 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
 <!--
 `etools-data-table-column`
 
@@ -83,33 +84,37 @@
 
   <script>
 
-    Polymer({
+    class EtoolsDataTableColumn extends Polymer.Element {
 
-      is: 'etools-data-table-column',
+      static get is() {
+        return 'etools-data-table-column';
+      }
 
-      properties: {
+      static get properties() {
+        return {
+          selected: {
+            type: Boolean,
+            value: false,
+            reflectToAttribute: true
+          },
 
-        selected: {
-          type: Boolean,
-          value: false,
-          reflectToAttribute: true
-        },
+          field: {
+            type: String,
+          },
 
-        field: {
-          type: String,
-        },
+          direction: {
+            type: String,
+            reflectToAttribute: true
+          }
+        };
+      }
 
-        direction: {
-          type: String,
-          reflectToAttribute: true
-        }
-      },
+      ready() {
+        super.ready();
+        this.addEventListener('tap', this._sort);
+      }
 
-      listeners: {
-        'tap': '_sort'
-      },
-
-      _sort: function() {
+      _sort() {
         if (!this.hasAttribute('sortable')) {
           return;
         }
@@ -119,10 +124,10 @@
         } else {
           this.set('direction', this.direction === 'asc' ? 'desc' : 'asc');
         }
-        this.fire('sort-changed', {field: this.field, direction: this.direction});
-      },
-
-    });
+        this.dispatchEvent(new CustomEvent('sort-changed', {detail: {field: this.field, direction: this.direction}, bubbles: true, composed: true }));
+      }
+    }
+    customElements.define(EtoolsDataTableColumn.is, EtoolsDataTableColumn);
 
   </script>
 
