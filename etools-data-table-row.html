@@ -21,21 +21,21 @@
         border-bottom: 1px solid var(--list-divider-color, #9d9d9d);
       }
 
-      :host([no-collapse]) paper-material:hover {
+      :host([no-collapse]) div#wrapper:hover {
         background: var(--list-bg-color, #ffffff);
       }
 
-      :host([secondary-bg-on-hover]) paper-material:hover {
+      :host([secondary-bg-on-hover]) div#wrapper:hover {
         background-color: var(--list-second-bg-color, #eeeeee);
         @apply --hover-setting;
       }
 
-      paper-material:hover {
+      div#wrapper:hover {
         background-color: var(--list-second-bg-color, #eeeeee);
         @apply --hover-setting;
       }
 
-      paper-material {
+      div#wrapper {
         @apply --layout-horizontal;
         @apply --layout-center;
         padding-right: 24px;
@@ -45,11 +45,11 @@
         @apply --list-row-wrapper;
       }
 
-      :host([no-collapse]) paper-material ::slotted(*) {
+      :host([no-collapse]) div#wrapper ::slotted(*) {
         width: 100%
       }
 
-      paper-material ::slotted(*) {
+      div#wrapper ::slotted(*) {
         text-overflow: ellipsis;
         @apply --row-width;
       }
@@ -90,13 +90,13 @@
 
     </style>
 
-    <paper-material id="wrapper" elevation="0">
+    <div id="wrapper">
       <div id="iconWrapper">
         <iron-icon id="more" icon="expand-more" hidden$="[[detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
         <iron-icon id="less" icon="expand-less" hidden$="[[!detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
       </div>
       <slot name="row-data"></slot>
-    </paper-material>
+    </div>
 
     <iron-collapse id="details" opened="{{detailsOpened}}" no-animation="[[noAnimation]]">
       <div id="collapse-wrapper">
