@@ -45,13 +45,12 @@
         @apply --list-row-wrapper;
       }
 
-      :host([no-collapse]) div#wrapper ::slotted(*) {
-        width: 100%
-      }
-
-      div#wrapper ::slotted(*) {
+      :host div#wrapper ::slotted([slot="row-data"]) {
         text-overflow: ellipsis;
         @apply --row-width;
+      }
+      :host([no-collapse]) div#wrapper ::slotted([slot="row-data"]) {
+        width: 100%
       }
 
       #iconWrapper {
