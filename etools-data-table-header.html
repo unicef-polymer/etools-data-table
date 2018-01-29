@@ -1,5 +1,4 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../paper-material/paper-material.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <!--
 `etools-data-table-header`
@@ -16,14 +15,14 @@
         border-bottom: 1px solid var(--list-divider-color, #9d9d9d);
       }
 
-      paper-material {
+      div#header-wrapper {
         padding: 0 24px;
         height: 118px;
         background-color: var(--list-bg-color, #ffffff);
         @apply --data-table-header;
       }
 
-      :host([no-title]) paper-material {
+      :host([no-title]) div#header-wrapper {
         height: auto;
       }
 
@@ -55,7 +54,7 @@
 
     </style>
 
-    <paper-material elevation="0">
+    <div id="header-wrapper">
       <div id="title">
         <span>[[label]]</span>
       </div>
@@ -64,7 +63,7 @@
         <slot></slot>
       </div>
 
-    </paper-material>
+    </div>
 
   </template>
 

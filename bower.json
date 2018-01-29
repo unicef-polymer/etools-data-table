@@ -6,7 +6,6 @@
   "version": "2.0.0",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
-    "paper-material": "PolymerElements/paper-material#^2.0.0",
     "paper-listbox": "PolymerElements/paper-listbox#^2.0.0",
     "paper-item": "PolymerElements/paper-item#^2.0.0",
     "paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0",
