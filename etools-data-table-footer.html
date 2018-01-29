@@ -1,7 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../paper-material/paper-material.html">
 <link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
-<link rel="import" href="../paper-menu/paper-menu.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <!--
@@ -86,11 +85,11 @@
       <span id="rows">Rows per page:</span>
 
       <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink>
-        <paper-menu class="dropdown-content" attr-for-selected="name" selected="{{pageSize}}">
+        <paper-listbox class="dropdown-content" attr-for-selected="name" selected="{{pageSize}}">
           <template is="dom-repeat" items="[[pageSizeOptions]]">
             <paper-item name="[[item]]">[[item]]</paper-item>
           </template>
-        </paper-menu>
+        </paper-listbox>
       </paper-dropdown-menu>
 
       <span id="range">[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]]</span>
