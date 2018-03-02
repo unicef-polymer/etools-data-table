@@ -83,33 +83,36 @@
         };
       }
     </style>
+    <template
+      is="dom-if"
+      if="[[!_hideFooter(totalResults)]]">
+      <div id="table-footer">
+        <span id="rows">Rows per page:</span>
 
-    <div id="table-footer">
-      <span id="rows">Rows per page:</span>
+        <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink>
+          <paper-listbox class="dropdown-content" attr-for-selected="name" selected="{{pageSize}}">
+            <template is="dom-repeat" items="[[pageSizeOptions]]">
+              <paper-item name="[[item]]">[[item]]</paper-item>
+            </template>
+          </paper-listbox>
+        </paper-dropdown-menu>
 
-      <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink>
-        <paper-listbox class="dropdown-content" attr-for-selected="name" selected="{{pageSize}}">
-          <template is="dom-repeat" items="[[pageSizeOptions]]">
-            <paper-item name="[[item]]">[[item]]</paper-item>
-          </template>
-        </paper-listbox>
-      </paper-dropdown-menu>
+        <span id="range">[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]]</span>
 
-      <span id="range">[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]]</span>
+        <paper-icon-button icon="first-page" on-tap="_firstPage"
+                          disabled$="[[_pageBackDisabled(pageNumber)]]"></paper-icon-button>
 
-      <paper-icon-button icon="first-page" on-tap="_firstPage"
-                         disabled$="[[_pageBackDisabled(pageNumber)]]"></paper-icon-button>
+        <paper-icon-button icon="chevron-left" on-tap="_pageLeft"
+                          disabled$="[[_pageBackDisabled(pageNumber)]]"></paper-icon-button>
 
-      <paper-icon-button icon="chevron-left" on-tap="_pageLeft"
-                         disabled$="[[_pageBackDisabled(pageNumber)]]"></paper-icon-button>
+        <paper-icon-button icon="chevron-right" on-tap="_pageRight"
+                          disabled$="[[_pageForwardDisabled(pageNumber, totalPages)]]"></paper-icon-button>
 
-      <paper-icon-button icon="chevron-right" on-tap="_pageRight"
-                         disabled$="[[_pageForwardDisabled(pageNumber, totalPages)]]"></paper-icon-button>
+        <paper-icon-button icon="last-page" on-tap="_lastPage"
+                          disabled$="[[_pageForwardDisabled(pageNumber, totalPages)]]"></paper-icon-button>
 
-      <paper-icon-button icon="last-page" on-tap="_lastPage"
-                         disabled$="[[_pageForwardDisabled(pageNumber, totalPages)]]"></paper-icon-button>
-
-    </div>
+      </div>
+    </template>
 
   </template>
 
