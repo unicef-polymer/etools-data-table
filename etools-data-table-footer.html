@@ -161,7 +161,7 @@
 
           doNotShow: {
             type: Boolean,
-            computed: '_hideFooter(totalPages)',
+            computed: '_hideFooter(totalResults)',
             reflectToAttribute: true
           }
         };
@@ -226,8 +226,8 @@
         return pageNumber === totalPages;
       }
 
-      _hideFooter(totalPages) {
-        return totalPages <= 1;
+      _hideFooter(totalResults) {
+        return totalResults <= 5;
       }
 
     }
