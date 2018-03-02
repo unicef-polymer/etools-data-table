@@ -83,7 +83,12 @@
   </template>
 
   <script>
+    'use strict';
 
+    /**
+     * @polymer
+     * @customElement
+     */
     class EtoolsDataTableColumn extends Polymer.Element {
 
       static get is() {
@@ -124,9 +129,14 @@
         } else {
           this.set('direction', this.direction === 'asc' ? 'desc' : 'asc');
         }
-        this.dispatchEvent(new CustomEvent('sort-changed', {detail: {field: this.field, direction: this.direction}, bubbles: true, composed: true }));
+        this.dispatchEvent(new CustomEvent('sort-changed', {
+          detail: {field: this.field, direction: this.direction},
+          bubbles: true,
+          composed: true
+        }));
       }
     }
+
     customElements.define(EtoolsDataTableColumn.is, EtoolsDataTableColumn);
 
   </script>

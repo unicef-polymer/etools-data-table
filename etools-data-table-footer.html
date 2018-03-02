@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../paper-material/paper-material.html">
+<link rel="import" href="../polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../paper-listbox/paper-listbox.html">
 <link rel="import" href="../paper-item/paper-item.html">
@@ -17,9 +17,12 @@
 
       :host {
         display: block;
-
         font-size: 12px;
         color: var(--list-text-color, rgba(0, 0, 0, 0.54));
+      }
+
+      :host([do-not-show]) {
+        display: none;
       }
 
       #table-footer paper-item {
@@ -112,7 +115,12 @@
   </template>
 
   <script>
-    'use strict'
+    'use strict';
+
+    /**
+     * @polymer
+     * @customElement
+     */
     class EtoolsDataTableFooter extends Polymer.Element {
 
       static get is() {
@@ -149,6 +157,12 @@
             type: Array,
             notify: true,
             computed: '_computeVisibleRange(pageNumber, pageSize, totalResults, totalPages)'
+          },
+
+          doNotShow: {
+            type: Boolean,
+            computed: '_hideFooter(totalPages)',
+            reflectToAttribute: true
           }
         };
       }
@@ -186,6 +200,11 @@
       }
 
       _computeVisibleRange(pageNumber, pageSize, totalResults, totalPages) {
+        totalResults = Number(totalResults);
+        pageSize = Number(pageSize);
+        pageNumber = Number(pageNumber);
+        totalPages = Number(totalPages);
+
         let start = 1;
         let end = totalResults;
 
@@ -206,7 +225,13 @@
       _pageForwardDisabled(pageNumber, totalPages) {
         return pageNumber === totalPages;
       }
+
+      _hideFooter(totalPages) {
+        return totalPages <= 1;
+      }
+
     }
+
     customElements.define(EtoolsDataTableFooter.is, EtoolsDataTableFooter);
   </script>
 

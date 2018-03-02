@@ -109,11 +109,17 @@
   </template>
 
   <script>
-    'use strict'
+    'use strict';
+
+    /**
+     * @polymer
+     * @customElement
+     */
     class EtoolsDataTableRow extends Polymer.Element {
       static get is() {
         return 'etools-data-table-row';
       }
+
       static get properties() {
         return {
           detailsOpened: {
@@ -134,7 +140,8 @@
       _toggleRowDetails() {
         this.detailsOpened ? this.detailsOpened = false : this.detailsOpened = true
       }
-    };
+    }
+
     customElements.define(EtoolsDataTableRow.is, EtoolsDataTableRow);
   </script>
 

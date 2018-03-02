@@ -1,97 +1,120 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>etools-data-table demo</title>
+  <title>etools-data-table demo</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../etools-data-table.html">
-    <custom-style>
-      <style is="custom-style" include="demo-pages-shared-styles">
-        .vertical-section-container {
-          max-width: 900px;
-        }
-        .col-4 {
-          flex: 0 0 33.333333%;
-          max-width: 33.333333%;
-        }
-        .col-6 {
-          flex: 0 0 50%;
-          max-width: 50%;
-        }
-      </style>
-    </custom-style>
-  </head>
-  <body>
-    <div class="vertical-section-container centered">
-      <h3>Basic etools-data-table demo</h3>
-      <demo-snippet>
-        <dom-bind id="domBind1">
-          <template is="dom-bind">
-            <etools-data-table-header id="listHeader">
-              <etools-data-table-column class="col-4" field="agreement_number" sortable>
-                Reference Number #
-              </etools-data-table-column>
-              <etools-data-table-column class="col-4" field="partner_name" sortable>
-                Partner Full Name
-              </etools-data-table-column>
-              <etools-data-table-column class="col-4" field="partner_type">
-                Type
-              </etools-data-table-column>
-            </etools-data-table-header>
-            <template id="rows" is="dom-repeat"
-             items="[[items]]" as="agreement">
-              <etools-data-table-row>
-                <div slot="row-data" style="display:flex; flex-direction: row;">
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../etools-data-table.html">
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+      .vertical-section-container {
+        max-width: 900px;
+      }
+
+      .col-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+      }
+
+      .col-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+    </style>
+  </custom-style>
+</head>
+<body>
+<div class="vertical-section-container centered">
+  <h3>Basic etools-data-table demo</h3>
+  <demo-snippet>
+    <dom-bind id="domBind1">
+      <template is="dom-bind">
+
+        <etools-data-table-header id="listHeader"
+                                  label="[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]] results to show">
+          <etools-data-table-column class="col-4" field="agreement_number" sortable>
+            Reference Number #
+          </etools-data-table-column>
+          <etools-data-table-column class="col-4" field="partner_name" sortable>
+            Partner Full Name
+          </etools-data-table-column>
+          <etools-data-table-column class="col-4" field="partner_type">
+            Type
+          </etools-data-table-column>
+        </etools-data-table-header>
+
+        <template id="rows" is="dom-repeat"
+                  items="[[items]]" as="agreement">
+          <etools-data-table-row>
+            <div slot="row-data" style="display:flex; flex-direction: row;">
                   <span class="col-4 ">
                       [[agreement.agreement_number]]
                   </span>
-                  <span class="col-4" title="[[agreement.partner_name]]">
+              <span class="col-4" title="[[agreement.partner_name]]">
                     <span class="truncate"> [[agreement.partner_name]] </span>
                   </span>
-                  <span class="col-4">
+              <span class="col-4">
                       [[agreement.agreement_type]]
                   </span>
 
-                </div>
-                <div slot="row-data-details">
-                  <div class="col-6">
-                    <span >Signed By Partner Date</span>
-                    <span>[[agreement.signed_by_partner_date]]</span>
-                  </div>
-                  <div class="col-6">
-                    <span >Signed By UNICEF Date</span>
-                    <span>[[agreement.signed_by_unicef_date]]</span>
-                  </div>
+            </div>
+            <div slot="row-data-details">
+              <div class="col-6">
+                <span>Signed By Partner Date</span>
+                <span>[[agreement.signed_by_partner_date]]</span>
+              </div>
+              <div class="col-6">
+                <span>Signed By UNICEF Date</span>
+                <span>[[agreement.signed_by_unicef_date]]</span>
+              </div>
 
-                </div>
-              </etools-data-table-row>
-            </template>
-          </template>
-        </dom-bind>
-      </demo-snippet>
-    </div>
-    <script>
-      let domBind = document.getElementById('domBind1')
-      domBind.items = [
-        { partner_name : 'Partner name 1',
-          agreement_number: '1234',
-          agreement_type: 'PCA',
-          signed_by_partner_date: '6 jun 2016',
-          signed_by_unicef_date:'7 jun 2016'
-        },
-        { partner_name : 'Partner name 2',
-          agreement_number: '456',
-          agreement_type: 'SSFA',
-          signed_by_partner_date: '16 jun 2016',
-          signed_by_unicef_date:'17 jun 2016'
-        }
-      ]
-    </script>
-  </body>
+            </div>
+          </etools-data-table-row>
+        </template>
+
+        <etools-data-table-footer
+            id="footer"
+            page-size="[[pageSize]]"
+            page-number="[[pageNumber]]"
+            total-results="[[totalResults]]"
+            visible-range="{{visibleRange}}">
+        </etools-data-table-footer>
+
+      </template>
+    </dom-bind>
+  </demo-snippet>
+</div>
+<script>
+
+  function generateDemoData(size) {
+    let demoData = [];
+    for (let i = 0; i < size; i++) {
+      let id = i + 1;
+      demoData.push({
+        partner_name: 'Partner name ' + id,
+        agreement_number: id,
+        agreement_type: 'PCA',
+        signed_by_partner_date: '6 jun 2018',
+        signed_by_unicef_date: '7 jun 2018'
+      });
+    }
+    return demoData;
+  }
+
+  let demoData = generateDemoData(15);
+  let domBind = document.getElementById('domBind1');
+  domBind.pageSize = 10;
+  domBind.pageNumber = 1;
+  domBind.items = demoData;
+  domBind.totalResults = demoData.length;
+  domBind.visibleRange = [1, domBind.pageSize];
+
+</script>
+</body>
 </html>

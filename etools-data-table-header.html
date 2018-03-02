@@ -68,7 +68,12 @@
   </template>
 
   <script>
-    'use strict'
+    'use strict';
+
+    /**
+     * @polymer
+     * @customElement
+     */
     class EtoolsDataTableHeader extends Polymer.Element {
 
       static get is() {
@@ -126,6 +131,7 @@
         this._lastSelectedCol = column;
       }
     }
+
     customElements.define(EtoolsDataTableHeader.is, EtoolsDataTableHeader);
 
   </script>
