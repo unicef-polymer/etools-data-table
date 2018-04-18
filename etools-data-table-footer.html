@@ -4,6 +4,7 @@
 <link rel="import" href="../paper-listbox/paper-listbox.html">
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <!--
 `etools-data-table-footer`
 
@@ -78,10 +79,9 @@
           font-size: 12px;
           height: 24px;
           /* For IE below */
-          display: flex;
-          flex-direction: row;
+          @apply --layout-horizontal;
           align-items: strech;
-          max-width: 16px;
+          max-width: 24px;
         };
 
         --paper-input-container-underline: {
