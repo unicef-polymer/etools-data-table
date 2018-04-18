@@ -74,9 +74,14 @@
         bottom: 9px;
 
         --paper-input-container-input: {
+          color: var(--list-text-color, rgba(0, 0, 0, 0.54));
           font-size: 12px;
           height: 24px;
-          color: var(--list-text-color, rgba(0, 0, 0, 0.54));
+          /* For IE below */
+          display: flex;
+          flex-direction: row;
+          align-items: strech;
+          max-width: 16px;
         };
 
         --paper-input-container-underline: {
