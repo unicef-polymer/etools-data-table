@@ -6,7 +6,8 @@ Etools data table UI
 
 #### etools-data-table-header
  * label - String
- * no-collapse - Boolean, default: false
+ * noCollapse - Boolean, default: false
+ * noTitle - Boolean, default: false
 #### etools-data-table-column
  * field - String
  * sortable - Boolean, default: false
