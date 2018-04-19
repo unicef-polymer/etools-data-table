@@ -4,6 +4,7 @@
 <link rel="import" href="../paper-listbox/paper-listbox.html">
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <!--
 `etools-data-table-footer`
 
@@ -25,10 +26,11 @@
         display: none;
       }
 
-      #table-footer paper-item {
+      #table-footer paper-item {        
         --paper-item-focused: {
           background-color: var(--list-secondary-color);
         };
+        height: 24px; /* for IE */
       }
 
       iron-icon {
@@ -74,9 +76,13 @@
         bottom: 9px;
 
         --paper-input-container-input: {
+          color: var(--list-text-color, rgba(0, 0, 0, 0.54));
           font-size: 12px;
           height: 24px;
-          color: var(--list-text-color, rgba(0, 0, 0, 0.54));
+          /* For IE below */
+          @apply --layout-horizontal;
+          align-items: strech;
+          max-width: 24px;
         };
 
         --paper-input-container-underline: {
