@@ -1,8 +1,10 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../paper-listbox/paper-listbox.html">
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <!--
 `etools-data-table-footer`
 
@@ -24,10 +26,11 @@
         display: none;
       }
 
-      #table-footer paper-item {
+      #table-footer paper-item {        
         --paper-item-focused: {
           background-color: var(--list-secondary-color);
         };
+        height: 24px; /* for IE */
       }
 
       iron-icon {
@@ -73,9 +76,13 @@
         bottom: 9px;
 
         --paper-input-container-input: {
+          color: var(--list-text-color, rgba(0, 0, 0, 0.54));
           font-size: 12px;
           height: 24px;
-          color: var(--list-text-color, rgba(0, 0, 0, 0.54));
+          /* For IE below */
+          @apply --layout-horizontal;
+          align-items: strech;
+          max-width: 24px;
         };
 
         --paper-input-container-underline: {
@@ -88,9 +95,9 @@
       <span id="rows">Rows per page:</span>
 
       <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink>
-        <paper-listbox class="dropdown-content" attr-for-selected="name" selected="{{pageSize}}">
+        <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{pageSize}}">
           <template is="dom-repeat" items="[[pageSizeOptions]]">
-            <paper-item name="[[item]]">[[item]]</paper-item>
+            <paper-item name$="[[item]]">[[item]]</paper-item>
           </template>
         </paper-listbox>
       </paper-dropdown-menu>
@@ -114,84 +121,96 @@
   </template>
 
   <script>
+    'use strict';
 
-    Polymer({
+    /**
+     * @polymer
+     * @customElement
+     */
+    class EtoolsDataTableFooter extends Polymer.Element {
 
-      is: 'etools-data-table-footer',
+      static get is() {
+        return 'etools-data-table-footer';
+      }
 
-      properties: {
+      static get properties() {
+        return {
+          pageSize: {
+            type: String,
+            notify: true
+          },
 
-        pageSize: {
-          type: String,
-          notify: true
-        },
+          pageSizeOptions: {
+            type: Array,
+            value: [5, 10, 25, 50]
+          },
 
-        pageSizeOptions: {
-          type: Array,
-          value: [5, 10, 25, 50]
-        },
+          pageNumber: {
+            type: Number,
+            notify: true
+          },
 
-        pageNumber: {
-          type: Number,
-          notify: true
-        },
+          totalResults: {
+            type: Number
+          },
 
-        totalResults: {
-          type: Number
-        },
+          totalPages: {
+            type: Number,
+            computed: '_computeTotalPages(pageSize, totalResults)',
+          },
 
-        totalPages: {
-          type: Number,
-          computed: '_computeTotalPages(pageSize, totalResults)',
-        },
+          visibleRange: {
+            type: Array,
+            notify: true,
+            computed: '_computeVisibleRange(pageNumber, pageSize, totalResults, totalPages)'
+          },
 
-        visibleRange: {
-          type: Array,
-          notify: true,
-          computed: '_computeVisibleRange(pageNumber, pageSize, totalResults, totalPages)'
-        },
+          doNotShow: {
+            type: Boolean,
+            computed: '_hideFooter(totalResults)',
+            reflectToAttribute: true
+          }
+        };
+      }
 
-        doNotShow: {
-          type: Boolean,
-          computed: '_hideFooter(totalResults)',
-          reflectToAttribute: true
-        }
-
-      },
-
-      _pageLeft: function() {
+      _pageLeft() {
         if (this.pageNumber > 1) {
           this.set('pageNumber', this.pageNumber - 1);
         }
-      },
+      }
 
-      _pageRight: function() {
+      _pageRight() {
         if (this.pageNumber < this.totalPages) {
           this.set('pageNumber', this.pageNumber + 1);
         }
-      },
+      }
 
-      _firstPage: function() {
+      _firstPage() {
         if (this.pageNumber > 1) {
           this.set('pageNumber', 1);
         }
-      },
+      }
 
-      _lastPage: function() {
+      _lastPage() {
         if (this.pageNumber < this.totalPages) {
           this.set('pageNumber', this.totalPages);
         }
-      },
+      }
 
-      _computeTotalPages: function(pageSize, totalResults) {
+      _computeTotalPages(pageSize, totalResults) {
         let result = 1;
         if (pageSize < totalResults) {
           result = Math.ceil(totalResults / pageSize);
         }
         return result;
-      },
+      }
 
-      _computeVisibleRange: function(pageNumber, pageSize, totalResults, totalPages) {
+      _computeVisibleRange(pageNumber, pageSize, totalResults, totalPages) {
+        totalResults = Number(totalResults);
+        pageSize = Number(pageSize);
+        pageNumber = Number(pageNumber);
+        totalPages = Number(totalPages);
+
         let start = 1;
         let end = totalResults;
 
@@ -203,13 +222,13 @@
         }
 
         return [start, end];
-      },
+      }
 
-      _pageBackDisabled: function(pageNumber) {
+      _pageBackDisabled(pageNumber) {
         return pageNumber === 1;
-      },
+      }
 
-      _pageForwardDisabled: function(pageNumber, totalPages) {
+      _pageForwardDisabled(pageNumber, totalPages) {
         return pageNumber === totalPages;
       },
 
@@ -217,8 +236,13 @@
         return totalResults <= 5;
       }
 
-    });
+      _hideFooter(totalResults) {
+        return totalResults <= 5;
+      }
 
+    }
+
+    customElements.define(EtoolsDataTableFooter.is, EtoolsDataTableFooter);
   </script>
 
 </dom-module>

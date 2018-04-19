@@ -89,7 +89,8 @@ Custom property | Description | Default
 `--list-icon-hover-color` | Icon hover color | `rgba(0, 0, 0, 0.87)`
 `--list-disabled-icon-color` | Disabled icon color | `rgba(0, 0, 0, 0.64)`
 `--list-row-collapse-wrapper` | Row collapsible details mixin | `{}`
-
+`--list-row-wrapper` | Row wrapper mixin | `{}`
+`--list-row-wrapper-padding` | Row wrapper padding var | `0 24px 0 0`
 
 ## Install
 

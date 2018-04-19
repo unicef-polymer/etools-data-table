@@ -48,17 +48,17 @@
           row = fixture('row');
         });
         test('instantiating etools-data-table-column works', function() {
-          assert.equal(column.is, 'etools-data-table-column');
+          expect(column).to.not.equal(undefined);
         });
         test('tapping column resorts contents', function() {
           let initialValue = column.direction;
-          let arrow = Polymer.dom(column.root).querySelector('#icon-wrapper');
+          let arrow = column.shadowRoot.querySelector('#icon-wrapper');
           column.setAttribute('sortable', 'true');
           MockInteractions.tap(arrow);
           expect(initialValue).to.not.equal(column.direction);
         });
         test('instantiating etools-data-table-footer works', function() {
-          assert.equal(footer.is, 'etools-data-table-footer');
+          expect(footer).to.not.equal(undefined);
         });
         test('table footer correctly computes total pages', function() {
           let testFunction = (size, results, total) => {
@@ -92,19 +92,19 @@
           };
         });
         test('instantiating etools-data-table-header works', function() {
-          assert.equal(header.is, 'etools-data-table-header');
+          expect(header).to.not.equal(undefined);
         });
         test('instantiating etools-data-table-row works', function() {
-          assert.equal(row.is, 'etools-data-table-row');
+          expect(row).to.not.equal(undefined);
         });
         test('show data toggle opens', function() {
-          let expand = Polymer.dom(row.root).querySelector('#more')
+          let expand = row.shadowRoot.querySelector('#more')
           MockInteractions.tap(expand)
           expect(row.detailsOpened).to.equal(true)
         })
         test('show data toggle closes', function() {
           row.detailsOpened = true
-          let collapse = Polymer.dom(row.root).querySelector('#less')
+          let collapse = row.shadowRoot.querySelector('#less')
           MockInteractions.tap(collapse)
           expect(row.detailsOpened).to.equal(false)
         })
