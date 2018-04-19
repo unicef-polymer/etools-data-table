@@ -224,6 +224,10 @@
 
       _pageForwardDisabled(pageNumber, totalPages) {
         return pageNumber === totalPages;
+      },
+
+      _hideFooter: function(totalResults) {
+        return totalResults <= 5;
       }
 
       _hideFooter(totalResults) {

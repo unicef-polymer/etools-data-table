@@ -51,6 +51,9 @@
         text-overflow: ellipsis;
         @apply --row-width;
       }
+      :host([no-collapse]) div#wrapper ::slotted([slot="row-data"]) {
+        width: 100%
+      }
 
       :host([no-collapse]) div#wrapper ::slotted([slot="row-data"]) {
         width: 100%
