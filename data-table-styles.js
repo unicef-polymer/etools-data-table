@@ -1,9 +1,9 @@
-<!-- Styles for list pages -->
+import '@polymer/polymer/polymer-element.js';
+import '@polymer/iron-flex-layout/iron-flex-layout.js';
+const $_documentContainer = document.createElement('template');
+$_documentContainer.setAttribute('style', 'display: none;');
 
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-
-<dom-module id="data-table-styles">
+$_documentContainer.innerHTML = `<dom-module id="data-table-styles">
 
   <template>
 
@@ -74,4 +74,14 @@
 
   </template>
 
-</dom-module>
+</dom-module>`;
+
+document.head.appendChild($_documentContainer.content);
+
+/* Styles for list pages */
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+;

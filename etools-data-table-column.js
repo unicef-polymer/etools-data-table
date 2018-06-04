@@ -1,14 +1,23 @@
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../iron-icons/iron-icons.html">
-<!--
-`etools-data-table-column`
 
-@demo demo/index.html
--->
-<dom-module id="etools-data-table-column">
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 
-  <template>
+import '@polymer/iron-icons/iron-icons.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
+/**
+ * `etools-data-table-column`
+ * @polymer
+ * @customElement
+ * @demo demo/index.html
+ */
+class EtoolsDataTableColumn extends PolymerElement {
+  static get template() {
+    return html`
     <style>
 
       :host {
@@ -79,66 +88,53 @@
       <iron-icon id="up" icon="arrow-upward"></iron-icon>
       <iron-icon id="down" icon="arrow-downward"></iron-icon>
     </div>
+`;
+  }
 
-  </template>
+  static get is() {
+    return 'etools-data-table-column';
+  }
 
-  <script>
-    'use strict';
+  static get properties() {
+    return {
+      selected: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      },
 
-    /**
-     * @polymer
-     * @customElement
-     */
-    class EtoolsDataTableColumn extends Polymer.Element {
+      field: {
+        type: String
+      },
 
-      static get is() {
-        return 'etools-data-table-column';
+      direction: {
+        type: String,
+        reflectToAttribute: true
       }
+    };
+  }
 
-      static get properties() {
-        return {
-          selected: {
-            type: Boolean,
-            value: false,
-            reflectToAttribute: true
-          },
+  ready() {
+    super.ready();
+    this.addEventListener('tap', this._sort);
+  }
 
-          field: {
-            type: String
-          },
-
-          direction: {
-            type: String,
-            reflectToAttribute: true
-          }
-        };
-      }
-
-      ready() {
-        super.ready();
-        this.addEventListener('tap', this._sort);
-      }
-
-      _sort() {
-        if (!this.hasAttribute('sortable')) {
-          return;
-        }
-        if (!this.selected || !this.direction) {
-          this.set('selected', true);
-          this.set('direction', 'asc');
-        } else {
-          this.set('direction', this.direction === 'asc' ? 'desc' : 'asc');
-        }
-        this.dispatchEvent(new CustomEvent('sort-changed', {
-          detail: {field: this.field, direction: this.direction},
-          bubbles: true,
-          composed: true
-        }));
-      }
+  _sort() {
+    if (!this.hasAttribute('sortable')) {
+      return;
     }
+    if (!this.selected || !this.direction) {
+      this.set('selected', true);
+      this.set('direction', 'asc');
+    } else {
+      this.set('direction', this.direction === 'asc' ? 'desc' : 'asc');
+    }
+    this.dispatchEvent(new CustomEvent('sort-changed', {
+      detail: {field: this.field, direction: this.direction},
+      bubbles: true,
+      composed: true
+    }));
+  }
+}
 
-    customElements.define(EtoolsDataTableColumn.is, EtoolsDataTableColumn);
-
-  </script>
-
-</dom-module>
+customElements.define(EtoolsDataTableColumn.is, EtoolsDataTableColumn);

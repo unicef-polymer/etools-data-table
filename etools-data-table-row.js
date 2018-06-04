@@ -1,15 +1,24 @@
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../iron-icons/iron-icons.html">
-<link rel="import" href="../iron-collapse/iron-collapse.html">
-<!--
-`etools-data-table-row`
 
-@demo demo/index.html
--->
-<dom-module id="etools-data-table-row">
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 
-  <template>
+import '@polymer/iron-icons/iron-icons.js';
+import '@polymer/iron-collapse/iron-collapse.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
+/**
+ * `etools-data-table-row`
+ * @polymer
+ * @customElement
+ * @demo demo/index.html
+ */
+class EtoolsDataTableRow extends PolymerElement {
+  static get template() {
+    return html`
     <style>
       *[hidden] {
         display: none !important;
@@ -97,8 +106,8 @@
 
     <div id="wrapper">
       <div id="iconWrapper">
-        <iron-icon id="more" icon="expand-more" hidden$="[[detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
-        <iron-icon id="less" icon="expand-less" hidden$="[[!detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
+        <iron-icon id="more" icon="expand-more" hidden\$="[[detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
+        <iron-icon id="less" icon="expand-less" hidden\$="[[!detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
       </div>
       <slot name="row-data"></slot>
     </div>
@@ -108,44 +117,33 @@
         <slot name="row-data-details"></slot>
       </div>
     </iron-collapse>
+`;
+  }
 
-  </template>
+  static get is() {
+    return 'etools-data-table-row';
+  }
 
-  <script>
-    'use strict';
-
-    /**
-     * @polymer
-     * @customElement
-     */
-    class EtoolsDataTableRow extends Polymer.Element {
-      static get is() {
-        return 'etools-data-table-row';
+  static get properties() {
+    return {
+      detailsOpened: {
+        type: Boolean,
+        value: false
+      },
+      noCollapse: {
+        type: Boolean,
+        reflectToAttribute: true
+      },
+      noAnimation: {
+        type: Boolean,
+        value: false
       }
+    };
+  }
 
-      static get properties() {
-        return {
-          detailsOpened: {
-            type: Boolean,
-            value: false
-          },
-          noCollapse: {
-            type: Boolean,
-            reflectToAttribute: true
-          },
-          noAnimation: {
-            type: Boolean,
-            value: false
-          }
-        };
-      }
+  _toggleRowDetails() {
+    this.detailsOpened ? this.detailsOpened = false : this.detailsOpened = true;
+  }
+}
 
-      _toggleRowDetails() {
-        this.detailsOpened ? this.detailsOpened = false : this.detailsOpened = true;
-      }
-    }
-
-    customElements.define(EtoolsDataTableRow.is, EtoolsDataTableRow);
-  </script>
-
-</dom-module>
+customElements.define(EtoolsDataTableRow.is, EtoolsDataTableRow);

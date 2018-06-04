@@ -1,47 +1,49 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>etools-data-table demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-  <title>etools-data-table demo</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
+    <script type="module" src="../etools-data-table.js"></script>
 
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../etools-data-table.html">
-  <custom-style>
-    <style is="custom-style" include="demo-pages-shared-styles">
-      .vertical-section-container {
-        max-width: 900px;
-      }
+    <custom-style>
+        <style is="custom-style" include="demo-pages-shared-styles">
+            .vertical-section-container {
+                max-width: 900px;
+            }
 
-      .col-4 {
-        flex: 0 0 33.333333%;
-        max-width: 33.333333%;
-      }
+            .col-4 {
+                flex: 0 0 33.333333%;
+                max-width: 33.333333%;
+            }
 
-      .col-6 {
-        flex: 0 0 50%;
-        max-width: 50%;
-      }
-    </style>
-  </custom-style>
+            .col-6 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+        </style>
+    </custom-style>
+
+
 </head>
 <body>
+
 <div class="vertical-section-container centered">
   <h3>Basic etools-data-table demo</h3>
   <demo-snippet>
     <dom-bind id="domBind1">
       <template is="dom-bind">
 
-        <etools-data-table-header id="listHeader"
-                                  label="[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]] results to show">
-          <etools-data-table-column class="col-4" field="agreement_number" sortable>
+        <etools-data-table-header id="listHeader" label="[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]] results to show">
+          <etools-data-table-column class="col-4" field="agreement_number" sortable="">
             Reference Number #
           </etools-data-table-column>
-          <etools-data-table-column class="col-4" field="partner_name" sortable>
+          <etools-data-table-column class="col-4" field="partner_name" sortable="">
             Partner Full Name
           </etools-data-table-column>
           <etools-data-table-column class="col-4" field="partner_type">
@@ -49,8 +51,7 @@
           </etools-data-table-column>
         </etools-data-table-header>
 
-        <template id="rows" is="dom-repeat"
-                  items="[[items]]" as="agreement">
+        <template id="rows" is="dom-repeat" items="[[items]]" as="agreement">
           <etools-data-table-row>
             <div slot="row-data" style="display:flex; flex-direction: row;">
                   <span class="col-4 ">
@@ -78,43 +79,41 @@
           </etools-data-table-row>
         </template>
 
-        <etools-data-table-footer
-            id="footer"
-            page-size="[[pageSize]]"
-            page-number="[[pageNumber]]"
-            total-results="[[totalResults]]"
-            visible-range="{{visibleRange}}">
+        <etools-data-table-footer id="footer" page-size="[[pageSize]]" page-number="[[pageNumber]]" total-results="[[totalResults]]" visible-range="{{visibleRange}}">
         </etools-data-table-footer>
 
       </template>
     </dom-bind>
   </demo-snippet>
 </div>
-<script>
 
-  function generateDemoData(size) {
-    let demoData = [];
-    for (let i = 0; i < size; i++) {
-      let id = i + 1;
-      demoData.push({
-        partner_name: 'Partner name ' + id,
-        agreement_number: id,
-        agreement_type: 'PCA',
-        signed_by_partner_date: '6 jun 2018',
-        signed_by_unicef_date: '7 jun 2018'
-      });
+<script type="module">
+    import '@polymer/iron-demo-helpers/demo-pages-shared-styles.js';
+    import '@polymer/iron-demo-helpers/demo-snippet.js';
+    import '../etools-data-table.js';
+
+    function generateDemoData(size) {
+        let demoData = [];
+        for (let i = 0; i < size; i++) {
+            let id = i + 1;
+            demoData.push({
+                partner_name: 'Partner name ' + id,
+                agreement_number: id,
+                agreement_type: 'PCA',
+                signed_by_partner_date: '6 jun 2018',
+                signed_by_unicef_date: '7 jun 2018'
+            });
+        }
+        return demoData;
     }
-    return demoData;
-  }
 
-  let demoData = generateDemoData(6);
-  let domBind = document.getElementById('domBind1');
-  domBind.pageSize = 10;
-  domBind.pageNumber = 1;
-  domBind.items = demoData;
-  domBind.totalResults = demoData.length;
-  domBind.visibleRange = [1, domBind.pageSize];
-
+    let demoData = generateDemoData(6);
+    let domBind = document.getElementById('domBind1');
+    domBind.pageSize = 10;
+    domBind.pageNumber = 1;
+    domBind.items = demoData;
+    domBind.totalResults = demoData.length;
+    domBind.visibleRange = [1, domBind.pageSize];
 </script>
 </body>
 </html>
