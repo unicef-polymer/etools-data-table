@@ -45,7 +45,7 @@ class EtoolsDataTableHeader extends PolymerElement {
         #columns {
           @apply --layout-horizontal;
           @apply --layout-center;
-          margin-left: 32px;
+          /*margin-left: 32px;*/
           height: 56px;
           @apply --header-columns;
         }
