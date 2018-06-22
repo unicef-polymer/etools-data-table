@@ -78,10 +78,4 @@ $_documentContainer.innerHTML = `<dom-module id="data-table-styles">
 
 document.head.appendChild($_documentContainer.content);
 
-/* Styles for list pages */
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
 ;

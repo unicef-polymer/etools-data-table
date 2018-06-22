@@ -1,33 +1,33 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>etools-data-table demo</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+  <title>etools-data-table demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
 
-    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
-    <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
-    <script type="module" src="../etools-data-table.js"></script>
+  <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+  <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
+  <script type="module" src="../etools-data-table.js"></script>
 
-    <custom-style>
-        <style is="custom-style" include="demo-pages-shared-styles">
-            .vertical-section-container {
-                max-width: 900px;
-            }
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+      .vertical-section-container {
+        max-width: 900px;
+      }
 
-            .col-4 {
-                flex: 0 0 33.333333%;
-                max-width: 33.333333%;
-            }
+      .col-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+      }
 
-            .col-6 {
-                flex: 0 0 50%;
-                max-width: 50%;
-            }
-        </style>
-    </custom-style>
+      .col-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+    </style>
+  </custom-style>
 
 
 </head>
@@ -39,7 +39,8 @@
     <dom-bind id="domBind1">
       <template is="dom-bind">
 
-        <etools-data-table-header id="listHeader" label="[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]] results to show">
+        <etools-data-table-header id="listHeader"
+                                  label="[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]] results to show">
           <etools-data-table-column class="col-4" field="agreement_number" sortable="">
             Reference Number #
           </etools-data-table-column>
@@ -79,7 +80,8 @@
           </etools-data-table-row>
         </template>
 
-        <etools-data-table-footer id="footer" page-size="[[pageSize]]" page-number="[[pageNumber]]" total-results="[[totalResults]]" visible-range="{{visibleRange}}">
+        <etools-data-table-footer id="footer" page-size="[[pageSize]]" page-number="[[pageNumber]]"
+                                  total-results="[[totalResults]]" visible-range="{{visibleRange}}">
         </etools-data-table-footer>
 
       </template>
@@ -88,32 +90,32 @@
 </div>
 
 <script type="module">
-    import '@polymer/iron-demo-helpers/demo-pages-shared-styles.js';
-    import '@polymer/iron-demo-helpers/demo-snippet.js';
-    import '../etools-data-table.js';
+  import '@polymer/iron-demo-helpers/demo-pages-shared-styles.js';
+  import '@polymer/iron-demo-helpers/demo-snippet.js';
+  import '../etools-data-table.js';
 
-    function generateDemoData(size) {
-        let demoData = [];
-        for (let i = 0; i < size; i++) {
-            let id = i + 1;
-            demoData.push({
-                partner_name: 'Partner name ' + id,
-                agreement_number: id,
-                agreement_type: 'PCA',
-                signed_by_partner_date: '6 jun 2018',
-                signed_by_unicef_date: '7 jun 2018'
-            });
-        }
-        return demoData;
+  function generateDemoData(size) {
+    let demoData = [];
+    for (let i = 0; i < size; i++) {
+      let id = i + 1;
+      demoData.push({
+        partner_name: 'Partner name ' + id,
+        agreement_number: id,
+        agreement_type: 'PCA',
+        signed_by_partner_date: '6 jun 2018',
+        signed_by_unicef_date: '7 jun 2018'
+      });
     }
+    return demoData;
+  }
 
-    let demoData = generateDemoData(6);
-    let domBind = document.getElementById('domBind1');
-    domBind.pageSize = 10;
-    domBind.pageNumber = 1;
-    domBind.items = demoData;
-    domBind.totalResults = demoData.length;
-    domBind.visibleRange = [1, domBind.pageSize];
+  let demoData = generateDemoData(6);
+  let domBind = document.getElementById('domBind1');
+  domBind.pageSize = 10;
+  domBind.pageNumber = 1;
+  domBind.items = demoData;
+  domBind.totalResults = demoData.length;
+  domBind.visibleRange = [1, domBind.pageSize];
 </script>
 </body>
 </html>

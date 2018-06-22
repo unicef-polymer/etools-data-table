@@ -1,14 +1,6 @@
-
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-
+import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-icons/iron-icons.js';
 import '@polymer/iron-collapse/iron-collapse.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 /**
  * `etools-data-table-row`
@@ -18,106 +10,108 @@ import { html } from '@polymer/polymer/lib/utils/html-tag.js';
  */
 class EtoolsDataTableRow extends PolymerElement {
   static get template() {
+    // language=HTML
     return html`
-    <style>
-      *[hidden] {
-        display: none !important;
-      }
+      <style>
+        *[hidden] {
+          display: none !important;
+        }
 
-      :host {
-        --row-width: {
-          width: calc(100% - 96px);
-        };
-        display: block;
-        border-bottom: 1px solid var(--list-divider-color, #9d9d9d);
-      }
+        :host {
+          --row-width: {
+            width: calc(100% - 96px);
+          };
+          display: block;
+          border-bottom: 1px solid var(--list-divider-color, #9d9d9d);
+        }
 
-      :host([no-collapse]) div#wrapper:hover {
-        background: var(--list-bg-color, #ffffff);
-      }
+        :host([no-collapse]) div#wrapper:hover {
+          background: var(--list-bg-color, #ffffff);
+        }
 
-      :host([secondary-bg-on-hover]) div#wrapper:hover {
-        background-color: var(--list-second-bg-color, #eeeeee);
-        @apply --hover-setting;
-      }
+        :host([secondary-bg-on-hover]) div#wrapper:hover {
+          background-color: var(--list-second-bg-color, #eeeeee);
+          @apply --hover-setting;
+        }
 
-      div#wrapper:hover {
-        background-color: var(--list-second-bg-color, #eeeeee);
-        @apply --hover-setting;
-      }
+        div#wrapper:hover {
+          background-color: var(--list-second-bg-color, #eeeeee);
+          @apply --hover-setting;
+        }
 
-      div#wrapper {
-        @apply --layout-horizontal;
-        @apply --layout-center;
-        padding: var(--list-row-wrapper-padding, 0 24px 0 0);
-        font-size: 13px;
-        color: var(--list-text-color, #2b2b2b);
-        background-color: var(--list-bg-color, #ffffff);
-        @apply --list-row-wrapper;
-      }
+        div#wrapper {
+          @apply --layout-horizontal;
+          @apply --layout-center;
+          padding: var(--list-row-wrapper-padding, 0 24px 0 0);
+          font-size: 13px;
+          color: var(--list-text-color, #2b2b2b);
+          background-color: var(--list-bg-color, #ffffff);
+          @apply --list-row-wrapper;
+        }
 
-      :host div#wrapper ::slotted([slot="row-data"]) {
-        text-overflow: ellipsis;
-        @apply --row-width;
-      }
-      :host([no-collapse]) div#wrapper ::slotted([slot="row-data"]) {
-        width: 100%
-      }
+        :host div#wrapper ::slotted([slot="row-data"]) {
+          text-overflow: ellipsis;
+          @apply --row-width;
+        }
 
-      :host([no-collapse]) div#wrapper ::slotted([slot="row-data"]) {
-        width: 100%
-      }
+        :host([no-collapse]) div#wrapper ::slotted([slot="row-data"]) {
+          width: 100%
+        }
 
-      #iconWrapper {
-        min-height: 48px;
-        line-height: 48px;
-        padding: 0 16px;
-        cursor: pointer;
-        width: 24px;
-        @apply --icon-wrapper;
-      }
+        :host([no-collapse]) div#wrapper ::slotted([slot="row-data"]) {
+          width: 100%
+        }
 
-      iron-icon {
-        color: var(--list-icon-color, #2b2b2b);
-      }
+        #iconWrapper {
+          min-height: 48px;
+          line-height: 48px;
+          padding: 0 16px;
+          cursor: pointer;
+          width: 24px;
+          @apply --icon-wrapper;
+        }
 
-      iron-icon:hover {
-        color: var(--list-icon-hover-color, rgba(0, 0, 0, 0.87));
-      }
+        iron-icon {
+          color: var(--list-icon-color, #2b2b2b);
+        }
 
-      #collapse-wrapper {
-        padding: 16px 24px 16px 58px;
-        background-color: var(--list-second-bg-color, #eeeeee);
-        border-top: 1px solid var(--list-divider-color, #9d9d9d);
-        @apply --list-row-collapse-wrapper;
-      }
+        iron-icon:hover {
+          color: var(--list-icon-hover-color, rgba(0, 0, 0, 0.87));
+        }
 
-      :host([no-collapse]) #details,
-      :host([no-collapse]) #iconWrapper {
-        display: none;
-      }
+        #collapse-wrapper {
+          padding: 16px 24px 16px 58px;
+          background-color: var(--list-second-bg-color, #eeeeee);
+          border-top: 1px solid var(--list-divider-color, #9d9d9d);
+          @apply --list-row-collapse-wrapper;
+        }
 
-      :host([no-collapse]) #wrapper {
-        padding: var(--list-row-wrapper-padding, 0 24px);
-        @apply --list-row-no-collapse;
-      }
+        :host([no-collapse]) #details,
+        :host([no-collapse]) #iconWrapper {
+          display: none;
+        }
 
-    </style>
+        :host([no-collapse]) #wrapper {
+          padding: var(--list-row-wrapper-padding, 0 24px);
+          @apply --list-row-no-collapse;
+        }
 
-    <div id="wrapper">
-      <div id="iconWrapper">
-        <iron-icon id="more" icon="expand-more" hidden\$="[[detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
-        <iron-icon id="less" icon="expand-less" hidden\$="[[!detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
+      </style>
+
+      <div id="wrapper">
+        <div id="iconWrapper">
+          <iron-icon id="more" icon="expand-more" hidden\$="[[detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
+          <iron-icon id="less" icon="expand-less" hidden\$="[[!detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
+        </div>
+        <slot name="row-data"></slot>
       </div>
-      <slot name="row-data"></slot>
-    </div>
 
-    <iron-collapse id="details" opened="{{detailsOpened}}" no-animation="[[noAnimation]]">
-      <div id="collapse-wrapper">
-        <slot name="row-data-details"></slot>
-      </div>
-    </iron-collapse>
-`;
+      <iron-collapse id="details" opened="{{detailsOpened}}" no-animation="[[noAnimation]]">
+        <div id="collapse-wrapper">
+          <slot name="row-data-details"></slot>
+        </div>
+      </iron-collapse>
+    `;
   }
 
   static get is() {

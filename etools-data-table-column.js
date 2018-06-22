@@ -1,13 +1,6 @@
-
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
 
 import '@polymer/iron-icons/iron-icons.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 /**
  * `etools-data-table-column`
@@ -17,78 +10,79 @@ import { html } from '@polymer/polymer/lib/utils/html-tag.js';
  */
 class EtoolsDataTableColumn extends PolymerElement {
   static get template() {
+    // language=HTML
     return html`
-    <style>
+      <style>
 
-      :host {
-        @apply --layout-horizontal;
-        @apply --layout-center;
+        :host {
+          @apply --layout-horizontal;
+          @apply --layout-center;
 
-        height: 56px;
-        font-size: 12px;
-        color: var(--list-secondary-text-color, #757575);
-        font-weight: bold;
-      }
+          height: 56px;
+          font-size: 12px;
+          color: var(--list-secondary-text-color, #757575);
+          font-weight: bold;
+        }
 
-      :host([sortable]) {
-        cursor: pointer;
-      }
+        :host([sortable]) {
+          cursor: pointer;
+        }
 
-      #label {
-        margin-right: 5px;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        @apply --list-column-label;
-      }
+        #label {
+          margin-right: 5px;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          @apply --list-column-label;
+        }
 
-      #icon-wrapper, iron-icon {
-        width: 16px;
-        height: 16px;
-      }
+        #icon-wrapper, iron-icon {
+          width: 16px;
+          height: 16px;
+        }
 
-      #up, #down, #icon-wrapper {
-        display: none;
-      }
+        #up, #down, #icon-wrapper {
+          display: none;
+        }
 
-      :host(:not([selected]):hover[sortable]) #up {
-        display: block;
-      }
+        :host(:not([selected]):hover[sortable]) #up {
+          display: block;
+        }
 
-      :host([selected]) #label,
-      :host(:not([selected]):hover[sortable]) #label {
-        color: var(--list-text-color, rgba(0, 0, 0, 0.87));
-      }
+        :host([selected]) #label,
+        :host(:not([selected]):hover[sortable]) #label {
+          color: var(--list-text-color, rgba(0, 0, 0, 0.87));
+        }
 
-      :host([selected][direction="asc"]) #up,
-      :host([selected][direction="asc"]) #icon-wrapper {
-        display: block;
-      }
+        :host([selected][direction="asc"]) #up,
+        :host([selected][direction="asc"]) #icon-wrapper {
+          display: block;
+        }
 
-      :host([selected][direction="desc"]) #down,
-      :host([selected][direction="desc"]) #icon-wrapper {
-        display: block;
-      }
+        :host([selected][direction="desc"]) #down,
+        :host([selected][direction="desc"]) #icon-wrapper {
+          display: block;
+        }
 
-      :host(:not([selected])) iron-icon {
-        color: var(--list-icon-hover-color, rgba(0, 0, 0, 0.38));
-      }
+        :host(:not([selected])) iron-icon {
+          color: var(--list-icon-hover-color, rgba(0, 0, 0, 0.38));
+        }
 
-      :host([selected]) iron-icon {
-        color: var(--list-icon-color, rgba(0, 0, 0, 0.87));
-      }
+        :host([selected]) iron-icon {
+          color: var(--list-icon-color, rgba(0, 0, 0, 0.87));
+        }
 
-    </style>
+      </style>
 
-    <span id="label">
+      <span id="label">
       <slot></slot>
     </span>
-    <div id="icon-wrapper">
-      <iron-icon id="up" icon="arrow-upward"></iron-icon>
-      <iron-icon id="down" icon="arrow-downward"></iron-icon>
-    </div>
-`;
+      <div id="icon-wrapper">
+        <iron-icon id="up" icon="arrow-upward"></iron-icon>
+        <iron-icon id="down" icon="arrow-downward"></iron-icon>
+      </div>
+    `;
   }
 
   static get is() {
