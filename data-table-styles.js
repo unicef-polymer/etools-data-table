@@ -82,7 +82,7 @@ $_documentContainer.innerHTML = `<dom-module id="data-table-styles">
         
         *[slot="row-data"] .col-data,
         *[slot="row-data-details"] > * {
-          display: flex;
+          display: inline-block;
           width: 100%;
           max-width: 100%;
           padding: 8px 0;
@@ -94,6 +94,8 @@ $_documentContainer.innerHTML = `<dom-module id="data-table-styles">
           color: var(--list-secondary-text-color, #757575);
           font-weight: bold;
           margin-right: 8px;
+          vertical-align: top;
+          min-height: 24px;
         }
         
       }
