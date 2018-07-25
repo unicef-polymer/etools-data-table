@@ -93,7 +93,7 @@ $_documentContainer.innerHTML = `<dom-module id="data-table-styles">
           content: attr(data-col-header-label)": ";
           color: var(--list-secondary-text-color, #757575);
           font-weight: bold;
-          margin-right: 16px;
+          margin-right: 8px;
         }
         
       }
