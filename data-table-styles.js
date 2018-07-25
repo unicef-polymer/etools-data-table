@@ -1,12 +1,11 @@
 import '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
+
 const $_documentContainer = document.createElement('template');
 $_documentContainer.setAttribute('style', 'display: none;');
-
+// languae=HTML
 $_documentContainer.innerHTML = `<dom-module id="data-table-styles">
-
   <template>
-
     <style>
       a {
         color: var(--list-primary-color, #0099ff);
@@ -69,13 +68,31 @@ $_documentContainer.innerHTML = `<dom-module id="data-table-styles">
         font-weight: bold;
         margin-bottom: 10px;
       }
-
+      
+      @media screen and (max-width: 767px) {
+        etools-data-table-header {
+          display: none;
+        }
+        
+        *[slot="row-data"] .col-data,
+        *[slot="row-data-details"] > * {
+          display: inline-block;
+          width: 100%;
+          max-width: 100%;
+          padding: 8px 0;
+          box-sizing: border-box;
+        }
+        
+        *[slot="row-data"] .col-data:before {
+          content: attr(data-col-header-label)": ";
+          color: var(--list-secondary-text-color, #757575);
+          font-weight: bold;
+        }
+        
+      }
+      
     </style>
-
   </template>
-
 </dom-module>`;
 
 document.head.appendChild($_documentContainer.content);
-
-;

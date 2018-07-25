@@ -96,6 +96,25 @@ class EtoolsDataTableRow extends PolymerElement {
           @apply --list-row-no-collapse;
         }
 
+        @media screen and (max-width: 767px) {
+          div#wrapper {
+            padding-right: 0;
+          }
+          #iconWrapper {
+            min-height: 0;
+            line-height: normal;
+            padding: 8px;
+          }
+          :host div#wrapper ::slotted([slot="row-data"]),
+          :host #details ::slotted([slot="row-data-details"]) {
+            display: block;
+            width: 100%;
+          }
+          #collapse-wrapper {
+            padding: 0px 0px 0px 40px;
+          }
+        }
+
       </style>
 
       <div id="wrapper">
