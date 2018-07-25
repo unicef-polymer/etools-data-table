@@ -74,9 +74,15 @@ $_documentContainer.innerHTML = `<dom-module id="data-table-styles">
           display: none;
         }
         
+        *[slot="row-data"],
+        *[slot="row-data-details"] {
+          display: block;
+          width: 100%;
+        }
+        
         *[slot="row-data"] .col-data,
         *[slot="row-data-details"] > * {
-          display: inline-block;
+          display: flex;
           width: 100%;
           max-width: 100%;
           padding: 8px 0;
@@ -87,6 +93,7 @@ $_documentContainer.innerHTML = `<dom-module id="data-table-styles">
           content: attr(data-col-header-label)": ";
           color: var(--list-secondary-text-color, #757575);
           font-weight: bold;
+          margin-right: 16px;
         }
         
       }

@@ -105,11 +105,6 @@ class EtoolsDataTableRow extends PolymerElement {
             line-height: normal;
             padding: 8px;
           }
-          :host div#wrapper ::slotted([slot="row-data"]),
-          :host #details ::slotted([slot="row-data-details"]) {
-            display: block;
-            width: 100%;
-          }
           #collapse-wrapper {
             padding: 0px 0px 0px 40px;
           }
