@@ -77,7 +77,8 @@ $_documentContainer.innerHTML = `<dom-module id="data-table-styles">
         *[slot="row-data"],
         *[slot="row-data-details"] {
           display: block;
-          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
         }
         
         *[slot="row-data"] .col-data,
