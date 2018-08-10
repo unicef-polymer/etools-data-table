@@ -20,7 +20,6 @@
           width: calc(100% - 96px);
         };
         display: block;
-        border-bottom: 1px solid var(--list-divider-color, #9d9d9d);
       }
 
       :host([no-collapse]) div#wrapper:hover {
@@ -59,6 +58,11 @@
         width: 100%
       }
 
+      div#wrapper,
+      #collapse-wrapper {
+        border-bottom: 1px solid var(--list-divider-color, #9d9d9d);
+      }
+
       #iconWrapper {
         min-height: 48px;
         line-height: 48px;
@@ -79,7 +83,6 @@
       #collapse-wrapper {
         padding: 16px 24px 16px 58px;
         background-color: var(--list-second-bg-color, #eeeeee);
-        border-top: 1px solid var(--list-divider-color, #9d9d9d);
         @apply --list-row-collapse-wrapper;
       }
 
