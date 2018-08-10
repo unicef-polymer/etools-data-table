@@ -3,7 +3,7 @@
   "description": "etools data table UI",
   "main": "etools-data-table.html",
   "license": "https://github.com/unicef-polymer/etools-data-table/blob/master/LICENSE.md",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
     "paper-listbox": "PolymerElements/paper-listbox#^2.0.0",
