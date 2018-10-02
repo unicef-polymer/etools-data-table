@@ -107,22 +107,38 @@ class EtoolsDataTableFooter extends PolymerElement {
           bottom: -1px;
         }
 
-        @media screen and (max-width: 767px) {
-          #table-footer {
-            padding: 8px 0;
-            height: auto;
-            @apply --layout-vertical;
-            @apply --layout-start;
-          }
-
-          #range {
-            margin: 0 0 0 24px;
-          }
-          
-          .pag-btns {
-            margin-left: -12px;
-          }
+        /* Mobile vew CSS */
+        :host([low-resolution-layout]) #table-footer {
+          padding: 8px 0;
+          height: auto;
+          @apply --layout-vertical;
+          @apply --layout-start;
         }
+        
+        :host([low-resolution-layout]) #range {
+          margin: 0 0 0 24px;
+        }
+        
+        :host([low-resolution-layout]) .pag-btns {
+          margin-left: -12px;
+        }
+
+        /*@media screen and (max-width: 767px) {*/
+          /*#table-footer {*/
+            /*padding: 8px 0;*/
+            /*height: auto;*/
+            /*@apply --layout-vertical;*/
+            /*@apply --layout-start;*/
+          /*}*/
+        
+          /*#range {*/
+            /*margin: 0 0 0 24px;*/
+          /*}*/
+          /**/
+          /*.pag-btns {*/
+            /*margin-left: -12px;*/
+          /*}*/
+        /*}*/
         
       </style>
 
@@ -198,6 +214,12 @@ class EtoolsDataTableFooter extends PolymerElement {
       doNotShow: {
         type: Boolean,
         computed: '_hideFooter(totalResults)',
+        reflectToAttribute: true
+      },
+
+      lowResolutionLayout: {
+        type: Boolean,
+        value: false,
         reflectToAttribute: true
       }
     };

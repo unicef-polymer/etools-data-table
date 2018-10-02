@@ -9,7 +9,11 @@
 
   <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
   <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
+  <script type="module" src="../node_modules/@polymer/iron-media-query/iron-media-query.js"></script>
+
   <script type="module" src="../etools-data-table.js"></script>
+
+  <script src="https://unpkg.com/web-animations-js@^2.0.0/web-animations-next-lite.min.js"></script>
 
   <custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
@@ -90,37 +94,67 @@
         margin-bottom: 10px;
       }
 
-      @media screen and (max-width: 767px) {
-        etools-data-table-header {
-          display: none;
-        }
-
-        *[slot="row-data"],
-        *[slot="row-data-details"] {
-          display: block;
-          max-width: 100%;
-          box-sizing: border-box;
-        }
-
-        *[slot="row-data"] .col-data,
-        *[slot="row-data-details"] > * {
-          display: inline-block;
-          width: 100%;
-          max-width: 100%;
-          padding: 8px 0;
-          box-sizing: border-box;
-        }
-
-        *[slot="row-data"] .col-data:before {
-          content: attr(data-col-header-label)":";
-          color: var(--list-secondary-text-color, #757575);
-          font-weight: bold;
-          margin-right: 8px;
-          vertical-align: top;
-          min-height: 24px;
-        }
-
+      /* Mobile vew CSS */
+      etools-data-table-header[low-resolution-layout] {
+        display: none;
       }
+
+      etools-data-table-row[low-resolution-layout] *[slot="row-data"],
+      etools-data-table-row[low-resolution-layout] *[slot="row-data-details"] {
+        display: block;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+
+      etools-data-table-row[low-resolution-layout] *[slot="row-data"] .col-data,
+      etools-data-table-row[low-resolution-layout] *[slot="row-data-details"] > * {
+        display: inline-block;
+        width: 100%;
+        max-width: 100%;
+        padding: 8px 0;
+        box-sizing: border-box;
+      }
+
+      etools-data-table-row[low-resolution-layout] *[slot="row-data"] .col-data:before {
+        content: attr(data-col-header-label)": ";
+        color: var(--list-secondary-text-color, #757575);
+        font-weight: bold;
+        margin-right: 8px;
+        vertical-align: top;
+        min-height: 24px;
+      }
+
+      /*@media screen and (max-width: 767px) {*/
+        /*etools-data-table-header {*/
+          /*display: none;*/
+        /*}*/
+
+        /**[slot="row-data"],*/
+        /**[slot="row-data-details"] {*/
+          /*display: block;*/
+          /*max-width: 100%;*/
+          /*box-sizing: border-box;*/
+        /*}*/
+
+        /**[slot="row-data"] .col-data,*/
+        /**[slot="row-data-details"] > * {*/
+          /*display: inline-block;*/
+          /*width: 100%;*/
+          /*max-width: 100%;*/
+          /*padding: 8px 0;*/
+          /*box-sizing: border-box;*/
+        /*}*/
+
+        /**[slot="row-data"] .col-data:before {*/
+          /*content: attr(data-col-header-label)":";*/
+          /*color: var(--list-secondary-text-color, #757575);*/
+          /*font-weight: bold;*/
+          /*margin-right: 8px;*/
+          /*vertical-align: top;*/
+          /*min-height: 24px;*/
+        /*}*/
+
+      /*}*/
     </style>
   </custom-style>
 </head>
@@ -132,8 +166,11 @@
     <dom-bind id="domBind1">
       <template is="dom-bind">
 
+        <iron-media-query query="(max-width: 767px)" query-matches="{{lowResolutionLayout}}"></iron-media-query>
+
         <etools-data-table-header id="listHeader"
-                                  label="[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]] results to show">
+                                  label="[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]] results to show"
+                                  low-resolution-layout="[[lowResolutionLayout]]">
           <etools-data-table-column class="col-data col-4" field="agreement_number" sortable="">
             Reference Number #
           </etools-data-table-column>
@@ -146,7 +183,7 @@
         </etools-data-table-header>
 
         <template id="rows" is="dom-repeat" items="[[items]]" as="agreement">
-          <etools-data-table-row>
+          <etools-data-table-row low-resolution-layout="[[lowResolutionLayout]]">
             <div slot="row-data">
               <span class="col-data col-4" data-col-header-label="Reference Number #">
                 [[agreement.agreement_number]]
@@ -174,7 +211,8 @@
         </template>
 
         <etools-data-table-footer id="footer" page-size="[[pageSize]]" page-number="[[pageNumber]]"
-                                  total-results="[[totalResults]]" visible-range="{{visibleRange}}">
+                                  total-results="[[totalResults]]" visible-range="{{visibleRange}}"
+                                  low-resolution-layout="[[lowResolutionLayout]]">
         </etools-data-table-footer>
 
       </template>

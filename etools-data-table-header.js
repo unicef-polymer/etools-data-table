@@ -54,16 +54,26 @@ class EtoolsDataTableHeader extends PolymerElement {
           margin-left: 0;
           flex: 1
         }
-
-        @media screen and (max-width: 767px) {
-          div#header-wrapper {
-            height: auto;
-            padding: 0;
-          }
-          #columns {
-            display: none;
-          }
+        
+        /* Mobile vew CSS */
+        :host([low-resolution-layout]) div#header-wrapper {
+          height: auto;
+          padding: 0;
         }
+        
+        :host([low-resolution-layout]) #columns {
+          display: none;
+        }
+
+        /*@media screen and (max-width: 767px) {*/
+          /*div#header-wrapper {*/
+            /*height: auto;*/
+            /*padding: 0;*/
+          /*}*/
+          /*#columns {*/
+            /*display: none;*/
+          /*}*/
+        /*}*/
 
       </style>
 
@@ -105,6 +115,11 @@ class EtoolsDataTableHeader extends PolymerElement {
       },
       label: {
         type: String
+      },
+      lowResolutionLayout: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
       }
     };
   }
