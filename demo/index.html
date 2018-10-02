@@ -21,6 +21,21 @@
         max-width: 900px;
       }
 
+      .col-1 {
+        flex: 0 0 8.333333333%;
+        max-width: 8.333333333%;
+      }
+
+      .col-2 {
+        flex: 0 0 16.66666667%;
+        max-width: 16.66666667%;
+      }
+
+      .col-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+      }
+
       .col-4 {
         flex: 0 0 33.333333%;
         max-width: 33.333333%;
@@ -29,6 +44,10 @@
       .col-6 {
         flex: 0 0 50%;
         max-width: 50%;
+      }
+
+      .flex-c {
+        @apply --layout-flex;
       }
 
       /* COPY OF DATA TABLE STYLES */
@@ -124,37 +143,6 @@
         min-height: 24px;
       }
 
-      /*@media screen and (max-width: 767px) {*/
-        /*etools-data-table-header {*/
-          /*display: none;*/
-        /*}*/
-
-        /**[slot="row-data"],*/
-        /**[slot="row-data-details"] {*/
-          /*display: block;*/
-          /*max-width: 100%;*/
-          /*box-sizing: border-box;*/
-        /*}*/
-
-        /**[slot="row-data"] .col-data,*/
-        /**[slot="row-data-details"] > * {*/
-          /*display: inline-block;*/
-          /*width: 100%;*/
-          /*max-width: 100%;*/
-          /*padding: 8px 0;*/
-          /*box-sizing: border-box;*/
-        /*}*/
-
-        /**[slot="row-data"] .col-data:before {*/
-          /*content: attr(data-col-header-label)":";*/
-          /*color: var(--list-secondary-text-color, #757575);*/
-          /*font-weight: bold;*/
-          /*margin-right: 8px;*/
-          /*vertical-align: top;*/
-          /*min-height: 24px;*/
-        /*}*/
-
-      /*}*/
     </style>
   </custom-style>
 </head>
@@ -171,28 +159,52 @@
         <etools-data-table-header id="listHeader"
                                   label="[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]] results to show"
                                   low-resolution-layout="[[lowResolutionLayout]]">
-          <etools-data-table-column class="col-data col-4" field="agreement_number" sortable="">
+          <etools-data-table-column class="col-data col-1" field="agreement_number" sortable="">
             Reference Number #
           </etools-data-table-column>
-          <etools-data-table-column class="col-data col-4" field="partner_name" sortable="">
+          <etools-data-table-column class="col-data col-3" field="partner_name" sortable="">
             Partner Full Name
           </etools-data-table-column>
-          <etools-data-table-column class="col-data col-4" field="partner_type">
+          <etools-data-table-column class="col-data flex-c" field="partner_type">
             Type
+          </etools-data-table-column>
+          <etools-data-table-column class="col-data col-2">
+            Status
+          </etools-data-table-column>
+          <etools-data-table-column class="col-data flex-c">
+            Created
+          </etools-data-table-column>
+          <etools-data-table-column class="col-data flex-c">
+            Modified
+          </etools-data-table-column>
+          <etools-data-table-column class="col-data col-2">
+            Modified By
           </etools-data-table-column>
         </etools-data-table-header>
 
         <template id="rows" is="dom-repeat" items="[[items]]" as="agreement">
           <etools-data-table-row low-resolution-layout="[[lowResolutionLayout]]">
             <div slot="row-data">
-              <span class="col-data col-4" data-col-header-label="Reference Number #">
+              <span class="col-data col-1" data-col-header-label="Reference Number #">
                 [[agreement.agreement_number]]
               </span>
-              <span class="col-data col-4" title="[[agreement.partner_name]]" data-col-header-label="Partner Full Name">
+              <span class="col-data col-3" title="[[agreement.partner_name]]" data-col-header-label="Partner Full Name">
                 <span class="truncate"> [[agreement.partner_name]] </span>
               </span>
-              <span class="col-data col-4" data-col-header-label="Type">
+              <span class="col-data flex-c" data-col-header-label="Type">
                 [[agreement.agreement_type]]
+              </span>
+              <span class="col-data col-2" data-col-header-label="Status">
+                [[agreement.status]]
+              </span>
+              <span class="col-data flex-c" data-col-header-label="Created">
+                [[agreement.created]]
+              </span>
+              <span class="col-data flex-c" data-col-header-label="Modified">
+                [[agreement.modified]]
+              </span>
+              <span class="col-data col-2" data-col-header-label="Modified By">
+                [[agreement.modified_by]]
               </span>
 
             </div>
@@ -233,6 +245,10 @@
         partner_name: 'Partner name ' + id,
         agreement_number: id,
         agreement_type: 'PCA',
+        status: 'active',
+        created: '2 oct 2018',
+        modified: '2 oct 2018',
+        modified_by: 'admin',
         signed_by_partner_date: '6 jun 2018',
         signed_by_unicef_date: '7 jun 2018'
       });

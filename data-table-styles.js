@@ -99,38 +99,6 @@ $_documentContainer.innerHTML = `<dom-module id="data-table-styles">
         min-height: 24px;
       }
       
-      /*@media screen and (max-width: 767px) {*/
-        /*etools-data-table-header {*/
-          /*display: none;*/
-        /*}*/
-        /**/
-        /**[slot="row-data"],*/
-        /**[slot="row-data-details"] {*/
-          /*display: block;*/
-          /*max-width: 100%;*/
-          /*box-sizing: border-box;*/
-        /*}*/
-        /**/
-        /**[slot="row-data"] .col-data,*/
-        /**[slot="row-data-details"] > * {*/
-          /*display: inline-block;*/
-          /*width: 100%;*/
-          /*max-width: 100%;*/
-          /*padding: 8px 0;*/
-          /*box-sizing: border-box;*/
-        /*}*/
-        /**/
-        /**[slot="row-data"] .col-data:before {*/
-          /*content: attr(data-col-header-label)": ";*/
-          /*color: var(--list-secondary-text-color, #757575);*/
-          /*font-weight: bold;*/
-          /*margin-right: 8px;*/
-          /*vertical-align: top;*/
-          /*min-height: 24px;*/
-        /*}*/
-        /**/
-      /*}*/
-      
     </style>
   </template>
 </dom-module>`;

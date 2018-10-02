@@ -113,20 +113,6 @@ class EtoolsDataTableRow extends PolymerElement {
         :host([low-resolution-layout]) #collapse-wrapper {
           padding: 0 0 0 40px;
         }
-        
-        /*@media screen and (max-width: 767px) {*/
-          /*div#wrapper {*/
-            /*padding-right: 0;*/
-          /*}*/
-          /*#iconWrapper {*/
-            /*min-height: 0;*/
-            /*line-height: normal;*/
-            /*padding: 8px;*/
-          /*}*/
-          /*#collapse-wrapper {*/
-            /*padding: 0px 0px 0px 40px;*/
-          /*}*/
-        /*}*/
 
       </style>
 

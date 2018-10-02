@@ -122,23 +122,6 @@ class EtoolsDataTableFooter extends PolymerElement {
         :host([low-resolution-layout]) .pag-btns {
           margin-left: -12px;
         }
-
-        /*@media screen and (max-width: 767px) {*/
-          /*#table-footer {*/
-            /*padding: 8px 0;*/
-            /*height: auto;*/
-            /*@apply --layout-vertical;*/
-            /*@apply --layout-start;*/
-          /*}*/
-        
-          /*#range {*/
-            /*margin: 0 0 0 24px;*/
-          /*}*/
-          /**/
-          /*.pag-btns {*/
-            /*margin-left: -12px;*/
-          /*}*/
-        /*}*/
         
       </style>
 

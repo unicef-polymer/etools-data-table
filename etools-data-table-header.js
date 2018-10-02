@@ -65,16 +65,6 @@ class EtoolsDataTableHeader extends PolymerElement {
           display: none;
         }
 
-        /*@media screen and (max-width: 767px) {*/
-          /*div#header-wrapper {*/
-            /*height: auto;*/
-            /*padding: 0;*/
-          /*}*/
-          /*#columns {*/
-            /*display: none;*/
-          /*}*/
-        /*}*/
-
       </style>
 
       <div id="header-wrapper">
