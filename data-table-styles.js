@@ -78,8 +78,7 @@ $_documentContainer.innerHTML = `<dom-module id="data-table-styles">
         box-sizing: border-box;
       }
 
-      etools-data-table-row[medium-resolution-layout] *[slot="row-data"] .col-data,
-      etools-data-table-row[medium-resolution-layout] *[slot="row-data-details"] > * {
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data"] .col-data {
         @apply --layout;
         @apply --layout-start;
         flex: 1 0 calc(50% - 16px);
