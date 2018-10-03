@@ -10,6 +10,7 @@
   <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
   <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
   <script type="module" src="../node_modules/@polymer/iron-media-query/iron-media-query.js"></script>
+  <script type="module" src="../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js"></script>
 
   <script type="module" src="../etools-data-table.js"></script>
 
@@ -113,9 +114,31 @@
         margin-bottom: 10px;
       }
 
-      /* Mobile vew CSS */
-      etools-data-table-header[low-resolution-layout] {
-        display: none;
+      /* Mobile view CSS */
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data"],
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data-details"] {
+        @apply --layout;
+        @apply --layout-wrap;
+        @apply --layout-flex;
+        box-sizing: border-box;
+      }
+
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data"] .col-data,
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data-details"] > * {
+        @apply --layout;
+        @apply --layout-start;
+        flex: 1 0 calc(50% - 16px);
+        max-width: calc(50% - 16px);
+        padding: 8px;
+        box-sizing: border-box;
+      }
+
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data"] .truncate {
+        @apply --layout;
+        @apply --layout-flex;
+        white-space: unset;
+        overflow: unset;
+        text-overflow: unset;
       }
 
       etools-data-table-row[low-resolution-layout] *[slot="row-data"],
@@ -134,6 +157,7 @@
         box-sizing: border-box;
       }
 
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data"] .col-data:before,
       etools-data-table-row[low-resolution-layout] *[slot="row-data"] .col-data:before {
         content: attr(data-col-header-label)": ";
         color: var(--list-secondary-text-color, #757575);
@@ -155,10 +179,13 @@
       <template is="dom-bind">
 
         <iron-media-query query="(max-width: 767px)" query-matches="{{lowResolutionLayout}}"></iron-media-query>
+        <iron-media-query query="(min-width: 768px) and (max-width: 900px)"
+                          query-matches="{{mediumResolutionLayout}}"></iron-media-query>
 
         <etools-data-table-header id="listHeader"
                                   label="[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]] results to show"
-                                  low-resolution-layout="[[lowResolutionLayout]]">
+                                  low-resolution-layout="[[lowResolutionLayout]]"
+                                  medium-resolution-layout="[[mediumResolutionLayout]]">
           <etools-data-table-column class="col-data col-1" field="agreement_number" sortable="">
             Reference Number #
           </etools-data-table-column>
@@ -183,7 +210,8 @@
         </etools-data-table-header>
 
         <template id="rows" is="dom-repeat" items="[[items]]" as="agreement">
-          <etools-data-table-row low-resolution-layout="[[lowResolutionLayout]]">
+          <etools-data-table-row low-resolution-layout="[[lowResolutionLayout]]"
+                                 medium-resolution-layout="[[mediumResolutionLayout]]">
             <div slot="row-data">
               <span class="col-data col-1" data-col-header-label="Reference Number #">
                 [[agreement.agreement_number]]

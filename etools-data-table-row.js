@@ -99,17 +99,20 @@ class EtoolsDataTableRow extends PolymerElement {
           @apply --list-row-no-collapse;
         }
 
-        /* Mobile vew CSS */
+        /* Mobile view CSS */
+        :host([medium-resolution-layout]) div#wrapper,
         :host([low-resolution-layout]) div#wrapper {
           padding-right: 0;
         }
 
+        :host([medium-resolution-layout]) #iconWrapper,
         :host([low-resolution-layout]) #iconWrapper {
           min-height: 0;
           line-height: normal;
           padding: 8px;
         }
 
+        :host([medium-resolution-layout]) #collapse-wrapper,
         :host([low-resolution-layout]) #collapse-wrapper {
           padding: 0 0 0 40px;
         }
@@ -151,6 +154,11 @@ class EtoolsDataTableRow extends PolymerElement {
         value: false
       },
       lowResolutionLayout: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      },
+      mediumResolutionLayout: {
         type: Boolean,
         value: false,
         reflectToAttribute: true

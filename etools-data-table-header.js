@@ -55,12 +55,14 @@ class EtoolsDataTableHeader extends PolymerElement {
           flex: 1
         }
         
-        /* Mobile vew CSS */
+        /* Mobile view CSS */
+        :host([medium-resolution-layout]) div#header-wrapper,
         :host([low-resolution-layout]) div#header-wrapper {
           height: auto;
           padding: 0;
         }
         
+        :host([medium-resolution-layout]) #columns,
         :host([low-resolution-layout]) #columns {
           display: none;
         }
@@ -107,6 +109,11 @@ class EtoolsDataTableHeader extends PolymerElement {
         type: String
       },
       lowResolutionLayout: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      },
+      mediumResolutionLayout: {
         type: Boolean,
         value: false,
         reflectToAttribute: true

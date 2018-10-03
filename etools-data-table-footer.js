@@ -107,7 +107,7 @@ class EtoolsDataTableFooter extends PolymerElement {
           bottom: -1px;
         }
 
-        /* Mobile vew CSS */
+        /* Mobile view CSS */
         :host([low-resolution-layout]) #table-footer {
           padding: 8px 0;
           height: auto;

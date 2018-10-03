@@ -69,9 +69,31 @@ $_documentContainer.innerHTML = `<dom-module id="data-table-styles">
         margin-bottom: 10px;
       }
       
-      /* Mobile vew CSS */
-      etools-data-table-header[low-resolution-layout] {
-        display: none;
+      /* Mobile view CSS */
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data"],
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data-details"] {
+        @apply --layout;
+        @apply --layout-wrap;
+        @apply --layout-flex;
+        box-sizing: border-box;
+      }
+
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data"] .col-data,
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data-details"] > * {
+        @apply --layout;
+        @apply --layout-start;
+        flex: 1 0 calc(50% - 16px);
+        max-width: calc(50% - 16px);
+        padding: 8px;
+        box-sizing: border-box;
+      }
+
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data"] .truncate {
+        @apply --layout;
+        @apply --layout-flex;
+        white-space: unset;
+        overflow: unset;
+        text-overflow: unset;
       }
       
       etools-data-table-row[low-resolution-layout] *[slot="row-data"],
@@ -90,6 +112,7 @@ $_documentContainer.innerHTML = `<dom-module id="data-table-styles">
         box-sizing: border-box;
       }
       
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data"] .col-data:before,
       etools-data-table-row[low-resolution-layout] *[slot="row-data"] .col-data:before {
         content: attr(data-col-header-label)": ";
         color: var(--list-secondary-text-color, #757575);
