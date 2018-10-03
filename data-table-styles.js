@@ -69,6 +69,11 @@ $_documentContainer.innerHTML = `<dom-module id="data-table-styles">
         margin-bottom: 10px;
       }
       
+      .row-details-content .rdc-title.inline {
+        width: auto;
+        margin: 0 8px 0 0;
+      }
+      
       /* Mobile view CSS */
       etools-data-table-row[medium-resolution-layout] *[slot="row-data"],
       etools-data-table-row[medium-resolution-layout] *[slot="row-data-details"] {
