@@ -97,32 +97,62 @@ class EtoolsDataTableFooter extends PolymerElement {
             display: none;
           };
         }
+
+        .pagination-item {
+          @apply --layout-horizontal;
+          @apply --layout-center;
+        }
+
+        .pagination-item paper-dropdown-menu {
+          bottom: -1px;
+        }
+
+        /* Mobile view CSS */
+        :host([low-resolution-layout]) #table-footer {
+          padding: 8px 0;
+          height: auto;
+          @apply --layout-vertical;
+          @apply --layout-start;
+        }
+        
+        :host([low-resolution-layout]) #range {
+          margin: 0 0 0 24px;
+        }
+        
+        :host([low-resolution-layout]) .pag-btns {
+          margin-left: -12px;
+        }
+        
       </style>
 
       <div id="table-footer">
-        <span id="rows">Rows per page:</span>
-
-        <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink="">
-          <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{pageSize}}">
-            <template is="dom-repeat" items="[[pageSizeOptions]]">
-              <paper-item name\$="[[item]]">[[item]]</paper-item>
-            </template>
-          </paper-listbox>
-        </paper-dropdown-menu>
-
-        <span id="range">[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]]</span>
-
-        <paper-icon-button icon="first-page" on-tap="_firstPage"
-                           disabled\$="[[_pageBackDisabled(pageNumber)]]"></paper-icon-button>
-
-        <paper-icon-button icon="chevron-left" on-tap="_pageLeft"
-                           disabled\$="[[_pageBackDisabled(pageNumber)]]"></paper-icon-button>
-
-        <paper-icon-button icon="chevron-right" on-tap="_pageRight"
-                           disabled\$="[[_pageForwardDisabled(pageNumber, totalPages)]]"></paper-icon-button>
-
-        <paper-icon-button icon="last-page" on-tap="_lastPage"
-                           disabled\$="[[_pageForwardDisabled(pageNumber, totalPages)]]"></paper-icon-button>
+        
+        <span class="pagination-item">
+          <span id="rows">Rows per page:</span>
+          <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink="" no-label-float>
+            <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{pageSize}}">
+              <template is="dom-repeat" items="[[pageSizeOptions]]">
+                <paper-item name\$="[[item]]">[[item]]</paper-item>
+              </template>
+            </paper-listbox>
+          </paper-dropdown-menu>
+          
+          <span id="range">[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]]</span>
+        </span>
+        
+        <span class="pagination-item pag-btns">
+          <paper-icon-button icon="first-page" on-tap="_firstPage"
+                             disabled\$="[[_pageBackDisabled(pageNumber)]]"></paper-icon-button>
+  
+          <paper-icon-button icon="chevron-left" on-tap="_pageLeft"
+                             disabled\$="[[_pageBackDisabled(pageNumber)]]"></paper-icon-button>
+  
+          <paper-icon-button icon="chevron-right" on-tap="_pageRight"
+                             disabled\$="[[_pageForwardDisabled(pageNumber, totalPages)]]"></paper-icon-button>
+  
+          <paper-icon-button icon="last-page" on-tap="_lastPage"
+                             disabled\$="[[_pageForwardDisabled(pageNumber, totalPages)]]"></paper-icon-button>
+        </span>
 
       </div>
     `;
@@ -167,6 +197,12 @@ class EtoolsDataTableFooter extends PolymerElement {
       doNotShow: {
         type: Boolean,
         computed: '_hideFooter(totalResults)',
+        reflectToAttribute: true
+      },
+
+      lowResolutionLayout: {
+        type: Boolean,
+        value: false,
         reflectToAttribute: true
       }
     };

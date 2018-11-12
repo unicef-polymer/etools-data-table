@@ -45,7 +45,7 @@ class EtoolsDataTableHeader extends PolymerElement {
         #columns {
           @apply --layout-horizontal;
           @apply --layout-center;
-          /*margin-left: 32px;*/
+          margin-left: 32px;
           height: 56px;
           @apply --header-columns;
         }
@@ -53,6 +53,18 @@ class EtoolsDataTableHeader extends PolymerElement {
         :host([no-collapse]) #columns {
           margin-left: 0;
           flex: 1
+        }
+        
+        /* Mobile view CSS */
+        :host([medium-resolution-layout]) div#header-wrapper,
+        :host([low-resolution-layout]) div#header-wrapper {
+          height: auto;
+          padding: 0;
+        }
+        
+        :host([medium-resolution-layout]) #columns,
+        :host([low-resolution-layout]) #columns {
+          display: none;
         }
 
       </style>
@@ -95,6 +107,16 @@ class EtoolsDataTableHeader extends PolymerElement {
       },
       label: {
         type: String
+      },
+      lowResolutionLayout: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      },
+      mediumResolutionLayout: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
       }
     };
   }

@@ -22,7 +22,6 @@ class EtoolsDataTableRow extends PolymerElement {
             width: calc(100% - 96px);
           };
           display: block;
-          border-bottom: 1px solid var(--list-divider-color, #9d9d9d);
         }
 
         :host([no-collapse]) div#wrapper:hover {
@@ -66,6 +65,11 @@ class EtoolsDataTableRow extends PolymerElement {
           width: 100%
         }
 
+        div#wrapper,
+        #collapse-wrapper {
+          border-bottom: 1px solid var(--list-divider-color, #9d9d9d);
+        }
+
         #iconWrapper {
           min-height: 48px;
           line-height: 48px;
@@ -86,7 +90,6 @@ class EtoolsDataTableRow extends PolymerElement {
         #collapse-wrapper {
           padding: 16px 24px 16px 58px;
           background-color: var(--list-second-bg-color, #eeeeee);
-          border-top: 1px solid var(--list-divider-color, #9d9d9d);
           @apply --list-row-collapse-wrapper;
         }
 
@@ -98,6 +101,24 @@ class EtoolsDataTableRow extends PolymerElement {
         :host([no-collapse]) #wrapper {
           padding: var(--list-row-wrapper-padding, 0 24px);
           @apply --list-row-no-collapse;
+        }
+
+        /* Mobile view CSS */
+        :host([medium-resolution-layout]) div#wrapper,
+        :host([low-resolution-layout]) div#wrapper {
+          padding-right: 0;
+        }
+
+        :host([medium-resolution-layout]) #iconWrapper,
+        :host([low-resolution-layout]) #iconWrapper {
+          min-height: 0;
+          line-height: normal;
+          padding: 8px;
+        }
+
+        :host([medium-resolution-layout]) #collapse-wrapper,
+        :host([low-resolution-layout]) #collapse-wrapper {
+          padding: 0 0 0 40px;
         }
 
       </style>
@@ -135,6 +156,16 @@ class EtoolsDataTableRow extends PolymerElement {
       noAnimation: {
         type: Boolean,
         value: false
+      },
+      lowResolutionLayout: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      },
+      mediumResolutionLayout: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
       }
     };
   }
