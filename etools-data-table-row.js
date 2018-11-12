@@ -33,6 +33,10 @@ class EtoolsDataTableRow extends PolymerElement {
           background-color: var(--list-second-bg-color, #eeeeee);
           @apply --hover-setting;
         }
+        
+        div#wrapper, #collapse-wrapper {
+          border-bottom: 1px solid var(--list-divider-color, #9d9d9d);
+        }
 
         div#wrapper:hover {
           background-color: var(--list-second-bg-color, #eeeeee);
