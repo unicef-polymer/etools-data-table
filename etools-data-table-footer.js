@@ -11,6 +11,7 @@ import '@polymer/iron-flex-layout/iron-flex-layout.js';
  * `etools-data-table-footer`
  * @polymer
  * @customElement
+ * @extends {PolymerElement}
  * @demo demo/index.html
  */
 class EtoolsDataTableFooter extends PolymerElement {

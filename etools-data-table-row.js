@@ -6,6 +6,7 @@ import '@polymer/iron-collapse/iron-collapse.js';
  * `etools-data-table-row`
  * @polymer
  * @customElement
+ * @extends {PolymerElement}
  * @demo demo/index.html
  */
 class EtoolsDataTableRow extends PolymerElement {
