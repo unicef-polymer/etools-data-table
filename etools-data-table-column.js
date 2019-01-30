@@ -6,6 +6,7 @@ import '@polymer/iron-icons/iron-icons.js';
  * `etools-data-table-column`
  * @polymer
  * @customElement
+ * @extends {PolymerElement}
  * @demo demo/index.html
  */
 class EtoolsDataTableColumn extends PolymerElement {
