@@ -2,30 +2,6 @@
 
 Etools data table UI
 
-### Element properties
-
-#### etools-data-table-header
- * label - String
- * noCollapse - Boolean, default: false
- * noTitle - Boolean, default: false
-#### etools-data-table-column
- * field - String
- * sortable - Boolean, default: false
-#### etools-data-table-row
- * details-opened - Boolean, default: false
- * no-collapse - Boolean, default: false
- * secondary-bg-on-hover - Boolean, default: false - By default the no-collapse property will also remove the highlighting on mouse over. Set this to true to keep the highlighting.
- * no-animation - Boolean, default: false
-#### etools-data-table-footer
- * page-size - Number
- * page-number - Number
- * total-results - Number
- * visible-range - Array - notifies
-### Element events:
- #### etools-data-table-footer
- * on-page-size-changed - when a different page size is selected
- * on-page-number-changed - when page navigation occured
-
 ## Usage
 ```html
       <etools-data-table-header id="listHeader" label="[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]] results to show">
@@ -94,39 +70,28 @@ Custom property | Description | Default
 `--list-row-wrapper-padding` | Row wrapper padding var | `0 24px 0 0`
 
 ## Install
-
+TODO: create npm package
 ```bash
-$ bower install --save etools-data-table
+$ npm i --save unicef-polymer/etools-data-table#branch_name
 ```
 
 ## Preview element locally
-
-Install needed dependencies by running: `$ bower install`.
+Install needed dependencies by running: `$ npm install`.
 Make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `$ polymer serve` to serve your element application locally.
+
+Update demo interface: `$ polymer analyze demo/index.html > analysis.json`
 
 ## Linting the code
 
-Innstall local npm packages (run `npm install`)
+Install local npm packages (run `npm install`)
 Then just run the linting task
 
 ```bash
 $ npm run lint
 ```
-You should also use polylint. If you don't have Polylint installed run `npm install -g polylint`.
-Then just run the linter on each file you wish to check like so
-
-```bash
-$ polylint -i filename.html
-```
-At the moment polylint crashes if it encounters a missing import. If that happens, temporarily comment out such imports and run the command again.
 
 ## Running Tests
-
-You need to have `web-component-tester` installed (if not run `npm install -g web-component-tester`)
-```bash
-$ wct
+TODO: improve and add more tests
 ```
-or
-```bash
-$ wct -p
+$ polymer test
 ```
