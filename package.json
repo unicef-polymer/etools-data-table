@@ -1,46 +1,47 @@
 {
-  "description": "etools data table UI",
-  "name": "etools-data-table",
+  "name": "@unicef-polymer/etools-data-table",
+  "version": "3.0.0-rc.1",
+  "homepage": "https://github.com/unicef-polymer/etools-data-table",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unicef-polymer/etools-data-table"
+    "url": "https://github.com/unicef-polymer/etools-data-table.git"
   },
+  "description": "Data table",
+  "author": "The Polymer Authors",
+  "license": "Apache-2.0",
   "devDependencies": {
-    "eslint": "^3.19.0",
-    "eslint-config-google": "^0.7.0",
-    "eslint-plugin-html": "^2.0.0",
-    "@polymer/iron-component-page": "^3.0.0-pre.18",
-    "@polymer/iron-demo-helpers": "^3.0.0-pre.18",
-    "@polymer/iron-test-helpers": "^3.0.0-pre.18",
-    "@polymer/gen-typescript-declarations": "^1.6.0",
-    "wct-browser-legacy": "^0.0.1-pre.11",
-    "@webcomponents/webcomponentsjs": "^2.0.0"
+    "eslint": "^5.2.0",
+    "eslint-config-google": "^0.13.0",
+    "eslint-plugin-html": "^5.0.5",
+    "@polymer/iron-component-page": "^4.0.1",
+    "@polymer/iron-demo-helpers": "^3.1.0",
+    "@polymer/iron-test-helpers": "^3.0.1",
+    "@polymer/gen-typescript-declarations": "^1.6.1",
+    "wct-browser-legacy": "^1.0.2",
+    "@webcomponents/webcomponentsjs": "^2.2.10"
   },
   "scripts": {
     "lint": "npm run lint:javascript && polymer lint && exit 0",
     "lint:javascript": "eslint . --ext js,html && exit 0",
     "gen-typings": "gen-typescript-declarations --deleteExisting --outDir './'"
   },
-  "version": "3.0.0",
   "resolutions": {
     "inherits": "2.0.3",
-    "samsam": "1.1.3",
     "supports-color": "3.1.2",
     "type-detect": "1.0.0",
-    "@webcomponents/webcomponentsjs": "2.0.0-beta.2"
+    "@webcomponents/webcomponentsjs": "2.2.10"
   },
   "main": "etools-data-table.js",
-  "license": "Apache-2.0",
   "dependencies": {
-    "@polymer/iron-collapse": "^3.0.0",
-    "@polymer/iron-flex-layout": "^3.0.0",
-    "@polymer/iron-icons": "^3.0.0",
-    "@polymer/neon-animation": "^3.0.0",
-    "@polymer/paper-dropdown-menu": "^3.0.0",
-    "@polymer/paper-icon-button": "^3.0.0",
-    "@polymer/paper-item": "^3.0.0",
-    "@polymer/paper-listbox": "^3.0.0",
-    "@polymer/polymer": "^3.0.0",
+    "@polymer/iron-collapse": "^3.0.1",
+    "@polymer/iron-flex-layout": "^3.0.1",
+    "@polymer/iron-icons": "^3.0.1",
+    "@polymer/neon-animation": "^3.0.1",
+    "@polymer/paper-dropdown-menu": "^3.0.1",
+    "@polymer/paper-icon-button": "^3.0.2",
+    "@polymer/paper-item": "^3.0.1",
+    "@polymer/paper-listbox": "^3.0.1",
+    "@polymer/polymer": "^3.2.0",
     "web-animations-js": "^2.3.1"
   }
 }
