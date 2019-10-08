@@ -72,7 +72,7 @@ Custom property | Description | Default
 ## Install
 TODO: create npm package
 ```bash
-$ npm i --save unicef-polymer/etools-data-table#branch_name
+$ npm i --save @unicef-polymer/etools-data-table
 ```
 
 ## Preview element locally
