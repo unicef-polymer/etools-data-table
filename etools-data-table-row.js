@@ -148,7 +148,8 @@ class EtoolsDataTableRow extends PolymerElement {
     return {
       detailsOpened: {
         type: Boolean,
-        value: false
+        value: false,
+        notify: true
       },
       noCollapse: {
         type: Boolean,
@@ -172,12 +173,7 @@ class EtoolsDataTableRow extends PolymerElement {
   }
 
   _toggleRowDetails() {
-    this.detailsOpened = !this.detailsOpened;
-    this.dispatchEvent(new CustomEvent('details-opened-changed', {
-      detail: {row: this, detailsOpened: this.detailsOpened},
-      bubbles: true,
-      composed: true
-    }));
+    this.detailsOpened ? this.detailsOpened = false : this.detailsOpened = true;
   }
 
 }
