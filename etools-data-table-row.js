@@ -33,7 +33,7 @@ class EtoolsDataTableRow extends PolymerElement {
           background-color: var(--list-second-bg-color, #eeeeee);
           @apply --hover-setting;
         }
-        
+
         div#wrapper, #collapse-wrapper {
           border-bottom: 1px solid var(--list-divider-color, #9d9d9d);
         }
@@ -172,8 +172,14 @@ class EtoolsDataTableRow extends PolymerElement {
   }
 
   _toggleRowDetails() {
-    this.detailsOpened ? this.detailsOpened = false : this.detailsOpened = true;
+    this.detailsOpened = !this.detailsOpened;
+    this.dispatchEvent(new CustomEvent('details-opened-changed', {
+      detail: {row: this, detailsOpened: this.detailsOpened},
+      bubbles: true,
+      composed: true
+    }));
   }
+
 }
 
 customElements.define(EtoolsDataTableRow.is, EtoolsDataTableRow);
