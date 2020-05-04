@@ -6,15 +6,15 @@
 
     <title>etools-data-table children test</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
-    <link rel="import" href="../../iron-test-helpers/mock-interactions.html">
+    <script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../wct-browser-legacy/browser.js"></script>
+    <script type="module" src="../../@polymer/iron-test-helpers/mock-interactions.js"></script>
 
 
-    <link rel="import" href="../etools-data-table-column.html">
-    <link rel="import" href="../etools-data-table-footer.html">
-    <link rel="import" href="../etools-data-table-header.html">
-    <link rel="import" href="../etools-data-table-row.html">
+    <script type="module" src="../etools-data-table-column.js"></script>
+    <script type="module" src="../etools-data-table-footer.js"></script>
+    <script type="module" src="../etools-data-table-header.js"></script>
+    <script type="module" src="../etools-data-table-row.js"></script>
   </head>
   <body>
     <test-fixture id="column">
@@ -38,77 +38,82 @@
       </template>
     </test-fixture>
 
-    <script>
-      suite('etools-data-table', function() {
-        let column, footer, header, row;
-        setup(function() {
-          column = fixture('column');
-          footer = fixture('footer');
-          header = fixture('header');
-          row = fixture('row');
-        });
-        test('instantiating etools-data-table-column works', function() {
-          expect(column).to.not.equal(undefined);
-        });
-        test('tapping column resorts contents', function() {
-          let initialValue = column.direction;
-          let arrow = column.shadowRoot.querySelector('#icon-wrapper');
-          column.setAttribute('sortable', 'true');
-          MockInteractions.tap(arrow);
-          expect(initialValue).to.not.equal(column.direction);
-        });
-        test('instantiating etools-data-table-footer works', function() {
-          expect(footer).to.not.equal(undefined);
-        });
-        test('table footer correctly computes total pages', function() {
-          let testFunction = (size, results, total) => {
-            footer.pageSize = size;
-            footer.totalResults = results;
-            expect(footer.totalPages).to.equal(total);
-          };
-          let testArray = [[5, 12, 3], [10, 223, 23], [25, 525, 21], [50, 32, 1]];
-          for (n in testArray) {
-            testFunction(testArray[n][0], testArray[n][1], testArray[n][2]);
-          };
-        });
-        test('table footer correctly displays visible range', function() {
-          let testFunction = (number, size, results, pages, visible) => {
-            footer.pageNumber = number;
-            footer.pageSize = size;
-            footer.totalResults = results;
-            footer.totalPages = pages;
-            expect(footer.visibleRange).to.deep.equal(visible)
-          };
-          let testArray = [
-            [1, 10, 287, 29, [1, 10]],
-            [3, 25, 54, 3, [51, 54]],
-            [6, 50, 2322, 47, [251, 300]]
-          ]
-          for (n in testArray) {
-            testFunction(
-              testArray[n][0], testArray[n][1], testArray[n][2],
-              testArray[n][3], testArray[n][4]
-            );
-          };
-        });
-        test('instantiating etools-data-table-header works', function() {
-          expect(header).to.not.equal(undefined);
-        });
-        test('instantiating etools-data-table-row works', function() {
-          expect(row).to.not.equal(undefined);
-        });
-        test('show data toggle opens', function() {
-          let expand = row.shadowRoot.querySelector('#more')
-          MockInteractions.tap(expand)
-          expect(row.detailsOpened).to.equal(true)
-        })
-        test('show data toggle closes', function() {
-          row.detailsOpened = true
-          let collapse = row.shadowRoot.querySelector('#less')
-          MockInteractions.tap(collapse)
-          expect(row.detailsOpened).to.equal(false)
-        })
-      });
-    </script>
+    <script type="module">
+import '../../@polymer/iron-test-helpers/mock-interactions.js';
+import '../etools-data-table-column.js';
+import '../etools-data-table-footer.js';
+import '../etools-data-table-header.js';
+import '../etools-data-table-row.js';
+suite('etools-data-table', function() {
+  let column, footer, header, row;
+  setup(function() {
+    column = fixture('column');
+    footer = fixture('footer');
+    header = fixture('header');
+    row = fixture('row');
+  });
+  test('instantiating etools-data-table-column works', function() {
+    expect(column).to.not.equal(undefined);
+  });
+  test('tapping column resorts contents', function() {
+    let initialValue = column.direction;
+    let arrow = column.shadowRoot.querySelector('#icon-wrapper');
+    column.setAttribute('sortable', 'true');
+    MockInteractions.tap(arrow);
+    expect(initialValue).to.not.equal(column.direction);
+  });
+  test('instantiating etools-data-table-footer works', function() {
+    expect(footer).to.not.equal(undefined);
+  });
+  test('table footer correctly computes total pages', function() {
+    let testFunction = (size, results, total) => {
+      footer.pageSize = size;
+      footer.totalResults = results;
+      expect(footer.totalPages).to.equal(total);
+    };
+    let testArray = [[5, 12, 3], [10, 223, 23], [25, 525, 21], [50, 32, 1]];
+    for (n in testArray) {
+      testFunction(testArray[n][0], testArray[n][1], testArray[n][2]);
+    };
+  });
+  test('table footer correctly displays visible range', function() {
+    let testFunction = (number, size, results, pages, visible) => {
+      footer.pageNumber = number;
+      footer.pageSize = size;
+      footer.totalResults = results;
+      footer.totalPages = pages;
+      expect(footer.visibleRange).to.deep.equal(visible)
+    };
+    let testArray = [
+      [1, 10, 287, 29, [1, 10]],
+      [3, 25, 54, 3, [51, 54]],
+      [6, 50, 2322, 47, [251, 300]]
+    ]
+    for (n in testArray) {
+      testFunction(
+        testArray[n][0], testArray[n][1], testArray[n][2],
+        testArray[n][3], testArray[n][4]
+      );
+    };
+  });
+  test('instantiating etools-data-table-header works', function() {
+    expect(header).to.not.equal(undefined);
+  });
+  test('instantiating etools-data-table-row works', function() {
+    expect(row).to.not.equal(undefined);
+  });
+  test('show data toggle opens', function() {
+    let expand = row.shadowRoot.querySelector('#more')
+    MockInteractions.tap(expand)
+    expect(row.detailsOpened).to.equal(true)
+  })
+  test('show data toggle closes', function() {
+    row.detailsOpened = true
+    let collapse = row.shadowRoot.querySelector('#less')
+    MockInteractions.tap(collapse)
+    expect(row.detailsOpened).to.equal(false)
+  })
+});
+</script>
   </body>
 </html>
