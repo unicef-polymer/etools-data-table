@@ -1,0 +1,181 @@
+import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
+import '@polymer/iron-icons/iron-icons.js';
+import '@polymer/iron-collapse/iron-collapse.js';
+
+/**
+ * `etools-data-table-row`
+ * @polymer
+ * @customElement
+ * @extends {PolymerElement}
+ * @demo demo/index.html
+ */
+class EtoolsDataTableRow extends PolymerElement {
+  static get template() {
+    // language=HTML
+    return html`
+      <style>
+        *[hidden] {
+          display: none !important;
+        }
+
+        :host {
+          --row-width: {
+            width: calc(100% - 96px);
+          };
+          display: block;
+        }
+
+        :host([no-collapse]) div#wrapper:hover {
+          background: var(--list-bg-color, #ffffff);
+        }
+
+        :host([secondary-bg-on-hover]) div#wrapper:hover {
+          background-color: var(--list-second-bg-color, #eeeeee);
+          @apply --hover-setting;
+        }
+
+        div#wrapper, #collapse-wrapper {
+          border-bottom: 1px solid var(--list-divider-color, #9d9d9d);
+        }
+
+        div#wrapper:hover {
+          background-color: var(--list-second-bg-color, #eeeeee);
+          @apply --hover-setting;
+        }
+
+        div#wrapper {
+          @apply --layout-horizontal;
+          @apply --layout-center;
+          padding: var(--list-row-wrapper-padding, 0 24px 0 0);
+          font-size: 13px;
+          color: var(--list-text-color, #2b2b2b);
+          background-color: var(--list-bg-color, #ffffff);
+          @apply --list-row-wrapper;
+        }
+
+        :host div#wrapper ::slotted([slot="row-data"]) {
+          text-overflow: ellipsis;
+          @apply --row-width;
+        }
+
+        :host([no-collapse]) div#wrapper ::slotted([slot="row-data"]) {
+          width: 100%
+        }
+
+        :host([no-collapse]) div#wrapper ::slotted([slot="row-data"]) {
+          width: 100%
+        }
+
+        div#wrapper,
+        #collapse-wrapper {
+          border-bottom: 1px solid var(--list-divider-color, #9d9d9d);
+        }
+
+        #iconWrapper {
+          min-height: 48px;
+          line-height: 48px;
+          padding: 0 16px;
+          cursor: pointer;
+          width: 24px;
+          @apply --icon-wrapper;
+        }
+
+        iron-icon {
+          color: var(--list-icon-color, #2b2b2b);
+        }
+
+        iron-icon:hover {
+          color: var(--list-icon-hover-color, rgba(0, 0, 0, 0.87));
+        }
+
+        #collapse-wrapper {
+          padding: 16px 24px 16px 58px;
+          background-color: var(--list-second-bg-color, #eeeeee);
+          @apply --list-row-collapse-wrapper;
+        }
+
+        :host([no-collapse]) #details,
+        :host([no-collapse]) #iconWrapper {
+          display: none;
+        }
+
+        :host([no-collapse]) #wrapper {
+          padding: var(--list-row-wrapper-padding, 0 24px);
+          @apply --list-row-no-collapse;
+        }
+
+        /* Mobile view CSS */
+        :host([medium-resolution-layout]) div#wrapper,
+        :host([low-resolution-layout]) div#wrapper {
+          padding-right: 0;
+        }
+
+        :host([medium-resolution-layout]) #iconWrapper,
+        :host([low-resolution-layout]) #iconWrapper {
+          min-height: 0;
+          line-height: normal;
+          padding: 8px;
+        }
+
+        :host([medium-resolution-layout]) #collapse-wrapper,
+        :host([low-resolution-layout]) #collapse-wrapper {
+          padding: 0 0 0 40px;
+        }
+
+      </style>
+
+      <div id="wrapper">
+        <div id="iconWrapper">
+          <iron-icon id="more" icon="expand-more" hidden\$="[[detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
+          <iron-icon id="less" icon="expand-less" hidden\$="[[!detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
+        </div>
+        <slot name="row-data"></slot>
+      </div>
+
+      <iron-collapse id="details" opened="{{detailsOpened}}" no-animation="[[noAnimation]]">
+        <div id="collapse-wrapper">
+          <slot name="row-data-details"></slot>
+        </div>
+      </iron-collapse>
+    `;
+  }
+
+  static get is() {
+    return 'etools-data-table-row';
+  }
+
+  static get properties() {
+    return {
+      detailsOpened: {
+        type: Boolean,
+        value: false,
+        notify: true
+      },
+      noCollapse: {
+        type: Boolean,
+        reflectToAttribute: true
+      },
+      noAnimation: {
+        type: Boolean,
+        value: false
+      },
+      lowResolutionLayout: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      },
+      mediumResolutionLayout: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      }
+    };
+  }
+
+  _toggleRowDetails() {
+    this.detailsOpened ? this.detailsOpened = false : this.detailsOpened = true;
+  }
+
+}
+
+customElements.define(EtoolsDataTableRow.is, EtoolsDataTableRow);

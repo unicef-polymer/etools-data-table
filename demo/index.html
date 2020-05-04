@@ -1,20 +1,40 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <title>etools-data-table demo</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-  <title>etools-data-table demo</title>
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+  <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
+  <script type="module" src="../node_modules/@polymer/iron-media-query/iron-media-query.js"></script>
+  <script type="module" src="../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js"></script>
 
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../etools-data-table.html">
+  <script type="module" src="../etools-data-table.js"></script>
+
+  <script src="https://unpkg.com/web-animations-js@^2.0.0/web-animations-next-lite.min.js"></script>
+
   <custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
       .vertical-section-container {
         max-width: 900px;
+      }
+
+      .col-1 {
+        flex: 0 0 8.333333333%;
+        max-width: 8.333333333%;
+      }
+
+      .col-2 {
+        flex: 0 0 16.66666667%;
+        max-width: 16.66666667%;
+      }
+
+      .col-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
       }
 
       .col-4 {
@@ -26,42 +46,193 @@
         flex: 0 0 50%;
         max-width: 50%;
       }
+
+      .flex-c {
+        @apply --layout-flex;
+      }
+
+      /* COPY OF DATA TABLE STYLES */
+      a {
+        color: var(--list-primary-color, #0099ff);
+      }
+
+      #list {
+        display: block;
+        opacity: 1;
+        transition: opacity 0.4s;
+        background-color: var(--list-secondary-color, #ffffff);
+        padding: 0;
+      }
+
+      #list.hidden {
+        transition: none;
+        opacity: 0;
+      }
+
+      *[slot="row-data"] {
+        margin-top: 12px;
+        margin-bottom: 12px;
+      }
+      *[slot="row-data"],
+      *[slot="row-data-details"] {
+        @apply --layout-horizontal;
+        @apply --layout-flex;
+      }
+
+      *[slot="row-data"] .col-data {
+        display: inline-flex;
+        line-height: 24px;
+        align-items: center;
+      }
+
+      *[slot="row-data"] .truncate {
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+
+      etools-data-table-column,
+      *[slot="row-data"] .col-data {
+        box-sizing: border-box;
+        padding-right: 16px;
+      }
+      etools-data-table-column:last-child,
+      *[slot="row-data"] .col-data:last-child {
+        padding-right: 0;
+      }
+      .row-details-content {
+        font-size: 12px;
+      }
+      .row-details-content .rdc-title {
+        display: inline-block;
+        width: 100%;
+        color: var(--list-secondary-text-color, #757575);
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      /* Mobile view CSS */
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data"],
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data-details"] {
+        @apply --layout;
+        @apply --layout-wrap;
+        @apply --layout-flex;
+        box-sizing: border-box;
+      }
+
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data"] .col-data {
+        @apply --layout;
+        @apply --layout-start;
+        flex: 1 0 calc(50% - 16px);
+        max-width: calc(50% - 16px);
+        padding: 8px;
+        box-sizing: border-box;
+      }
+
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data"] .truncate {
+        @apply --layout;
+        @apply --layout-flex;
+        white-space: unset;
+        overflow: unset;
+        text-overflow: unset;
+      }
+
+      etools-data-table-row[low-resolution-layout] *[slot="row-data"],
+      etools-data-table-row[low-resolution-layout] *[slot="row-data-details"] {
+        display: block;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+
+      etools-data-table-row[low-resolution-layout] *[slot="row-data"] .col-data,
+      etools-data-table-row[low-resolution-layout] *[slot="row-data-details"] > * {
+        display: inline-block;
+        width: 100%;
+        max-width: 100%;
+        padding: 8px 0;
+        box-sizing: border-box;
+      }
+
+      etools-data-table-row[medium-resolution-layout] *[slot="row-data"] .col-data:before,
+      etools-data-table-row[low-resolution-layout] *[slot="row-data"] .col-data:before {
+        content: attr(data-col-header-label)": ";
+        color: var(--list-secondary-text-color, #757575);
+        font-weight: bold;
+        margin-right: 8px;
+        vertical-align: top;
+        min-height: 24px;
+      }
+
     </style>
   </custom-style>
 </head>
 <body>
+
 <div class="vertical-section-container centered">
   <h3>Basic etools-data-table demo</h3>
   <demo-snippet>
     <dom-bind id="domBind1">
       <template is="dom-bind">
 
+        <iron-media-query query="(max-width: 767px)" query-matches="{{lowResolutionLayout}}"></iron-media-query>
+        <iron-media-query query="(min-width: 768px) and (max-width: 900px)"
+                          query-matches="{{mediumResolutionLayout}}"></iron-media-query>
+
         <etools-data-table-header id="listHeader"
-                                  label="[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]] results to show">
-          <etools-data-table-column class="col-4" field="agreement_number" sortable>
+                                  label="[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]] results to show"
+                                  low-resolution-layout="[[lowResolutionLayout]]"
+                                  medium-resolution-layout="[[mediumResolutionLayout]]">
+          <etools-data-table-column class="col-data col-1" field="agreement_number" sortable="">
             Reference Number #
           </etools-data-table-column>
-          <etools-data-table-column class="col-4" field="partner_name" sortable>
+          <etools-data-table-column class="col-data col-3" field="partner_name" sortable="">
             Partner Full Name
           </etools-data-table-column>
-          <etools-data-table-column class="col-4" field="partner_type">
+          <etools-data-table-column class="col-data flex-c" field="partner_type">
             Type
+          </etools-data-table-column>
+          <etools-data-table-column class="col-data col-2">
+            Status
+          </etools-data-table-column>
+          <etools-data-table-column class="col-data flex-c">
+            Created
+          </etools-data-table-column>
+          <etools-data-table-column class="col-data flex-c">
+            Modified
+          </etools-data-table-column>
+          <etools-data-table-column class="col-data col-2">
+            Modified By
           </etools-data-table-column>
         </etools-data-table-header>
 
-        <template id="rows" is="dom-repeat"
-                  items="[[items]]" as="agreement">
-          <etools-data-table-row>
-            <div slot="row-data" style="display:flex; flex-direction: row;">
-                  <span class="col-4 ">
-                      [[agreement.agreement_number]]
-                  </span>
-              <span class="col-4" title="[[agreement.partner_name]]">
-                    <span class="truncate"> [[agreement.partner_name]] </span>
-                  </span>
-              <span class="col-4">
-                      [[agreement.agreement_type]]
-                  </span>
+        <template id="rows" is="dom-repeat" items="[[items]]" as="agreement">
+          <etools-data-table-row low-resolution-layout="[[lowResolutionLayout]]"
+                                 medium-resolution-layout="[[mediumResolutionLayout]]">
+            <div slot="row-data">
+              <span class="col-data col-1" data-col-header-label="Reference Number #">
+                [[agreement.agreement_number]]
+              </span>
+              <span class="col-data col-3" title="[[agreement.partner_name]]" data-col-header-label="Partner Full Name">
+                <span class="truncate"> [[agreement.partner_name]] </span>
+              </span>
+              <span class="col-data flex-c" data-col-header-label="Type">
+                [[agreement.agreement_type]]
+              </span>
+              <span class="col-data col-2" data-col-header-label="Status">
+                [[agreement.status]]
+              </span>
+              <span class="col-data flex-c" data-col-header-label="Created">
+                [[agreement.created]]
+              </span>
+              <span class="col-data flex-c" data-col-header-label="Modified">
+                [[agreement.modified]]
+              </span>
+              <span class="col-data col-2" data-col-header-label="Modified By">
+                [[agreement.modified_by]]
+              </span>
 
             </div>
             <div slot="row-data-details">
@@ -78,19 +249,20 @@
           </etools-data-table-row>
         </template>
 
-        <etools-data-table-footer
-            id="footer"
-            page-size="[[pageSize]]"
-            page-number="[[pageNumber]]"
-            total-results="[[totalResults]]"
-            visible-range="{{visibleRange}}">
+        <etools-data-table-footer id="footer" page-size="[[pageSize]]" page-number="[[pageNumber]]"
+                                  total-results="[[totalResults]]" visible-range="{{visibleRange}}"
+                                  low-resolution-layout="[[lowResolutionLayout]]">
         </etools-data-table-footer>
 
       </template>
     </dom-bind>
   </demo-snippet>
 </div>
-<script>
+
+<script type="module">
+  import '@polymer/iron-demo-helpers/demo-pages-shared-styles.js';
+  import '@polymer/iron-demo-helpers/demo-snippet.js';
+  import '../etools-data-table.js';
 
   function generateDemoData(size) {
     let demoData = [];
@@ -100,6 +272,10 @@
         partner_name: 'Partner name ' + id,
         agreement_number: id,
         agreement_type: 'PCA',
+        status: 'active',
+        created: '2 oct 2018',
+        modified: '2 oct 2018',
+        modified_by: 'admin',
         signed_by_partner_date: '6 jun 2018',
         signed_by_unicef_date: '7 jun 2018'
       });
@@ -114,7 +290,6 @@
   domBind.items = demoData;
   domBind.totalResults = demoData.length;
   domBind.visibleRange = [1, domBind.pageSize];
-
 </script>
 </body>
 </html>
