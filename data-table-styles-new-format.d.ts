@@ -5,7 +5,7 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   data-table-styles.js
+ *   data-table-styles-new-format.js
  */
 
 
