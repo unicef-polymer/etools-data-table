@@ -1,6 +1,7 @@
 import '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 
+// todo: please note that changes also have to be made in data-table-styles-new-format
 const $_documentContainer = document.createElement('template');
 $_documentContainer.setAttribute('style', 'display: none;');
 // languae=HTML
