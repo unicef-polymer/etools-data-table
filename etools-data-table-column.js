@@ -14,12 +14,11 @@ class EtoolsDataTableColumn extends PolymerElement {
     // language=HTML
     return html`
       <style>
-
         :host {
           @apply --layout-horizontal;
           @apply --layout-center;
 
-          height: 56px;
+          height: var(--list-header-column-height, 56px);
           font-size: 12px;
           color: var(--list-secondary-text-color, #757575);
           font-weight: bold;
@@ -38,12 +37,15 @@ class EtoolsDataTableColumn extends PolymerElement {
           @apply --list-column-label;
         }
 
-        #icon-wrapper, iron-icon {
+        #icon-wrapper,
+        iron-icon {
           width: 16px;
           height: 16px;
         }
 
-        #up, #down, #icon-wrapper {
+        #up,
+        #down,
+        #icon-wrapper {
           display: none;
         }
 
@@ -56,13 +58,13 @@ class EtoolsDataTableColumn extends PolymerElement {
           color: var(--list-text-color, rgba(0, 0, 0, 0.87));
         }
 
-        :host([selected][direction="asc"]) #up,
-        :host([selected][direction="asc"]) #icon-wrapper {
+        :host([selected][direction='asc']) #up,
+        :host([selected][direction='asc']) #icon-wrapper {
           display: block;
         }
 
-        :host([selected][direction="desc"]) #down,
-        :host([selected][direction="desc"]) #icon-wrapper {
+        :host([selected][direction='desc']) #down,
+        :host([selected][direction='desc']) #icon-wrapper {
           display: block;
         }
 
@@ -73,12 +75,11 @@ class EtoolsDataTableColumn extends PolymerElement {
         :host([selected]) iron-icon {
           color: var(--list-icon-color, rgba(0, 0, 0, 0.87));
         }
-
       </style>
 
       <span id="label">
-      <slot></slot>
-    </span>
+        <slot></slot>
+      </span>
       <div id="icon-wrapper">
         <iron-icon id="up" icon="arrow-upward"></iron-icon>
         <iron-icon id="down" icon="arrow-downward"></iron-icon>
@@ -124,11 +125,13 @@ class EtoolsDataTableColumn extends PolymerElement {
     } else {
       this.set('direction', this.direction === 'asc' ? 'desc' : 'asc');
     }
-    this.dispatchEvent(new CustomEvent('sort-changed', {
-      detail: {field: this.field, direction: this.direction},
-      bubbles: true,
-      composed: true
-    }));
+    this.dispatchEvent(
+      new CustomEvent('sort-changed', {
+        detail: {field: this.field, direction: this.direction},
+        bubbles: true,
+        composed: true
+      })
+    );
   }
 }
 
