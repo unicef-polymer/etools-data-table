@@ -13,7 +13,6 @@ class EtoolsDataTableHeader extends PolymerElement {
     // language=HTML
     return html`
       <style>
-
         :host {
           display: block;
           border-bottom: 1px solid var(--list-divider-color, #9d9d9d);
@@ -21,7 +20,7 @@ class EtoolsDataTableHeader extends PolymerElement {
 
         div#header-wrapper {
           padding: 0 24px;
-          height: 118px;
+          height: var(--list-header-wrapper-height, 118px);
           background-color: var(--list-bg-color, #ffffff);
           @apply --data-table-header;
         }
@@ -47,27 +46,26 @@ class EtoolsDataTableHeader extends PolymerElement {
           @apply --layout-horizontal;
           @apply --layout-center;
           margin-left: 32px;
-          height: 56px;
+          height: var(--list-header-wrapper-column-height, 56px);
           @apply --header-columns;
         }
 
         :host([no-collapse]) #columns {
           margin-left: 0;
-          flex: 1
+          flex: 1;
         }
-        
+
         /* Mobile view CSS */
         :host([medium-resolution-layout]) div#header-wrapper,
         :host([low-resolution-layout]) div#header-wrapper {
           height: auto;
           padding: 0;
         }
-        
+
         :host([medium-resolution-layout]) #columns,
         :host([low-resolution-layout]) #columns {
           display: none;
         }
-
       </style>
 
       <div id="header-wrapper">
@@ -78,7 +76,6 @@ class EtoolsDataTableHeader extends PolymerElement {
         <div id="columns">
           <slot></slot>
         </div>
-
       </div>
     `;
   }
