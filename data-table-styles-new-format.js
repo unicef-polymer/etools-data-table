@@ -5,6 +5,4 @@ import {commonStyles} from './data-table-styles-common';
 // todo: please note that changes also have to be made in data-table-styles
 export const dataTableStylesNewFormat = html`
   ${commonStyles}
-  <style>
-  </style>
 `;

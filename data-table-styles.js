@@ -9,9 +9,6 @@ $_documentContainer.setAttribute('style', 'display: none;');
 $_documentContainer.innerHTML = `<dom-module id="data-table-styles">
   <template>
     ${commonStyles}
-    <style>
-      
-    </style>
   </template>
 </dom-module>`;
 
