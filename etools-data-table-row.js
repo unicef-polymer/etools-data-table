@@ -74,9 +74,11 @@ class EtoolsDataTableRow extends PolymerElement {
         #iconWrapper {
           min-height: 48px;
           line-height: 48px;
-          padding: 0 16px;
+          padding: var(--icon-wrapper-padding, 0 16px);
           cursor: pointer;
           width: 24px;
+          background:  var(--icon-wrapper-background);
+          margin: var(--icon-wrapper-margin, 0);
           @apply --icon-wrapper;
         }
 
