@@ -68,6 +68,9 @@ Custom property | Description | Default
 `--list-row-collapse-wrapper` | Row collapsible details mixin | `{}`
 `--list-row-wrapper` | Row wrapper mixin | `{}`
 `--list-row-wrapper-padding` | Row wrapper padding var | `0 24px 0 0`
+`--icon-wrapper-padding` | Icon wrapper padding var | `0 16px`
+`--icon-wrapper-margin` | Icon wrapper margin var | `0`
+`--icon-wrapper-background` | Icon wrapper background var | `none`
 
 ## Install
 TODO: create npm package
