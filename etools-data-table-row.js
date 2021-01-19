@@ -126,8 +126,8 @@ class EtoolsDataTableRow extends PolymerElement {
 
       <div id="wrapper">
         <div id="iconWrapper">
-          <iron-icon id="more" icon="expand-more" hidden\$="[[detailsOpened]]" on-tap="_toggleRowDetails" tabindex="1"></iron-icon>
-          <iron-icon id="less" icon="expand-less" hidden\$="[[!detailsOpened]]" on-tap="_toggleRowDetails" tabindex="1"></iron-icon>
+          <iron-icon id="more" icon="expand-more" hidden\$="[[detailsOpened]]" on-tap="_toggleRowDetails" tabindex="0"></iron-icon>
+          <iron-icon id="less" icon="expand-less" hidden\$="[[!detailsOpened]]" on-tap="_toggleRowDetails" tabindex="0"></iron-icon>
         </div>
         <slot name="row-data"></slot>
       </div>
