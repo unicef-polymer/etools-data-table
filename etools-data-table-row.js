@@ -50,7 +50,6 @@ class EtoolsDataTableRow extends PolymerElement {
           font-size: 13px;
           color: var(--list-text-color, #2b2b2b);
           background-color: var(--list-bg-color, #ffffff);
-          @apply --list-row-wrapper;
         }
 
         :host div#wrapper ::slotted([slot="row-data"]) {
@@ -91,7 +90,6 @@ class EtoolsDataTableRow extends PolymerElement {
         #collapse-wrapper {
           padding: 16px 24px 16px 58px;
           background-color: var(--list-second-bg-color, #eeeeee);
-          @apply --list-row-collapse-wrapper;
         }
 
         :host([no-collapse]) #details,
@@ -124,7 +122,7 @@ class EtoolsDataTableRow extends PolymerElement {
 
       </style>
 
-      <div id="wrapper">
+      <div id="wrapper" part="list-row-wrapper">
         <div id="iconWrapper">
           <iron-icon id="more" icon="expand-more" hidden\$="[[detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
           <iron-icon id="less" icon="expand-less" hidden\$="[[!detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
@@ -133,7 +131,7 @@ class EtoolsDataTableRow extends PolymerElement {
       </div>
 
       <iron-collapse id="details" opened="{{detailsOpened}}" no-animation="[[noAnimation]]">
-        <div id="collapse-wrapper">
+        <div id="collapse-wrapper" part="list-row-collapse-wrapper">
           <slot name="row-data-details"></slot>
         </div>
       </iron-collapse>
