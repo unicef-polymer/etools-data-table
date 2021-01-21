@@ -76,7 +76,6 @@ class EtoolsDataTableRow extends PolymerElement {
           padding: 0 16px;
           cursor: pointer;
           width: 24px;
-          @apply --icon-wrapper;
         }
 
         iron-icon {
@@ -123,7 +122,7 @@ class EtoolsDataTableRow extends PolymerElement {
       </style>
 
       <div id="wrapper" part="list-row-wrapper">
-        <div id="iconWrapper">
+        <div id="iconWrapper" part="icon-wrapper">
           <iron-icon id="more" icon="expand-more" hidden\$="[[detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
           <iron-icon id="less" icon="expand-less" hidden\$="[[!detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
         </div>

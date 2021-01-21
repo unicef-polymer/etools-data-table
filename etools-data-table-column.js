@@ -34,7 +34,6 @@ class EtoolsDataTableColumn extends PolymerElement {
           -moz-user-select: none;
           -ms-user-select: none;
           user-select: none;
-          @apply --list-column-label;
         }
 
         #icon-wrapper,
@@ -77,7 +76,7 @@ class EtoolsDataTableColumn extends PolymerElement {
         }
       </style>
 
-      <span id="label">
+      <span id="label" part="list-column-label">
         <slot></slot>
       </span>
       <div id="icon-wrapper">
