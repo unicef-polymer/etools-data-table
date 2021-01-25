@@ -80,8 +80,8 @@ class EtoolsDataTableRow extends PolymerElement {
 
         iron-icon:focus {
           outline: 0;
-          box-shadow:  0 0 10px 10px rgba(170, 165, 165, 0.2) !important;
-          background-color: rgba(170, 165, 165, 0.2);
+          box-shadow:  0 0 10px 10px rgba(170, 165, 165, 0.3) !important;
+          background-color: rgba(170, 165, 165, 0.3);
           border-radius: 50%
         }
 
