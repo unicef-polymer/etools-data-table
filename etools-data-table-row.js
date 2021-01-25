@@ -80,6 +80,13 @@ class EtoolsDataTableRow extends PolymerElement {
           @apply --icon-wrapper;
         }
 
+        iron-icon:focus {
+          outline: 0;
+          box-shadow:  0 0 10px 10px rgba(170, 165, 165, 0.2) !important;
+          background-color: rgba(170, 165, 165, 0.2);
+          border-radius: 50%
+        }
+
         iron-icon {
           color: var(--list-icon-color, #2b2b2b);
         }
@@ -126,8 +133,8 @@ class EtoolsDataTableRow extends PolymerElement {
 
       <div id="wrapper">
         <div id="iconWrapper">
-          <iron-icon id="more" icon="expand-more" hidden\$="[[detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
-          <iron-icon id="less" icon="expand-less" hidden\$="[[!detailsOpened]]" on-tap="_toggleRowDetails"></iron-icon>
+          <iron-icon id="more" icon="expand-more" hidden\$="[[detailsOpened]]" on-keyup="_callClickOnSpace" on-tap="_toggleRowDetails" tabindex="0"></iron-icon>
+          <iron-icon id="less" icon="expand-less" hidden\$="[[!detailsOpened]]" on-keyup="_callClickOnSpace" on-tap="_toggleRowDetails" tabindex="0"></iron-icon>
         </div>
         <slot name="row-data"></slot>
       </div>
@@ -174,6 +181,16 @@ class EtoolsDataTableRow extends PolymerElement {
 
   _toggleRowDetails() {
     this.detailsOpened ? this.detailsOpened = false : this.detailsOpened = true;
+  }
+
+  _callClickOnSpace(event) {
+    if (event.key === ' ' && !event.ctrlKey) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      event.target.click();
+      event.target.focus();
+    }
   }
 
 }
