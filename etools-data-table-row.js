@@ -133,8 +133,8 @@ class EtoolsDataTableRow extends PolymerElement {
 
       <div id="wrapper">
         <div id="iconWrapper">
-          <iron-icon id="more" icon="expand-more" hidden\$="[[detailsOpened]]" on-keyup="_callClickOnSpace" on-tap="_toggleRowDetails" tabindex="0"></iron-icon>
-          <iron-icon id="less" icon="expand-less" hidden\$="[[!detailsOpened]]" on-keyup="_callClickOnSpace" on-tap="_toggleRowDetails" tabindex="0"></iron-icon>
+          <iron-icon id="more" icon="expand-more" hidden\$="[[detailsOpened]]" on-keypress="_callClickOnSpace" on-tap="_toggleRowDetails" tabindex="0"></iron-icon>
+          <iron-icon id="less" icon="expand-less" hidden\$="[[!detailsOpened]]" on-keypress="_callClickOnSpace" on-tap="_toggleRowDetails" tabindex="0"></iron-icon>
         </div>
         <slot name="row-data"></slot>
       </div>
@@ -189,7 +189,10 @@ class EtoolsDataTableRow extends PolymerElement {
       event.preventDefault();
       // Trigger the button element with a click
       event.target.click();
-      event.target.focus();
+      // Set focus for next icon
+      var nextElement = PolymerElement;
+      this.detailsOpened ? nextElement = this.$.less : nextElement = this.$.more;
+      nextElement.focus();
     }
   }
 
