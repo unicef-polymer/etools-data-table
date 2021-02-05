@@ -76,7 +76,7 @@ class EtoolsDataTableColumn extends PolymerElement {
         }
       </style>
 
-      <span id="label" part="list-column-label">
+      <span id="label" part="edt-list-column-label">
         <slot></slot>
       </span>
       <div id="icon-wrapper">

@@ -31,7 +31,8 @@ class EtoolsDataTableRow extends PolymerElement {
 
         :host([secondary-bg-on-hover]) div#wrapper:hover {
           background-color: var(--list-second-bg-color, #eeeeee);
-          @apply --hover-setting;
+          /*@apply --hover-setting;*/
+          /* the above mixin is replaced by etools-data-table-row::part(edt-list-row-wrapper):hover */
         }
 
         div#wrapper, #collapse-wrapper {
@@ -40,7 +41,8 @@ class EtoolsDataTableRow extends PolymerElement {
 
         div#wrapper:hover {
           background-color: var(--list-second-bg-color, #eeeeee);
-          @apply --hover-setting;
+          /*@apply --hover-setting;*/
+          /* the above mixin is replaced by etools-data-table-row::part(edt-list-row-wrapper):hover */
         }
 
         div#wrapper {
@@ -128,8 +130,8 @@ class EtoolsDataTableRow extends PolymerElement {
 
       </style>
 
-      <div id="wrapper" part="list-row-wrapper">
-        <div id="iconWrapper" part="icon-wrapper">
+      <div id="wrapper" part="edt-list-row-wrapper">
+        <div id="iconWrapper" part="edt-icon-wrapper">
           <iron-icon id="more" icon="expand-more" hidden\$="[[detailsOpened]]" on-keyup="_callClickOnSpace" on-tap="_toggleRowDetails" tabindex="0"></iron-icon>
           <iron-icon id="less" icon="expand-less" hidden\$="[[!detailsOpened]]" on-keyup="_callClickOnSpace" on-tap="_toggleRowDetails" tabindex="0"></iron-icon>
         </div>
@@ -137,7 +139,7 @@ class EtoolsDataTableRow extends PolymerElement {
       </div>
 
       <iron-collapse id="details" opened="{{detailsOpened}}" no-animation="[[noAnimation]]">
-        <div id="collapse-wrapper" part="list-row-collapse-wrapper">
+        <div id="collapse-wrapper" part="edt-list-row-collapse-wrapper">
           <slot name="row-data-details"></slot>
         </div>
       </iron-collapse>
