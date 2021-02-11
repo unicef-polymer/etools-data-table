@@ -190,7 +190,6 @@ class EtoolsDataTableRow extends PolymerElement {
       // Trigger the button element with a click
       event.target.click();
       // Set focus for next icon
-      var nextElement = PolymerElement;
       this.detailsOpened ? nextElement = this.$.less : nextElement = this.$.more;
       nextElement.focus();
     }
