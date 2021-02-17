@@ -65,8 +65,13 @@ Custom property | Description | Default
 `--list-icon-color` | Icon color | `#2b2b2b`
 `--list-icon-hover-color` | Icon hover color | `rgba(0, 0, 0, 0.87)`
 `--list-disabled-icon-color` | Disabled icon color | `rgba(0, 0, 0, 0.64)`
-`--list-row-collapse-wrapper` | Row collapsible details mixin | `{}`
-`--list-row-wrapper` | Row wrapper mixin | `{}`
+`etools-data-table-row::part(edt-list-row-collapse-wrapper)` | Row collapsible details shadow part | `{}`
+`etools-data-table-row::part(edt-list-row-wrapper)` | Row wrapper shadow part | `{}`
+`etools-data-table-row::part(edt-icon-wrapper)` | Icon wrapper shadow part | `{}`
+`etools-data-table-header::part(edt-data-table-header)` | Data table header shadow part | `{}`
+`etools-data-table-header::part(edt-header-title)` | Header title shadow part | `{}`
+`etools-data-table-header::part(edt-header-columns)` | Header columns shadow part | `{}`
+`etools-data-table-column::part(edt-list-column-label)` | List columns shadow part | `{}`
 `--list-row-wrapper-padding` | Row wrapper padding var | `0 24px 0 0`
 
 ## Install

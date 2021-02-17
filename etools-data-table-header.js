@@ -22,7 +22,6 @@ class EtoolsDataTableHeader extends PolymerElement {
           padding: 0 24px;
           height: var(--list-header-wrapper-height, 118px);
           background-color: var(--list-bg-color, #ffffff);
-          @apply --data-table-header;
         }
 
         :host([no-title]) div#header-wrapper {
@@ -35,7 +34,6 @@ class EtoolsDataTableHeader extends PolymerElement {
           line-height: 64px;
           font-size: 20px;
           color: var(--list-text-color, #2b2b2b);
-          @apply --header-title;
         }
 
         :host([no-title]) #title {
@@ -47,7 +45,6 @@ class EtoolsDataTableHeader extends PolymerElement {
           @apply --layout-center;
           margin-left: 32px;
           height: var(--list-header-wrapper-column-height, 56px);
-          @apply --header-columns;
         }
 
         :host([no-collapse]) #columns {
@@ -68,12 +65,12 @@ class EtoolsDataTableHeader extends PolymerElement {
         }
       </style>
 
-      <div id="header-wrapper">
-        <div id="title">
+      <div id="header-wrapper" part="edt-data-table-header">
+        <div id="title" part="edt-header-title">
           <span>[[label]]</span>
         </div>
 
-        <div id="columns">
+        <div id="columns" part="edt-header-columns">
           <slot></slot>
         </div>
       </div>
