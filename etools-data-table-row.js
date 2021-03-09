@@ -1,3 +1,3 @@
 
-import {EtoolsDataTableRow} from './etools-data-table-row.js';
+import {EtoolsDataTableRow} from './EtoolsDataTableRow.js';
 customElements.define(EtoolsDataTableRow.is, EtoolsDataTableRow);

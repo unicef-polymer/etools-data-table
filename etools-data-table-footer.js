@@ -1,3 +1,3 @@
-import {EtoolsDataTableFooter} from './etools-data-table-footer.js';
+import {EtoolsDataTableFooter} from './EtoolsDataTableFooter.js';
 
 customElements.define(EtoolsDataTableFooter.is, EtoolsDataTableFooter);

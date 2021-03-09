@@ -1,2 +1,2 @@
-import {EtoolsDataTableHeader} from './etools-data-table-header.js';
+import {EtoolsDataTableHeader} from './EtoolsDataTableHeader.js';
 customElements.define(EtoolsDataTableHeader.is, EtoolsDataTableHeader);
