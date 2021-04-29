@@ -43,7 +43,7 @@ export class EtoolsDataTableHeader extends PolymerElement {
         #columns {
           @apply --layout-horizontal;
           @apply --layout-center;
-          margin-left: 32px;
+          margin-inline-start: 32px;
           height: var(--list-header-wrapper-column-height, 56px);
         }
 
