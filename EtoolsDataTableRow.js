@@ -1,4 +1,4 @@
-import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-icons/iron-icons.js';
 import '@polymer/iron-collapse/iron-collapse.js';
 
@@ -21,7 +21,7 @@ export class EtoolsDataTableRow extends PolymerElement {
         :host {
           --row-width: {
             width: calc(100% - 96px);
-          };
+          }
           display: block;
         }
 
@@ -35,7 +35,8 @@ export class EtoolsDataTableRow extends PolymerElement {
           /* the above mixin is replaced by etools-data-table-row::part(edt-list-row-wrapper):hover */
         }
 
-        div#wrapper, #collapse-wrapper {
+        div#wrapper,
+        #collapse-wrapper {
           border-bottom: 1px solid var(--list-divider-color, #9d9d9d);
         }
 
@@ -54,17 +55,17 @@ export class EtoolsDataTableRow extends PolymerElement {
           background-color: var(--list-bg-color, #ffffff);
         }
 
-        :host div#wrapper ::slotted([slot="row-data"]) {
+        :host div#wrapper ::slotted([slot='row-data']) {
           text-overflow: ellipsis;
           @apply --row-width;
         }
 
-        :host([no-collapse]) div#wrapper ::slotted([slot="row-data"]) {
-          width: 100%
+        :host([no-collapse]) div#wrapper ::slotted([slot='row-data']) {
+          width: 100%;
         }
 
-        :host([no-collapse]) div#wrapper ::slotted([slot="row-data"]) {
-          width: 100%
+        :host([no-collapse]) div#wrapper ::slotted([slot='row-data']) {
+          width: 100%;
         }
 
         div#wrapper,
@@ -82,9 +83,8 @@ export class EtoolsDataTableRow extends PolymerElement {
 
         iron-icon:focus {
           outline: 0;
-          box-shadow:  0 0 10px 10px rgba(170, 165, 165, 0.3) !important;
           background-color: rgba(170, 165, 165, 0.3);
-          border-radius: 50%
+          border-radius: 50%;
         }
 
         iron-icon {
@@ -127,18 +127,35 @@ export class EtoolsDataTableRow extends PolymerElement {
         :host([low-resolution-layout]) #collapse-wrapper {
           padding: 0 0 0 40px;
         }
-
       </style>
 
       <div id="wrapper" part="edt-list-row-wrapper">
         <div id="iconWrapper" part="edt-icon-wrapper">
-          <iron-icon id="more" icon="expand-more" hidden\$="[[detailsOpened]]" on-keypress="_callClickOnSpace" on-tap="_toggleRowDetails" tabindex="0"></iron-icon>
-          <iron-icon id="less" icon="expand-less" hidden\$="[[!detailsOpened]]" on-keypress="_callClickOnSpace" on-tap="_toggleRowDetails" tabindex="0"></iron-icon>
+          <iron-icon
+            id="more"
+            icon="expand-more"
+            hidden$="[[detailsOpened]]"
+            on-keypress="_callClickOnSpace"
+            on-tap="_toggleRowDetails"
+            tabindex="0"
+          ></iron-icon>
+          <iron-icon
+            id="less"
+            icon="expand-less"
+            hidden$="[[!detailsOpened]]"
+            on-keypress="_callClickOnSpace"
+            on-tap="_toggleRowDetails"
+            tabindex="0"
+          ></iron-icon>
         </div>
         <slot name="row-data"></slot>
       </div>
 
-      <iron-collapse id="details" opened="{{detailsOpened}}" no-animation="[[noAnimation]]">
+      <iron-collapse
+        id="details"
+        opened="{{detailsOpened}}"
+        no-animation="[[noAnimation]]"
+      >
         <div id="collapse-wrapper" part="edt-list-row-collapse-wrapper">
           <slot name="row-data-details"></slot>
         </div>
@@ -155,31 +172,33 @@ export class EtoolsDataTableRow extends PolymerElement {
       detailsOpened: {
         type: Boolean,
         value: false,
-        notify: true
+        notify: true,
       },
       noCollapse: {
         type: Boolean,
-        reflectToAttribute: true
+        reflectToAttribute: true,
       },
       noAnimation: {
         type: Boolean,
-        value: false
+        value: false,
       },
       lowResolutionLayout: {
         type: Boolean,
         value: false,
-        reflectToAttribute: true
+        reflectToAttribute: true,
       },
       mediumResolutionLayout: {
         type: Boolean,
         value: false,
-        reflectToAttribute: true
-      }
+        reflectToAttribute: true,
+      },
     };
   }
 
   _toggleRowDetails() {
-    this.detailsOpened ? this.detailsOpened = false : this.detailsOpened = true;
+    this.detailsOpened
+      ? (this.detailsOpened = false)
+      : (this.detailsOpened = true);
   }
 
   _callClickOnSpace(event) {
@@ -189,9 +208,10 @@ export class EtoolsDataTableRow extends PolymerElement {
       // Trigger the button element with a click
       event.target.click();
       // Set focus for next icon
-      this.detailsOpened ? nextElement = this.$.less : nextElement = this.$.more;
+      this.detailsOpened
+        ? (nextElement = this.$.less)
+        : (nextElement = this.$.more);
       nextElement.focus();
     }
   }
-
 }
