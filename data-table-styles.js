@@ -47,7 +47,7 @@ export const dataTableStylesContent = `
   etools-data-table-column,
   *[slot="row-data"] .col-data {
     box-sizing: border-box;
-    margin-inline-end: 16px;
+    padding-inline-end: 16px;
   }
   etools-data-table-column:last-child,
   *[slot="row-data"] .col-data:last-child {
