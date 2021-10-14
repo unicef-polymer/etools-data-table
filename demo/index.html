@@ -265,9 +265,9 @@
   import '../etools-data-table.js';
 
   function generateDemoData(size) {
-    let demoData = [];
+    const demoData = [];
     for (let i = 0; i < size; i++) {
-      let id = i + 1;
+      const id = i + 1;
       demoData.push({
         partner_name: 'Partner name ' + id,
         agreement_number: id,
@@ -283,8 +283,8 @@
     return demoData;
   }
 
-  let demoData = generateDemoData(6);
-  let domBind = document.getElementById('domBind1');
+  const demoData = generateDemoData(6);
+  const domBind = document.getElementById('domBind1');
   domBind.pageSize = 10;
   domBind.pageNumber = 1;
   domBind.items = demoData;

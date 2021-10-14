@@ -1,4 +1,4 @@
-import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-icons/iron-icons.js';
 import '@polymer/iron-collapse/iron-collapse.js';
 
@@ -151,11 +151,7 @@ export class EtoolsDataTableRow extends PolymerElement {
         <slot name="row-data"></slot>
       </div>
 
-      <iron-collapse
-        id="details"
-        opened="{{detailsOpened}}"
-        no-animation="[[noAnimation]]"
-      >
+      <iron-collapse id="details" opened="{{detailsOpened}}" no-animation="[[noAnimation]]">
         <div id="collapse-wrapper" part="edt-list-row-collapse-wrapper">
           <slot name="row-data-details"></slot>
         </div>
@@ -172,33 +168,31 @@ export class EtoolsDataTableRow extends PolymerElement {
       detailsOpened: {
         type: Boolean,
         value: false,
-        notify: true,
+        notify: true
       },
       noCollapse: {
         type: Boolean,
-        reflectToAttribute: true,
+        reflectToAttribute: true
       },
       noAnimation: {
         type: Boolean,
-        value: false,
+        value: false
       },
       lowResolutionLayout: {
         type: Boolean,
         value: false,
-        reflectToAttribute: true,
+        reflectToAttribute: true
       },
       mediumResolutionLayout: {
         type: Boolean,
         value: false,
-        reflectToAttribute: true,
-      },
+        reflectToAttribute: true
+      }
     };
   }
 
   _toggleRowDetails() {
-    this.detailsOpened
-      ? (this.detailsOpened = false)
-      : (this.detailsOpened = true);
+    this.detailsOpened ? (this.detailsOpened = false) : (this.detailsOpened = true);
   }
 
   _callClickOnSpace(event) {
@@ -208,10 +202,11 @@ export class EtoolsDataTableRow extends PolymerElement {
       // Trigger the button element with a click
       event.target.click();
       // Set focus for next icon
-      this.detailsOpened
-        ? (nextElement = this.$.less)
-        : (nextElement = this.$.more);
-      nextElement.focus();
+      if (this.detailsOpened) {
+        this.$.less.focus();
+      } else {
+        this.$.more.focus();
+      }
     }
   }
 }
