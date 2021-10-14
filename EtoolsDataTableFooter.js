@@ -19,7 +19,6 @@ export class EtoolsDataTableFooter extends PolymerElement {
     // language=HTML
     return html`
       <style>
-
         :host {
           display: block;
           font-size: 12px;
@@ -33,7 +32,7 @@ export class EtoolsDataTableFooter extends PolymerElement {
         #table-footer paper-item {
           --paper-item-focused: {
             background-color: var(--list-secondary-color);
-          };
+          }
           height: 24px; /* for IE */
         }
 
@@ -87,11 +86,11 @@ export class EtoolsDataTableFooter extends PolymerElement {
             @apply --layout-horizontal;
             align-items: strech;
             max-width: 24px;
-          };
+          }
 
           --paper-input-container-underline: {
             display: none;
-          };
+          }
         }
 
         .pagination-item {
@@ -118,17 +117,15 @@ export class EtoolsDataTableFooter extends PolymerElement {
         :host([low-resolution-layout]) .pag-btns {
           margin-left: -12px;
         }
-
       </style>
 
       <div id="table-footer">
-
         <span class="pagination-item">
           <span id="rows">Rows per page:</span>
           <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink="" no-label-float>
             <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{pageSize}}">
               <template is="dom-repeat" items="[[pageSizeOptions]]">
-                <paper-item name\$="[[item]]">[[item]]</paper-item>
+                <paper-item name$="[[item]]">[[item]]</paper-item>
               </template>
             </paper-listbox>
           </paper-dropdown-menu>
@@ -137,19 +134,30 @@ export class EtoolsDataTableFooter extends PolymerElement {
         </span>
 
         <span class="pagination-item pag-btns">
-          <paper-icon-button icon="first-page" on-tap="_firstPage"
-                             disabled\$="[[_pageBackDisabled(pageNumber)]]"></paper-icon-button>
+          <paper-icon-button
+            icon="first-page"
+            on-tap="_firstPage"
+            disabled$="[[_pageBackDisabled(pageNumber)]]"
+          ></paper-icon-button>
 
-          <paper-icon-button icon="chevron-left" on-tap="_pageLeft"
-                             disabled\$="[[_pageBackDisabled(pageNumber)]]"></paper-icon-button>
+          <paper-icon-button
+            icon="chevron-left"
+            on-tap="_pageLeft"
+            disabled$="[[_pageBackDisabled(pageNumber)]]"
+          ></paper-icon-button>
 
-          <paper-icon-button icon="chevron-right" on-tap="_pageRight"
-                             disabled\$="[[_pageForwardDisabled(pageNumber, totalPages)]]"></paper-icon-button>
+          <paper-icon-button
+            icon="chevron-right"
+            on-tap="_pageRight"
+            disabled$="[[_pageForwardDisabled(pageNumber, totalPages)]]"
+          ></paper-icon-button>
 
-          <paper-icon-button icon="last-page" on-tap="_lastPage"
-                             disabled\$="[[_pageForwardDisabled(pageNumber, totalPages)]]"></paper-icon-button>
+          <paper-icon-button
+            icon="last-page"
+            on-tap="_lastPage"
+            disabled$="[[_pageForwardDisabled(pageNumber, totalPages)]]"
+          ></paper-icon-button>
         </span>
-
       </div>
     `;
   }

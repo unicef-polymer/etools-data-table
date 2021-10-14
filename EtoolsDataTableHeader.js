@@ -122,14 +122,14 @@ export class EtoolsDataTableHeader extends PolymerElement {
   }
 
   _handleSortChanged(e) {
-    let column = e.target;
+    const column = e.target;
     this._clearSelected(column);
     this.set('sortOrder.field', e.detail.field);
     this.set('sortOrder.direction', e.detail.field);
   }
 
   _sortOrderChanged(sortOrder) {
-    let column = this.queryEffectiveChildren('*[field="' + sortOrder.field + '"]');
+    const column = this.queryEffectiveChildren('*[field="' + sortOrder.field + '"]');
     this._clearSelected(column);
     column.set('selected', true);
     column.set('direction', sortOrder.direction);
