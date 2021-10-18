@@ -122,8 +122,10 @@ export class EtoolsDataTableFooter extends LitElement {
         <span class="pagination-item">
           <span id="rows">Rows per page:</span>
           <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink="" no-label-float>
-            <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="${this.pageSize}">
-              ${(this.pageSizeOptions || []).map((item) => html` <paper-item name$="${item}">${item}</paper-item>`)}
+            <paper-listbox slot="dropdown-content" attr-for-selected="name" .selected="${this.pageSize}">
+              ${(this.pageSizeOptions || []).map(
+      (item) => html` <paper-item name="${item}" @click="${() => (this.pageSize = item)}">${item}</paper-item>`
+    )}
             </paper-listbox>
           </paper-dropdown-menu>
 
@@ -164,9 +166,12 @@ export class EtoolsDataTableFooter extends LitElement {
   }
 
   set pageSize(pageSize) {
-    this._pageSize = pageSize;
-    this._computeTotalPages(this.pageSize, this.totalResults);
-    this._computeVisibleRange(this.pageNumber, this.pageSize, this.totalResults, this.totalPages);
+    if (this._pageSize !== pageSize) {
+      this._pageSize = pageSize;
+      this._computeTotalPages(this.pageSize, this.totalResults);
+      this._computeVisibleRange(this.pageNumber, this.pageSize, this.totalResults, this.totalPages);
+      this._dispatchEvent('page-size-changed', this.pageSize);
+    }
   }
 
   get pageSize() {
@@ -174,8 +179,11 @@ export class EtoolsDataTableFooter extends LitElement {
   }
 
   set pageNumber(pageNumber) {
-    this._pageNumber = pageNumber;
-    this._computeVisibleRange(this.pageNumber, this.pageSize, this.totalResults, this.totalPages);
+    if (this._pageNumber !== pageNumber) {
+      this._pageNumber = pageNumber;
+      this._computeVisibleRange(this.pageNumber, this.pageSize, this.totalResults, this.totalPages);
+      this._dispatchEvent('page-number-changed', this.pageNumber);
+    }
   }
 
   get pageNumber() {
@@ -199,8 +207,7 @@ export class EtoolsDataTableFooter extends LitElement {
         type: String
       },
       pageSizeOptions: {
-        type: Array,
-        value: [5, 10, 25, 50]
+        type: Array
       },
       pageNumber: {
         type: Number
@@ -214,18 +221,25 @@ export class EtoolsDataTableFooter extends LitElement {
       visibleRange: {
         type: Array
       },
-
       doNotShow: {
         type: Boolean,
         reflect: true
       },
-
       lowResolutionLayout: {
         type: Boolean,
-        value: false,
         reflect: true
       }
     };
+  }
+
+  constructor() {
+    super();
+    this.initializeProperties();
+  }
+
+  initializeProperties() {
+    this.pageSizeOptions = [5, 10, 25, 50];
+    this.lowResolutionLayout = false;
   }
 
   _pageLeft() {
@@ -279,7 +293,10 @@ export class EtoolsDataTableFooter extends LitElement {
       }
     }
 
-    this.visibleRange = [start, end];
+    if (JSON.stringify(this.visibleRange) !== JSON.stringify([start, end])) {
+      this.visibleRange = [start, end];
+      this._dispatchEvent('visible-range-changed', this.visibleRange);
+    }
   }
 
   _pageBackDisabled(pageNumber) {
@@ -291,6 +308,16 @@ export class EtoolsDataTableFooter extends LitElement {
   }
 
   _hideFooter(totalResults) {
-    this._hideFooter = totalResults <= 5;
+    this.doNotShow = totalResults <= 5;
+  }
+
+  _dispatchEvent(eventName, eventValue) {
+    this.dispatchEvent(
+      new CustomEvent(eventName, {
+        detail: {value: eventValue},
+        bubbles: true,
+        composed: true
+      })
+    );
   }
 }

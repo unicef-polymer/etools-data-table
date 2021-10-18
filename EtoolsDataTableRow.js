@@ -181,12 +181,10 @@ export class EtoolsDataTableRow extends LitElement {
       },
       lowResolutionLayout: {
         type: Boolean,
-        value: false,
         reflect: true
       },
       mediumResolutionLayout: {
         type: Boolean,
-        value: false,
         reflect: true
       }
     };

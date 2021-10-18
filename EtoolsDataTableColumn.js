@@ -93,7 +93,6 @@ export class EtoolsDataTableColumn extends LitElement {
     return {
       selected: {
         type: Boolean,
-        value: false,
         reflect: true
       },
 

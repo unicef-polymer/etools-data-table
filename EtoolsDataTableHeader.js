@@ -111,12 +111,10 @@ export class EtoolsDataTableHeader extends LitElement {
       },
       lowResolutionLayout: {
         type: Boolean,
-        value: false,
         reflect: true
       },
       mediumResolutionLayout: {
         type: Boolean,
-        value: false,
         reflect: true
       }
     };
@@ -147,7 +145,6 @@ export class EtoolsDataTableHeader extends LitElement {
 
   _clearSelected(column) {
     if (this._lastSelectedCol && this._lastSelectedCol !== column) {
-      // this._lastSelectedCol.set('selected', null);
       this._lastSelectedCol = {...this._lastSelectedCol, selected: null};
     }
     this._lastSelectedCol = column;
