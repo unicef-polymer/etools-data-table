@@ -1,5 +1,4 @@
 import '@polymer/polymer/polymer-element.js';
-import '@polymer/iron-flex-layout/iron-flex-layout.js';
 
 export const dataTableStylesContent = `
   a {
