@@ -135,13 +135,11 @@ export class EtoolsDataTableHeader extends LitElement {
   _handleSortChanged(e) {
     const column = e.target;
     this._clearSelected(column);
-    // this.set('sortOrder.field', e.detail.field);
-    // this.set('sortOrder.direction', e.detail.field);
-    this.sortOrder = {...this.sortOrder, field: e.detail.field, direction: e.detail.field};
+    this.sortOrder = {...this.sortOrder, field: e.detail.field, direction: e.detail.direction};
   }
 
   _sortOrderChanged(sortOrder) {
-    const column = this.queryEffectiveChildren('*[field="' + sortOrder.field + '"]');
+    const column = this.querySelector('*[field="' + sortOrder.field + '"]');
     this._clearSelected(column);
     column.selected = true;
     column.direction = sortOrder.direction;
