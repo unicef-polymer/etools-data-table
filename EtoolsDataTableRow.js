@@ -47,8 +47,9 @@ export class EtoolsDataTableRow extends LitElement {
         }
 
         div#wrapper {
-          @apply --layout-horizontal;
-          @apply --layout-center;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
           padding: var(--list-row-wrapper-padding, 0 24px 0 0);
           font-size: 13px;
           color: var(--list-text-color, #2b2b2b);

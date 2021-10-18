@@ -44,10 +44,9 @@ export class EtoolsDataTableFooter extends LitElement {
         }
 
         #table-footer {
-          @apply --layout-horizontal;
-          @apply --layout-center;
-          @apply --layout-end-justified;
-
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
           padding: 0 8px 0 16px;
           height: 48px;
           background-color: var(--list-bg-color, #ffffff);
@@ -81,8 +80,6 @@ export class EtoolsDataTableFooter extends LitElement {
             color: var(--list-text-color, rgba(0, 0, 0, 0.54));
             font-size: 12px;
             height: 24px;
-            /* For IE below */
-            @apply --layout-horizontal;
             align-items: strech;
             max-width: 24px;
           }
@@ -93,8 +90,9 @@ export class EtoolsDataTableFooter extends LitElement {
         }
 
         .pagination-item {
-          @apply --layout-horizontal;
-          @apply --layout-center;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
         }
 
         .pagination-item paper-dropdown-menu {
@@ -105,8 +103,9 @@ export class EtoolsDataTableFooter extends LitElement {
         :host([low-resolution-layout]) #table-footer {
           padding: 8px 0;
           height: auto;
-          @apply --layout-vertical;
-          @apply --layout-start;
+          display: flex;
+          flex-direction: column;
+          justify-content: start;
         }
 
         :host([low-resolution-layout]) #range {

@@ -41,8 +41,9 @@ export class EtoolsDataTableHeader extends LitElement {
         }
 
         #columns {
-          @apply --layout-horizontal;
-          @apply --layout-center;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
           margin-inline-start: 32px;
           height: var(--list-header-wrapper-column-height, 56px);
         }

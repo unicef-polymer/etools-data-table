@@ -14,9 +14,9 @@ export class EtoolsDataTableColumn extends LitElement {
     return html`
       <style>
         :host {
-          @apply --layout-horizontal;
-          @apply --layout-center;
-
+          display: flex;
+          flex-direction: row;
+          align-items: center;
           height: var(--list-header-column-height, 56px);
           font-size: 12px;
           color: var(--list-secondary-text-color, #757575);
