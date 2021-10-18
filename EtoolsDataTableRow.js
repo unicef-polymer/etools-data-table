@@ -129,8 +129,8 @@ export class EtoolsDataTableRow extends LitElement {
         }
       </style>
 
-      <div id="wrapper" part="list-row-wrapper">
-        <div id="iconWrapper" part="icon-wrapper">
+      <div id="wrapper" part="edt-list-row-wrapper">
+        <div id="iconWrapper" part="edt-icon-wrapper">
           <iron-icon
             id="more"
             icon="expand-more"
@@ -154,7 +154,7 @@ export class EtoolsDataTableRow extends LitElement {
       </div>
 
       <iron-collapse id="details" ?opened="${this.detailsOpened}" no-animation="${this.noAnimation}">
-        <div id="collapse-wrapper" part="list-row-collapse-wrapper">
+        <div id="collapse-wrapper" part="edt-list-row-collapse-wrapper">
           <slot name="row-data-details"></slot>
         </div>
       </iron-collapse>
