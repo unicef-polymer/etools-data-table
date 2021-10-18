@@ -1,15 +1,15 @@
-import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
+import {LitElement, html, property} from 'lit-element';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 
 /**
  * `etools-data-table-header`
- * @polymer
+ * @LitElement
  * @customElement
- * @extends {PolymerElement}
+ * @extends {LitElement}
  * @demo demo/index.html
  */
-export class EtoolsDataTableHeader extends PolymerElement {
-  static get template() {
+class EtoolsDataTableHeader extends LitElement {
+  render() {
     // language=HTML
     return html`
       <style>
@@ -65,12 +65,12 @@ export class EtoolsDataTableHeader extends PolymerElement {
         }
       </style>
 
-      <div id="header-wrapper" part="edt-data-table-header">
-        <div id="title" part="edt-header-title">
-          <span>[[label]]</span>
+      <div id="header-wrapper" part="data-table-header">
+        <div id="title" part="header-title">
+          <span>${this.label}</span>
         </div>
 
-        <div id="columns" part="edt-header-columns">
+        <div id="columns" part="header-columns">
           <slot></slot>
         </div>
       </div>
@@ -81,24 +81,32 @@ export class EtoolsDataTableHeader extends PolymerElement {
     return 'etools-data-table-header';
   }
 
+  _sortOrder;
+
+  set sortOrder(sortOrder) {
+    this._sortOrder = sortOrder;
+    this._sortOrderChanged(this._sortOrder);
+  }
+
+  get sortOrder() {
+    return this._sortOrder;
+  }
+
   static get properties() {
     return {
       sortOrder: {
-        type: Object,
-        observer: '_sortOrderChanged'
+        type: Object
       },
-
       _lastSelectedCol: {
         type: Object
       },
-
       noTitle: {
         type: Boolean,
-        reflectToAttribute: true
+        reflect: true
       },
       noCollapse: {
         type: Boolean,
-        reflectToAttribute: true
+        reflect: true
       },
       label: {
         type: String
@@ -106,38 +114,48 @@ export class EtoolsDataTableHeader extends PolymerElement {
       lowResolutionLayout: {
         type: Boolean,
         value: false,
-        reflectToAttribute: true
+        reflect: true
       },
       mediumResolutionLayout: {
         type: Boolean,
         value: false,
-        reflectToAttribute: true
+        reflect: true
       }
     };
   }
 
-  ready() {
-    super.ready();
+  connectedCallback() {
+    super.connectedCallback();
     this.addEventListener('sort-changed', this._handleSortChanged);
   }
 
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('sort-changed', this._handleSortChanged);
+  }
+
   _handleSortChanged(e) {
-    const column = e.target;
+    let column = e.target;
     this._clearSelected(column);
-    this.set('sortOrder.field', e.detail.field);
-    this.set('sortOrder.direction', e.detail.field);
+    // this.set('sortOrder.field', e.detail.field);
+    // this.set('sortOrder.direction', e.detail.field);
+    debugger;
+    this.sortOrder = {...this.sortOrder, field: e.detail.field, direction: e.detail.field};
   }
 
   _sortOrderChanged(sortOrder) {
-    const column = this.queryEffectiveChildren('*[field="' + sortOrder.field + '"]');
+    debugger;
+    let column = this.queryEffectiveChildren('*[field="' + sortOrder.field + '"]');
     this._clearSelected(column);
-    column.set('selected', true);
-    column.set('direction', sortOrder.direction);
+    //@dci
+    column.selected = true;
+    column.direction = sortOrder.direction;
   }
 
   _clearSelected(column) {
     if (this._lastSelectedCol && this._lastSelectedCol !== column) {
-      this._lastSelectedCol.set('selected', null);
+      //@dci this._lastSelectedCol.set('selected', null);
+      this._lastSelectedCol = {...this._lastSelectedCol, selected: null};
     }
     this._lastSelectedCol = column;
   }

@@ -1,16 +1,16 @@
-import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
+import {LitElement, html} from 'lit-element';
 import '@polymer/iron-icons/iron-icons.js';
 import '@polymer/iron-collapse/iron-collapse.js';
 
 /**
  * `etools-data-table-row`
- * @polymer
+ * @LitElement
  * @customElement
- * @extends {PolymerElement}
+ * @extends {LitElement}
  * @demo demo/index.html
  */
-export class EtoolsDataTableRow extends PolymerElement {
-  static get template() {
+class EtoolsDataTableRow extends LitElement {
+  render() {
     // language=HTML
     return html`
       <style>
@@ -129,33 +129,29 @@ export class EtoolsDataTableRow extends PolymerElement {
         }
       </style>
 
-      <div id="wrapper" part="edt-list-row-wrapper">
-        <div id="iconWrapper" part="edt-icon-wrapper">
-          <iron-icon
-            id="more"
-            icon="expand-more"
-            hidden$="[[detailsOpened]]"
-            on-keypress="_callClickOnSpace"
-            on-tap="_toggleRowDetails"
-            tabindex="0"
-          ></iron-icon>
-          <iron-icon
-            id="less"
-            icon="expand-less"
-            hidden$="[[!detailsOpened]]"
-            on-keypress="_callClickOnSpace"
-            on-tap="_toggleRowDetails"
-            tabindex="0"
-          ></iron-icon>
-        </div>
-        <slot name="row-data"></slot>
+      <div id="wrapper" part="list-row-wrapper">
+      <div id="iconWrapper" part="icon-wrapper">
+        <iron-icon id="more" icon="expand-more"
+          ?hidden="${this.detailsOpened}"
+          @keyup="${(e) => this._callClickOnSpace(e)}"
+          @tap="${() => this._toggleRowDetails()}"
+          tabindex="0">
+        </iron-icon>
+        <iron-icon id="less" icon="expand-less"
+          ?hidden="${!this.detailsOpened}"
+          @keyup="${(e) => this._callClickOnSpace(e)}"
+          @tap="${() => this._toggleRowDetails()}"
+          tabindex="0">
+        </iron-icon>
       </div>
+      <slot name="row-data"></slot>
+    </div>
 
-      <iron-collapse id="details" opened="{{detailsOpened}}" no-animation="[[noAnimation]]">
-        <div id="collapse-wrapper" part="edt-list-row-collapse-wrapper">
-          <slot name="row-data-details"></slot>
-        </div>
-      </iron-collapse>
+    <iron-collapse id="details" ?opened="${this.detailsOpened}" no-animation="${this.noAnimation}">
+      <div id="collapse-wrapper" part="list-row-collapse-wrapper">
+        <slot name="row-data-details"></slot>
+      </div>
+    </iron-collapse>
     `;
   }
 
@@ -172,7 +168,7 @@ export class EtoolsDataTableRow extends PolymerElement {
       },
       noCollapse: {
         type: Boolean,
-        reflectToAttribute: true
+        reflect: true
       },
       noAnimation: {
         type: Boolean,
@@ -181,18 +177,18 @@ export class EtoolsDataTableRow extends PolymerElement {
       lowResolutionLayout: {
         type: Boolean,
         value: false,
-        reflectToAttribute: true
+        reflect: true
       },
       mediumResolutionLayout: {
         type: Boolean,
         value: false,
-        reflectToAttribute: true
+        reflect: true
       }
     };
   }
 
   _toggleRowDetails() {
-    this.detailsOpened ? (this.detailsOpened = false) : (this.detailsOpened = true);
+    this.detailsOpened ? this.detailsOpened = false : this.detailsOpened = true;
   }
 
   _callClickOnSpace(event) {
@@ -201,12 +197,8 @@ export class EtoolsDataTableRow extends PolymerElement {
       event.preventDefault();
       // Trigger the button element with a click
       event.target.click();
-      // Set focus for next icon
-      if (this.detailsOpened) {
-        this.$.less.focus();
-      } else {
-        this.$.more.focus();
-      }
+      event.target.focus();
     }
   }
+
 }

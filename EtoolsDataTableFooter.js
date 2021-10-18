@@ -1,6 +1,5 @@
-import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
+import {LitElement, html} from 'lit-element';
 
-import '@polymer/polymer/lib/elements/dom-repeat.js';
 import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
@@ -9,13 +8,14 @@ import '@polymer/iron-flex-layout/iron-flex-layout.js';
 
 /**
  * `etools-data-table-footer`
- * @polymer
+ * @LitElement
  * @customElement
- * @extends {PolymerElement}
+ * @extends {LitElement}
  * @demo demo/index.html
  */
-export class EtoolsDataTableFooter extends PolymerElement {
-  static get template() {
+export class EtoolsDataTableFooter extends LitElement {
+
+  render() {
     // language=HTML
     return html`
       <style>
@@ -120,45 +120,33 @@ export class EtoolsDataTableFooter extends PolymerElement {
       </style>
 
       <div id="table-footer">
+
         <span class="pagination-item">
           <span id="rows">Rows per page:</span>
           <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink="" no-label-float>
-            <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{pageSize}}">
-              <template is="dom-repeat" items="[[pageSizeOptions]]">
-                <paper-item name$="[[item]]">[[item]]</paper-item>
-              </template>
+            <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="${this.pageSize}">
+              ${this.pageSizeOptions.map((item) => html` <paper-item name$="${item}">${item}</paper-item>`)}
             </paper-listbox>
           </paper-dropdown-menu>
 
-          <span id="range">[[visibleRange.0]]-[[visibleRange.1]] of [[totalResults]]</span>
+          <span id="range">${`${this.visibleRange[0]}-${this.visibleRange[1]} of ${this.totalResults}`}</span>
         </span>
 
         <span class="pagination-item pag-btns">
-          <paper-icon-button
-            icon="first-page"
-            on-tap="_firstPage"
-            disabled$="[[_pageBackDisabled(pageNumber)]]"
-          ></paper-icon-button>
+          <paper-icon-button icon="first-page" on-tap="${() => this._firstPage()}"
+                            ?disabled="${this._pageBackDisabled(pageNumber)}"></paper-icon-button>
 
-          <paper-icon-button
-            icon="chevron-left"
-            on-tap="_pageLeft"
-            disabled$="[[_pageBackDisabled(pageNumber)]]"
-          ></paper-icon-button>
+          <paper-icon-button icon="chevron-left" on-tap="${() => this._pageLeft()}"
+                            ?disabled="${this._pageBackDisabled(this.pageNumber)}"></paper-icon-button>
 
-          <paper-icon-button
-            icon="chevron-right"
-            on-tap="_pageRight"
-            disabled$="[[_pageForwardDisabled(pageNumber, totalPages)]]"
-          ></paper-icon-button>
+          <paper-icon-button icon="chevron-right" on-tap="${() => _pageRight()}"
+                            ?disabled="${this._pageForwardDisabled(this.pageNumber, this.totalPages)}"></paper-icon-button>
 
-          <paper-icon-button
-            icon="last-page"
-            on-tap="_lastPage"
-            disabled$="[[_pageForwardDisabled(pageNumber, totalPages)]]"
-          ></paper-icon-button>
+          <paper-icon-button icon="last-page" on-tap="${() => _lastPage()}"
+                            ?disabled="${this._pageForwardDisabled(this.pageNumber, this.totalPages)}"></paper-icon-button>
         </span>
-      </div>
+
+    </div>
     `;
   }
 
@@ -166,73 +154,96 @@ export class EtoolsDataTableFooter extends PolymerElement {
     return 'etools-data-table-footer';
   }
 
+  _pageSize;
+  _pageNumber;
+  _totalResults;
+
+  set pageSize(pageSize) {
+    this._pageSize = pageSize;
+    this._computeTotalPages(this.pageSize, this.totalResults);
+    this._computeVisibleRange(this.pageNumber, this.pageSize, this.totalResults, this.totalPages);
+  }
+
+  get pageSize() {
+    return this._pageSize;
+  }
+
+  set pageNumber(pageNumber) {
+    this._pageNumber = pageNumber;
+    this._computeVisibleRange(this.pageNumber, this.pageSize, this.totalResults, this.totalPages);
+  }
+
+  get pageNumber() {
+    return this._pageNumber;
+  }
+
+  set totalResults(totalResults) {
+    this._totalResults = totalResults;
+    this._computeTotalPages(this.pageSize, this.totalResults);
+    this._computeVisibleRange(this.pageNumber, this.pageSize, this.totalResults, this.totalPages);
+    this._hideFooter(this.totalResults);
+  }
+
+  get totalResults() {
+    return this._totalResults;
+  }
+
   static get properties() {
     return {
       pageSize: {
-        type: String,
-        notify: true
+        type: String
       },
-
       pageSizeOptions: {
         type: Array,
         value: [5, 10, 25, 50]
       },
-
       pageNumber: {
-        type: Number,
-        notify: true
+        type: Number
       },
-
       totalResults: {
         type: Number
       },
-
       totalPages: {
-        type: Number,
-        computed: '_computeTotalPages(pageSize, totalResults)'
+        type: Number
       },
-
       visibleRange: {
-        type: Array,
-        notify: true,
-        computed: '_computeVisibleRange(pageNumber, pageSize, totalResults, totalPages)'
+        type: Array
       },
 
       doNotShow: {
         type: Boolean,
-        computed: '_hideFooter(totalResults)',
-        reflectToAttribute: true
+        reflect: true
       },
 
       lowResolutionLayout: {
         type: Boolean,
         value: false,
-        reflectToAttribute: true
+        reflect: true
       }
     };
   }
 
   _pageLeft() {
     if (this.pageNumber > 1) {
-      this.set('pageNumber', this.pageNumber - 1);
+      this.pageNumber = this.pageNumber - 1;
     }
   }
 
   _pageRight() {
     if (this.pageNumber < this.totalPages) {
-      this.set('pageNumber', this.pageNumber + 1);
+      this.pageNumber = this.pageNumber + 1;
     }
   }
 
   _firstPage() {
     if (this.pageNumber > 1) {
-      this.set('pageNumber', 1);
+      this.pageNumber = 1;
     }
   }
 
   _lastPage() {
     if (this.pageNumber < this.totalPages) {
-      this.set('pageNumber', this.totalPages);
+      this.pageNumber = this.totalPages;
     }
   }
 
@@ -241,7 +252,7 @@ export class EtoolsDataTableFooter extends PolymerElement {
     if (pageSize < totalResults) {
       result = Math.ceil(totalResults / pageSize);
     }
-    return result;
+    this.totalPages = result;
   }
 
   _computeVisibleRange(pageNumber, pageSize, totalResults, totalPages) {
@@ -263,7 +274,7 @@ export class EtoolsDataTableFooter extends PolymerElement {
       }
     }
 
-    return [start, end];
+    this.visibleRange = [start, end];
   }
 
   _pageBackDisabled(pageNumber) {
@@ -275,6 +286,6 @@ export class EtoolsDataTableFooter extends PolymerElement {
   }
 
   _hideFooter(totalResults) {
-    return totalResults <= 5;
+    this._hideFooter = totalResults <= 5;
   }
 }
