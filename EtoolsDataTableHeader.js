@@ -65,12 +65,12 @@ export class EtoolsDataTableHeader extends LitElement {
         }
       </style>
 
-      <div id="header-wrapper" part="data-table-header">
-        <div id="title" part="header-title">
+      <div id="header-wrapper" part="edt-data-table-header">
+        <div id="title" part="edt-header-title">
           <span>${this.label}</span>
         </div>
 
-        <div id="columns" part="header-columns">
+        <div id="columns" part="edt-header-columns">
           <slot></slot>
         </div>
       </div>
