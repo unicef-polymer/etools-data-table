@@ -9,7 +9,6 @@ import '@polymer/iron-icons/iron-icons.js';
  * @demo demo/index.html
  */
 export class EtoolsDataTableColumn extends LitElement {
-
   render() {
     // language=HTML
     return html`
@@ -109,7 +108,6 @@ export class EtoolsDataTableColumn extends LitElement {
     };
   }
 
-
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener('tap', this._sort);
@@ -126,7 +124,7 @@ export class EtoolsDataTableColumn extends LitElement {
     }
     if (!this.selected || !this.direction) {
       this.selected = true;
-      this.direction = asc;
+      this.direction = 'asc';
     } else {
       this.direction = this.direction === 'asc' ? 'desc' : 'asc';
     }

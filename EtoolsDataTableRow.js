@@ -9,7 +9,7 @@ import '@polymer/iron-collapse/iron-collapse.js';
  * @extends {LitElement}
  * @demo demo/index.html
  */
-class EtoolsDataTableRow extends LitElement {
+export class EtoolsDataTableRow extends LitElement {
   render() {
     // language=HTML
     return html`
@@ -130,28 +130,34 @@ class EtoolsDataTableRow extends LitElement {
       </style>
 
       <div id="wrapper" part="list-row-wrapper">
-      <div id="iconWrapper" part="icon-wrapper">
-        <iron-icon id="more" icon="expand-more"
-          ?hidden="${this.detailsOpened}"
-          @keyup="${(e) => this._callClickOnSpace(e)}"
-          @tap="${() => this._toggleRowDetails()}"
-          tabindex="0">
-        </iron-icon>
-        <iron-icon id="less" icon="expand-less"
-          ?hidden="${!this.detailsOpened}"
-          @keyup="${(e) => this._callClickOnSpace(e)}"
-          @tap="${() => this._toggleRowDetails()}"
-          tabindex="0">
-        </iron-icon>
+        <div id="iconWrapper" part="icon-wrapper">
+          <iron-icon
+            id="more"
+            icon="expand-more"
+            ?hidden="${this.detailsOpened}"
+            @keyup="${(e) => this._callClickOnSpace(e)}"
+            @tap="${() => this._toggleRowDetails()}"
+            tabindex="0"
+          >
+          </iron-icon>
+          <iron-icon
+            id="less"
+            icon="expand-less"
+            ?hidden="${!this.detailsOpened}"
+            @keyup="${(e) => this._callClickOnSpace(e)}"
+            @tap="${() => this._toggleRowDetails()}"
+            tabindex="0"
+          >
+          </iron-icon>
+        </div>
+        <slot name="row-data"></slot>
       </div>
-      <slot name="row-data"></slot>
-    </div>
 
-    <iron-collapse id="details" ?opened="${this.detailsOpened}" no-animation="${this.noAnimation}">
-      <div id="collapse-wrapper" part="list-row-collapse-wrapper">
-        <slot name="row-data-details"></slot>
-      </div>
-    </iron-collapse>
+      <iron-collapse id="details" ?opened="${this.detailsOpened}" no-animation="${this.noAnimation}">
+        <div id="collapse-wrapper" part="list-row-collapse-wrapper">
+          <slot name="row-data-details"></slot>
+        </div>
+      </iron-collapse>
     `;
   }
 
@@ -187,7 +193,7 @@ class EtoolsDataTableRow extends LitElement {
   }
 
   _toggleRowDetails() {
-    this.detailsOpened ? this.detailsOpened = false : this.detailsOpened = true;
+    this.detailsOpened ? (this.detailsOpened = false) : (this.detailsOpened = true);
   }
 
   _callClickOnSpace(event) {
@@ -199,5 +205,4 @@ class EtoolsDataTableRow extends LitElement {
       event.target.focus();
     }
   }
-
 }

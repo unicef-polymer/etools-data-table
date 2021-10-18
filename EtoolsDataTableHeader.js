@@ -1,4 +1,4 @@
-import {LitElement, html, property} from 'lit-element';
+import {LitElement, html} from 'lit-element';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 
 /**
@@ -8,7 +8,7 @@ import '@polymer/iron-flex-layout/iron-flex-layout.js';
  * @extends {LitElement}
  * @demo demo/index.html
  */
-class EtoolsDataTableHeader extends LitElement {
+export class EtoolsDataTableHeader extends LitElement {
   render() {
     // language=HTML
     return html`
@@ -81,8 +81,6 @@ class EtoolsDataTableHeader extends LitElement {
     return 'etools-data-table-header';
   }
 
-  _sortOrder;
-
   set sortOrder(sortOrder) {
     this._sortOrder = sortOrder;
     this._sortOrderChanged(this._sortOrder);
@@ -135,26 +133,23 @@ class EtoolsDataTableHeader extends LitElement {
   }
 
   _handleSortChanged(e) {
-    let column = e.target;
+    const column = e.target;
     this._clearSelected(column);
     // this.set('sortOrder.field', e.detail.field);
     // this.set('sortOrder.direction', e.detail.field);
-    debugger;
     this.sortOrder = {...this.sortOrder, field: e.detail.field, direction: e.detail.field};
   }
 
   _sortOrderChanged(sortOrder) {
-    debugger;
-    let column = this.queryEffectiveChildren('*[field="' + sortOrder.field + '"]');
+    const column = this.queryEffectiveChildren('*[field="' + sortOrder.field + '"]');
     this._clearSelected(column);
-    //@dci
     column.selected = true;
     column.direction = sortOrder.direction;
   }
 
   _clearSelected(column) {
     if (this._lastSelectedCol && this._lastSelectedCol !== column) {
-      //@dci this._lastSelectedCol.set('selected', null);
+      // this._lastSelectedCol.set('selected', null);
       this._lastSelectedCol = {...this._lastSelectedCol, selected: null};
     }
     this._lastSelectedCol = column;

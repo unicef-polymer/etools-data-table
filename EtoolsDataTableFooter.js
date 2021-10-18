@@ -14,7 +14,6 @@ import '@polymer/iron-flex-layout/iron-flex-layout.js';
  * @demo demo/index.html
  */
 export class EtoolsDataTableFooter extends LitElement {
-
   render() {
     // language=HTML
     return html`
@@ -120,12 +119,11 @@ export class EtoolsDataTableFooter extends LitElement {
       </style>
 
       <div id="table-footer">
-
         <span class="pagination-item">
           <span id="rows">Rows per page:</span>
           <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink="" no-label-float>
             <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="${this.pageSize}">
-              ${this.pageSizeOptions.map((item) => html` <paper-item name$="${item}">${item}</paper-item>`)}
+              ${(this.pageSizeOptions || []).map((item) => html` <paper-item name$="${item}">${item}</paper-item>`)}
             </paper-listbox>
           </paper-dropdown-menu>
 
@@ -133,30 +131,37 @@ export class EtoolsDataTableFooter extends LitElement {
         </span>
 
         <span class="pagination-item pag-btns">
-          <paper-icon-button icon="first-page" on-tap="${() => this._firstPage()}"
-                            ?disabled="${this._pageBackDisabled(pageNumber)}"></paper-icon-button>
+          <paper-icon-button
+            icon="first-page"
+            @click="${this._firstPage}"
+            ?disabled="${this._pageBackDisabled(this.pageNumber)}"
+          ></paper-icon-button>
 
-          <paper-icon-button icon="chevron-left" on-tap="${() => this._pageLeft()}"
-                            ?disabled="${this._pageBackDisabled(this.pageNumber)}"></paper-icon-button>
+          <paper-icon-button
+            icon="chevron-left"
+            @click="${this._pageLeft}"
+            ?disabled="${this._pageBackDisabled(this.pageNumber)}"
+          ></paper-icon-button>
 
-          <paper-icon-button icon="chevron-right" on-tap="${() => _pageRight()}"
-                            ?disabled="${this._pageForwardDisabled(this.pageNumber, this.totalPages)}"></paper-icon-button>
+          <paper-icon-button
+            icon="chevron-right"
+            @click="${this._pageRight}"
+            ?disabled="${this._pageForwardDisabled(this.pageNumber, this.totalPages)}"
+          ></paper-icon-button>
 
-          <paper-icon-button icon="last-page" on-tap="${() => _lastPage()}"
-                            ?disabled="${this._pageForwardDisabled(this.pageNumber, this.totalPages)}"></paper-icon-button>
+          <paper-icon-button
+            icon="last-page"
+            @click="${this._lastPage}"
+            ?disabled="${this._pageForwardDisabled(this.pageNumber, this.totalPages)}"
+          ></paper-icon-button>
         </span>
-
-    </div>
+      </div>
     `;
   }
 
   static get is() {
     return 'etools-data-table-footer';
   }
-
-  _pageSize;
-  _pageNumber;
-  _totalResults;
 
   set pageSize(pageSize) {
     this._pageSize = pageSize;
