@@ -163,8 +163,7 @@ class EtoolsDataTableRow extends LitElement {
     return {
       detailsOpened: {
         type: Boolean,
-        value: false,
-        notify: true
+        value: false
       },
       noCollapse: {
         type: Boolean,
