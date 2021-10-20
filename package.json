@@ -1,7 +1,7 @@
 {
   "name": "@unicef-polymer/etools-data-table",
   "description": "Data table",
-  "version": "5.2.0-rc.1",
+  "version": "6.0.0-rc.1",
   "homepage": "https://github.com/unicef-polymer/etools-data-table",
   "repository": {
     "type": "git",
