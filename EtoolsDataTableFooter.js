@@ -122,8 +122,9 @@ export class EtoolsDataTableFooter extends LitElement {
           <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink="" no-label-float>
             <paper-listbox slot="dropdown-content" attr-for-selected="name" .selected="${this.pageSize}">
               ${(this.pageSizeOptions || []).map(
-      (item) => html` <paper-item name="${item}" @click="${() => (this.pageSize = item)}">${item}</paper-item>`
-    )}
+                (item) =>
+                  html` <paper-item name="${item}" @click="${() => (this.pageSize = item)}">${item}</paper-item>`
+              )}
             </paper-listbox>
           </paper-dropdown-menu>
 
@@ -221,11 +222,13 @@ export class EtoolsDataTableFooter extends LitElement {
       },
       doNotShow: {
         type: Boolean,
-        reflect: true
+        reflect: true,
+        attribute: 'do-not-show'
       },
       lowResolutionLayout: {
         type: Boolean,
-        reflect: true
+        reflect: true,
+        attribute: 'low-resolution-layout'
       }
     };
   }

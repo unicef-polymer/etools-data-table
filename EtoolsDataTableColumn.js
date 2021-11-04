@@ -109,12 +109,12 @@ export class EtoolsDataTableColumn extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener('tap', this._sort);
+    this.addEventListener('click', this._sort);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.removeEventListener('tap', this._sort);
+    this.removeEventListener('click', this._sort);
   }
 
   _sort() {

@@ -100,22 +100,26 @@ export class EtoolsDataTableHeader extends LitElement {
       },
       noTitle: {
         type: Boolean,
-        reflect: true
+        reflect: true,
+        attribute: 'no-title'
       },
       noCollapse: {
         type: Boolean,
-        reflect: true
+        reflect: true,
+        attribute: 'no-collapse'
       },
       label: {
         type: String
       },
       lowResolutionLayout: {
         type: Boolean,
-        reflect: true
+        reflect: true,
+        attribute: 'low-resolution-layout'
       },
       mediumResolutionLayout: {
         type: Boolean,
-        reflect: true
+        reflect: true,
+        attribute: 'medium-resolution-layout'
       }
     };
   }

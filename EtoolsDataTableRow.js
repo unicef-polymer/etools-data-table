@@ -136,8 +136,8 @@ export class EtoolsDataTableRow extends LitElement {
             id="more"
             icon="expand-more"
             ?hidden="${this.detailsOpened}"
-            @keyup="${(e) => this._callClickOnSpace(e)}"
-            @tap="${() => this._toggleRowDetails()}"
+            @keyup="${this._callClickOnSpace}"
+            @click="${this._toggleRowDetails}"
             tabindex="0"
           >
           </iron-icon>
@@ -145,8 +145,8 @@ export class EtoolsDataTableRow extends LitElement {
             id="less"
             icon="expand-less"
             ?hidden="${!this.detailsOpened}"
-            @keyup="${(e) => this._callClickOnSpace(e)}"
-            @tap="${() => this._toggleRowDetails()}"
+            @keyup="${this._callClickOnSpace}"
+            @click="${this._toggleRowDetails}"
             tabindex="0"
           >
           </iron-icon>
@@ -154,7 +154,7 @@ export class EtoolsDataTableRow extends LitElement {
         <slot name="row-data"></slot>
       </div>
 
-      <iron-collapse id="details" ?opened="${this.detailsOpened}" no-animation="${this.noAnimation}">
+      <iron-collapse id="details" ?opened="${this.detailsOpened}" ?no-animation="${this.noAnimation}">
         <div id="collapse-wrapper" part="edt-list-row-collapse-wrapper">
           <slot name="row-data-details"></slot>
         </div>
@@ -169,26 +169,34 @@ export class EtoolsDataTableRow extends LitElement {
   static get properties() {
     return {
       detailsOpened: {
-        type: Boolean,
-        value: false
+        type: Boolean
       },
       noCollapse: {
         type: Boolean,
-        reflect: true
+        reflect: true,
+        attribute: 'no-collapse'
       },
       noAnimation: {
         type: Boolean,
-        value: false
+        attribute: 'no-animation'
       },
       lowResolutionLayout: {
         type: Boolean,
-        reflect: true
+        reflect: true,
+        attribute: 'low-resolution-layout'
       },
       mediumResolutionLayout: {
         type: Boolean,
-        reflect: true
+        reflect: true,
+        attribute: 'medium-resolution-layout'
       }
     };
+  }
+
+  constructor() {
+    super();
+    this.detailsOpened = false;
+    this.noAnimation = false;
   }
 
   _toggleRowDetails() {
