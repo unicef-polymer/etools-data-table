@@ -11,7 +11,8 @@
   "scripts": {
     "lint": "eslint . --ext js,html",
     "prepublishOnly": "npm run lint",
-    "gen-typings": "gen-typescript-declarations --deleteExisting --outDir './'"
+    "gen-typings": "gen-typescript-declarations --deleteExisting --outDir './'",
+    "publish": "git push --tags && npm publish"
   },
   "publishConfig": {
     "access": "public"
