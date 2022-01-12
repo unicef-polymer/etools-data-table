@@ -1,5 +1,4 @@
 import '@polymer/polymer/polymer-element.js';
-import '@polymer/iron-flex-layout/iron-flex-layout.js';
 
 export const dataTableStylesContent = `
   a {
@@ -25,8 +24,8 @@ export const dataTableStylesContent = `
   }
   *[slot="row-data"],
   *[slot="row-data-details"] {
-    @apply --layout-horizontal;
-    @apply --layout-flex;
+    display: flex;
+    flex-direction: row;
   }
 
   *[slot="row-data"] .col-data {
@@ -72,15 +71,15 @@ export const dataTableStylesContent = `
   /* Mobile view CSS */
   etools-data-table-row[medium-resolution-layout] *[slot="row-data"],
   etools-data-table-row[medium-resolution-layout] *[slot="row-data-details"] {
-    @apply --layout;
-    @apply --layout-wrap;
-    @apply --layout-flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     box-sizing: border-box;
   }
 
   etools-data-table-row[medium-resolution-layout] *[slot="row-data"] .col-data {
-    @apply --layout;
-    @apply --layout-start;
+    display: flex;
+    justify-content: flex-start;
     flex: 1 0 calc(50% - 16px);
     max-width: calc(50% - 16px);
     padding: 8px;
@@ -88,8 +87,7 @@ export const dataTableStylesContent = `
   }
 
   etools-data-table-row[medium-resolution-layout] *[slot="row-data"] .truncate {
-    @apply --layout;
-    @apply --layout-flex;
+    display: flex;
     white-space: unset;
     overflow: unset;
     text-overflow: unset;

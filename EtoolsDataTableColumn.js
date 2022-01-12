@@ -1,23 +1,22 @@
-import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
-
+import {LitElement, html} from 'lit-element';
 import '@polymer/iron-icons/iron-icons.js';
 
 /**
  * `etools-data-table-column`
- * @polymer
+ * @LitElement
  * @customElement
- * @extends {PolymerElement}
+ * @extends {LitElement}
  * @demo demo/index.html
  */
-export class EtoolsDataTableColumn extends PolymerElement {
-  static get template() {
+export class EtoolsDataTableColumn extends LitElement {
+  render() {
     // language=HTML
     return html`
       <style>
         :host {
-          @apply --layout-horizontal;
-          @apply --layout-center;
-
+          display: flex;
+          flex-direction: row;
+          align-items: center;
           height: var(--list-header-column-height, 56px);
           font-size: 12px;
           color: var(--list-secondary-text-color, #757575);
@@ -94,8 +93,7 @@ export class EtoolsDataTableColumn extends PolymerElement {
     return {
       selected: {
         type: Boolean,
-        value: false,
-        reflectToAttribute: true
+        reflect: true
       },
 
       field: {
@@ -104,14 +102,19 @@ export class EtoolsDataTableColumn extends PolymerElement {
 
       direction: {
         type: String,
-        reflectToAttribute: true
+        reflect: true
       }
     };
   }
 
-  ready() {
-    super.ready();
-    this.addEventListener('tap', this._sort);
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('click', this._sort);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('click', this._sort);
   }
 
   _sort() {
@@ -119,10 +122,10 @@ export class EtoolsDataTableColumn extends PolymerElement {
       return;
     }
     if (!this.selected || !this.direction) {
-      this.set('selected', true);
-      this.set('direction', 'asc');
+      this.selected = true;
+      this.direction = 'asc';
     } else {
-      this.set('direction', this.direction === 'asc' ? 'desc' : 'asc');
+      this.direction = this.direction === 'asc' ? 'desc' : 'asc';
     }
     this.dispatchEvent(
       new CustomEvent('sort-changed', {
