@@ -56,7 +56,6 @@ export class EtoolsDataTableHeader extends LitElement {
         :host([medium-resolution-layout]) div#header-wrapper,
         :host([low-resolution-layout]) div#header-wrapper {
           height: auto;
-          padding: 0;
         }
 
         :host([medium-resolution-layout]) #columns,
