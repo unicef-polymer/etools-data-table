@@ -200,7 +200,14 @@ export class EtoolsDataTableRow extends LitElement {
   }
 
   _toggleRowDetails() {
-    this.detailsOpened ? (this.detailsOpened = false) : (this.detailsOpened = true);
+    this.detailsOpened = !this.detailsOpened;
+    this.dispatchEvent(
+      new CustomEvent('opened-changed', {
+        detail: {opened: this.detailsOpened},
+        bubbles: true,
+        composed: true
+      })
+    );
   }
 
   _callClickOnSpace(event) {
