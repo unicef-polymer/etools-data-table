@@ -134,7 +134,7 @@ export class EtoolsDataTableRow extends LitElement {
         <div id="iconWrapper" part="edt-icon-wrapper">
           <iron-icon
             id="more"
-            icon="expand-more"
+            icon="chevron-right"
             ?hidden="${this.detailsOpened}"
             @keyup="${this._callClickOnSpace}"
             @click="${this._toggleRowDetails}"
@@ -143,7 +143,7 @@ export class EtoolsDataTableRow extends LitElement {
           </iron-icon>
           <iron-icon
             id="less"
-            icon="expand-less"
+            icon="expand-more"
             ?hidden="${!this.detailsOpened}"
             @keyup="${this._callClickOnSpace}"
             @click="${this._toggleRowDetails}"
