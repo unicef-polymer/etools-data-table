@@ -134,7 +134,7 @@ export class EtoolsDataTableRow extends LitElement {
         <div id="iconWrapper" part="edt-icon-wrapper">
           <iron-icon
             id="more"
-            icon="expand-more"
+            icon="chevron-right"
             ?hidden="${this.detailsOpened}"
             @keyup="${this._callClickOnSpace}"
             @click="${this._toggleRowDetails}"
@@ -143,7 +143,7 @@ export class EtoolsDataTableRow extends LitElement {
           </iron-icon>
           <iron-icon
             id="less"
-            icon="expand-less"
+            icon="expand-more"
             ?hidden="${!this.detailsOpened}"
             @keyup="${this._callClickOnSpace}"
             @click="${this._toggleRowDetails}"
@@ -200,7 +200,14 @@ export class EtoolsDataTableRow extends LitElement {
   }
 
   _toggleRowDetails() {
-    this.detailsOpened ? (this.detailsOpened = false) : (this.detailsOpened = true);
+    this.detailsOpened = !this.detailsOpened;
+    this.dispatchEvent(
+      new CustomEvent('opened-changed', {
+        detail: {opened: this.detailsOpened},
+        bubbles: true,
+        composed: true
+      })
+    );
   }
 
   _callClickOnSpace(event) {
