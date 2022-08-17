@@ -118,7 +118,7 @@ export class EtoolsDataTableFooter extends LitElement {
 
       <div id="table-footer">
         <span class="pagination-item">
-          <span id="rows">Rows per page:</span>
+          <span id="rows">${this.rowsPerPageText}</span>
           <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink="" no-label-float>
             <paper-listbox slot="dropdown-content" attr-for-selected="name" .selected="${this.pageSize}">
               ${(this.pageSizeOptions || []).map(
@@ -194,6 +194,7 @@ export class EtoolsDataTableFooter extends LitElement {
     this._computeTotalPages(this.pageSize, this.totalResults);
     this._computeVisibleRange(this.pageNumber, this.pageSize, this.totalResults, this.totalPages);
     this._hideFooter(this.totalResults);
+    this.requestUpdate();
   }
 
   get totalResults() {
@@ -229,6 +230,9 @@ export class EtoolsDataTableFooter extends LitElement {
         type: Boolean,
         reflect: true,
         attribute: 'low-resolution-layout'
+      },
+      rowsPerPageText: {
+        type: String
       }
     };
   }
@@ -236,6 +240,7 @@ export class EtoolsDataTableFooter extends LitElement {
   constructor() {
     super();
     this.initializeProperties();
+    this.rowsPerPageText = 'Rows per page:';
   }
 
   initializeProperties() {
