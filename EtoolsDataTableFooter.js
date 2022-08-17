@@ -194,6 +194,7 @@ export class EtoolsDataTableFooter extends LitElement {
     this._computeTotalPages(this.pageSize, this.totalResults);
     this._computeVisibleRange(this.pageNumber, this.pageSize, this.totalResults, this.totalPages);
     this._hideFooter(this.totalResults);
+    this.requestUpdate();
   }
 
   get totalResults() {
