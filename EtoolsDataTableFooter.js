@@ -258,8 +258,8 @@ export class EtoolsDataTableFooter extends LitElement {
     };
   }
 
-  constructor(...args) {
-    super(args);
+  constructor() {
+    super();
     this.initializeProperties();
   }
 
