@@ -118,7 +118,7 @@ export class EtoolsDataTableFooter extends LitElement {
 
       <div id="table-footer">
         <span class="pagination-item">
-          <span id="rows">${this.rowsPerPageText}</span>
+          <span id="rows">${this.rowsPerPageText || getTranslation(this.language, 'ROWS_PER_PAGE')}</span>
           <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink="" no-label-float>
             <paper-listbox slot="dropdown-content" attr-for-selected="name" .selected="${this.pageSize}">
               ${(this.pageSizeOptions || []).map(
@@ -269,7 +269,6 @@ export class EtoolsDataTableFooter extends LitElement {
     if (!this.language) {
       this.language = window.localStorage.defaultLanguage || 'en';
     }
-    this.rowsPerPageText = getTranslation(this.language, 'ROWS_PER_PAGE');
   }
 
   _pageLeft() {
