@@ -1,9 +1,9 @@
 import {LitElement, html} from 'lit-element';
-
 import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
+import {getTranslation} from './utils/translate.js';
 
 /**
  * `etools-data-table-footer`
@@ -118,7 +118,7 @@ export class EtoolsDataTableFooter extends LitElement {
 
       <div id="table-footer">
         <span class="pagination-item">
-          <span id="rows">${this.rowsPerPageText}</span>
+          <span id="rows">${this.rowsPerPageText || getTranslation(this.language, 'ROWS_PER_PAGE')}</span>
           <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink="" no-label-float>
             <paper-listbox slot="dropdown-content" attr-for-selected="name" .selected="${this.pageSize}">
               ${(this.pageSizeOptions || []).map(
@@ -128,7 +128,11 @@ export class EtoolsDataTableFooter extends LitElement {
             </paper-listbox>
           </paper-dropdown-menu>
 
-          <span id="range">${`${this.visibleRange[0]}-${this.visibleRange[1]} of ${this.totalResults}`}</span>
+          <span id="range"
+            >${`${this.visibleRange[0]}-${this.visibleRange[1]} ${getTranslation(this.language, 'OF')} ${
+              this.totalResults
+            }`}</span
+          >
         </span>
 
         <span class="pagination-item pag-btns">
@@ -158,6 +162,20 @@ export class EtoolsDataTableFooter extends LitElement {
         </span>
       </div>
     `;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    document.addEventListener('language-changed', this.handleLanguageChange.bind(this));
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    document.removeEventListener('language-changed', this.handleLanguageChange.bind(this));
+  }
+
+  handleLanguageChange(e) {
+    this.language = e.detail.language;
   }
 
   static get is() {
@@ -203,6 +221,9 @@ export class EtoolsDataTableFooter extends LitElement {
 
   static get properties() {
     return {
+      language: {
+        type: String
+      },
       pageSize: {
         type: String
       },
@@ -240,12 +261,14 @@ export class EtoolsDataTableFooter extends LitElement {
   constructor() {
     super();
     this.initializeProperties();
-    this.rowsPerPageText = 'Rows per page:';
   }
 
   initializeProperties() {
     this.pageSizeOptions = [5, 10, 25, 50];
     this.lowResolutionLayout = false;
+    if (!this.language) {
+      this.language = window.localStorage.defaultLanguage || 'en';
+    }
   }
 
   _pageLeft() {
