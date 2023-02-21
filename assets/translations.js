@@ -24,7 +24,7 @@ const translations = {
     OF: 'de'
   },
   ar: {
-    ROWS_PER_PAGE: 'عدد الصفوف في الصفحة:',
+    ROWS_PER_PAGE: ':دد الصفوف في الصفحة',
     OF: 'من'
   }
 };
