@@ -18,6 +18,14 @@ const translations = {
   ru: {
     ROWS_PER_PAGE: 'Рядов на странице:',
     OF: 'из'
+  },
+  es: {
+    ROWS_PER_PAGE: 'Filas por página:',
+    OF: 'de'
+  },
+  ar: {
+    ROWS_PER_PAGE: 'عدد الصفوف في الصفحة:',
+    OF: 'من'
   }
 };
 export default translations;
