@@ -64,7 +64,7 @@ export class EtoolsDataTableFooter extends LitElement {
         }
 
         #rows {
-          margin-right: 24px;
+          margin-inline-end: 24px;
         }
 
         #range {
@@ -149,13 +149,13 @@ export class EtoolsDataTableFooter extends LitElement {
           ></paper-icon-button>
 
           <paper-icon-button
-            icon="${this.direction === 'ltr' ? 'chevron-left' : 'chevron-right'}"
+            icon="${this.direction === 'ltr' ? 'chevron-right' : 'chevron-left'}"
             @click="${this._pageRight}"
             ?disabled="${this._pageForwardDisabled(this.pageNumber, this.totalPages)}"
           ></paper-icon-button>
 
           <paper-icon-button
-            icon="${this.direction === 'ltr' ? 'first-page' : 'last-page'}"
+            icon="${this.direction === 'ltr' ? 'last-page' : 'first-page'}"
             @click="${this._lastPage}"
             ?disabled="${this._pageForwardDisabled(this.pageNumber, this.totalPages)}"
           ></paper-icon-button>
