@@ -64,7 +64,7 @@ export class EtoolsDataTableFooter extends LitElement {
         }
 
         #rows {
-          margin-right: 24px;
+          margin-inline-end: 24px;
         }
 
         #range {
@@ -137,25 +137,25 @@ export class EtoolsDataTableFooter extends LitElement {
 
         <span class="pagination-item pag-btns">
           <paper-icon-button
-            icon="first-page"
+            icon="${this.direction === 'ltr' ? 'first-page' : 'last-page'}"
             @click="${this._firstPage}"
             ?disabled="${this._pageBackDisabled(this.pageNumber)}"
           ></paper-icon-button>
 
           <paper-icon-button
-            icon="chevron-left"
+            icon="${this.direction === 'ltr' ? 'chevron-left' : 'chevron-right'}"
             @click="${this._pageLeft}"
             ?disabled="${this._pageBackDisabled(this.pageNumber)}"
           ></paper-icon-button>
 
           <paper-icon-button
-            icon="chevron-right"
+            icon="${this.direction === 'ltr' ? 'chevron-right' : 'chevron-left'}"
             @click="${this._pageRight}"
             ?disabled="${this._pageForwardDisabled(this.pageNumber, this.totalPages)}"
           ></paper-icon-button>
 
           <paper-icon-button
-            icon="last-page"
+            icon="${this.direction === 'ltr' ? 'last-page' : 'first-page'}"
             @click="${this._lastPage}"
             ?disabled="${this._pageForwardDisabled(this.pageNumber, this.totalPages)}"
           ></paper-icon-button>
@@ -176,6 +176,7 @@ export class EtoolsDataTableFooter extends LitElement {
 
   handleLanguageChange(e) {
     this.language = e.detail.language;
+    this.direction = this.language === 'ar' ? 'rtl' : 'ltr';
   }
 
   static get is() {
@@ -224,6 +225,9 @@ export class EtoolsDataTableFooter extends LitElement {
       language: {
         type: String
       },
+      direction: {
+        type: String
+      },
       pageSize: {
         type: String
       },
@@ -266,8 +270,10 @@ export class EtoolsDataTableFooter extends LitElement {
   initializeProperties() {
     this.pageSizeOptions = [5, 10, 25, 50];
     this.lowResolutionLayout = false;
+    this.direction = 'ltr';
     if (!this.language) {
       this.language = window.localStorage.defaultLanguage || 'en';
+      this.direction = this.language === 'ar' ? 'rtl' : 'ltr';
     }
   }
 
