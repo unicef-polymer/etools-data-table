@@ -50,7 +50,7 @@ export const dataTableStylesContent = `
   }
   etools-data-table-column:last-child,
   *[slot="row-data"] .col-data:last-child {
-    padding-right: 0;
+    padding-inline-end: 0;
   }
   .row-details-content {
     font-size: 12px;

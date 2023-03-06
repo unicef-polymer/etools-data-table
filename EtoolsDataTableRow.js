@@ -50,7 +50,7 @@ export class EtoolsDataTableRow extends LitElement {
           display: flex;
           flex-direction: row;
           align-items: center;
-          padding: var(--list-row-wrapper-padding, 0 24px 0 0);
+          padding-inline: var(--list-row-wrapper-padding-inline, 0 24px);
           font-size: 13px;
           color: var(--list-text-color, #2b2b2b);
           background-color: var(--list-bg-color, #ffffff);
@@ -97,7 +97,8 @@ export class EtoolsDataTableRow extends LitElement {
         }
 
         #collapse-wrapper {
-          padding: 16px 24px 16px 58px;
+          padding: 16px 0;
+          padding-inline: 58px 24px;
           background-color: var(--list-second-bg-color, #eeeeee);
         }
 
@@ -114,7 +115,7 @@ export class EtoolsDataTableRow extends LitElement {
         /* Mobile view CSS */
         :host([medium-resolution-layout]) div#wrapper,
         :host([low-resolution-layout]) div#wrapper {
-          padding-right: 0;
+          padding-inline-end: 0;
         }
 
         :host([medium-resolution-layout]) #iconWrapper,
@@ -126,7 +127,8 @@ export class EtoolsDataTableRow extends LitElement {
 
         :host([medium-resolution-layout]) #collapse-wrapper,
         :host([low-resolution-layout]) #collapse-wrapper {
-          padding: 0 0 0 40px;
+          padding: 0;
+          padding-inline-start: 40px;
         }
       </style>
 

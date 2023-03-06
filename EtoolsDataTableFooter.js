@@ -46,7 +46,9 @@ export class EtoolsDataTableFooter extends LitElement {
           display: flex;
           flex-direction: row;
           justify-content: flex-end;
-          padding: 0 8px 0 16px;
+          padding: 0;
+          padding-inline-end: 8px;
+          padding-inline-start: 16px;
           height: 48px;
           background-color: var(--list-bg-color, #ffffff);
         }
