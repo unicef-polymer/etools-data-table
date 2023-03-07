@@ -110,11 +110,12 @@ export class EtoolsDataTableFooter extends LitElement {
         }
 
         :host([low-resolution-layout]) #range {
-          margin: 0 0 0 24px;
+          margin: 0;
+          margin-inline-start: 24px;
         }
 
         :host([low-resolution-layout]) .pag-btns {
-          margin-left: -12px;
+          margin-inline-start: -12px;
         }
       </style>
 

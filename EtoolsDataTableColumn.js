@@ -28,7 +28,7 @@ export class EtoolsDataTableColumn extends LitElement {
         }
 
         #label {
-          margin-right: 5px;
+          margin-inline-end: 5px;
           -webkit-user-select: none;
           -moz-user-select: none;
           -ms-user-select: none;
