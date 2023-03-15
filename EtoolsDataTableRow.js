@@ -96,6 +96,10 @@ export class EtoolsDataTableRow extends LitElement {
           color: var(--list-icon-hover-color, rgba(0, 0, 0, 0.87));
         }
 
+        :host-context([dir='rtl']) #more {
+          transform: rotate(180);
+        }
+
         #collapse-wrapper {
           padding: 16px 0;
           padding-inline: 58px 24px;
@@ -108,7 +112,7 @@ export class EtoolsDataTableRow extends LitElement {
         }
 
         :host([no-collapse]) #wrapper {
-          padding: var(--list-row-wrapper-padding, 0 24px);
+          padding-inline: var(--list-row-wrapper-padding-inline, 24px);
           @apply --list-row-no-collapse;
         }
 
