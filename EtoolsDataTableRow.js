@@ -97,7 +97,7 @@ export class EtoolsDataTableRow extends LitElement {
         }
 
         :host-context([dir='rtl']) #more {
-          transform: rotate(180);
+          transform: rotate(180deg);
         }
 
         #collapse-wrapper {
