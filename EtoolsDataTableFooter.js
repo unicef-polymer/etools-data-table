@@ -46,7 +46,9 @@ export class EtoolsDataTableFooter extends LitElement {
           display: flex;
           flex-direction: row;
           justify-content: flex-end;
-          padding: 0 8px 0 16px;
+          padding: 0;
+          padding-inline-end: 8px;
+          padding-inline-start: 16px;
           height: 48px;
           background-color: var(--list-bg-color, #ffffff);
         }
@@ -108,11 +110,12 @@ export class EtoolsDataTableFooter extends LitElement {
         }
 
         :host([low-resolution-layout]) #range {
-          margin: 0 0 0 24px;
+          margin: 0;
+          margin-inline-start: 24px;
         }
 
         :host([low-resolution-layout]) .pag-btns {
-          margin-left: -12px;
+          margin-inline-start: -12px;
         }
       </style>
 

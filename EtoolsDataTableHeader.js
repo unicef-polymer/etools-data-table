@@ -48,7 +48,7 @@ export class EtoolsDataTableHeader extends LitElement {
         }
 
         :host([no-collapse]) #columns {
-          margin-left: 0;
+          margin-inline-start: 0;
           flex: 1;
         }
 

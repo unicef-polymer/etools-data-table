@@ -50,7 +50,7 @@ export const dataTableStylesContent = `
   }
   etools-data-table-column:last-child,
   *[slot="row-data"] .col-data:last-child {
-    padding-right: 0;
+    padding-inline-end: 0;
   }
   .row-details-content {
     font-size: 12px;
@@ -65,7 +65,8 @@ export const dataTableStylesContent = `
 
   .row-details-content .rdc-title.inline {
     width: auto;
-    margin: 0 8px 0 0;
+    margin: 0;
+    margin-inline-end: 8px;
   }
 
   /* Mobile view CSS */
@@ -114,7 +115,7 @@ export const dataTableStylesContent = `
     content: attr(data-col-header-label)": ";
     color: var(--list-secondary-text-color, #757575);
     font-weight: bold;
-    margin-right: 8px;
+    margin-inline-end: 8px;
     vertical-align: top;
     min-height: 24px;
   }
