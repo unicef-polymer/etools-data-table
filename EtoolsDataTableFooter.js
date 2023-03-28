@@ -1,9 +1,9 @@
 import {LitElement, html} from 'lit-element';
-
 import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
+import {getTranslation} from './utils/translate.js';
 
 /**
  * `etools-data-table-footer`
@@ -46,7 +46,9 @@ export class EtoolsDataTableFooter extends LitElement {
           display: flex;
           flex-direction: row;
           justify-content: flex-end;
-          padding: 0 8px 0 16px;
+          padding: 0;
+          padding-inline-end: 8px;
+          padding-inline-start: 16px;
           height: 48px;
           background-color: var(--list-bg-color, #ffffff);
         }
@@ -64,7 +66,7 @@ export class EtoolsDataTableFooter extends LitElement {
         }
 
         #rows {
-          margin-right: 24px;
+          margin-inline-end: 24px;
         }
 
         #range {
@@ -108,17 +110,18 @@ export class EtoolsDataTableFooter extends LitElement {
         }
 
         :host([low-resolution-layout]) #range {
-          margin: 0 0 0 24px;
+          margin: 0;
+          margin-inline-start: 24px;
         }
 
         :host([low-resolution-layout]) .pag-btns {
-          margin-left: -12px;
+          margin-inline-start: -12px;
         }
       </style>
 
       <div id="table-footer">
         <span class="pagination-item">
-          <span id="rows">${this.rowsPerPageText}</span>
+          <span id="rows">${this.rowsPerPageText || getTranslation(this.language, 'ROWS_PER_PAGE')}</span>
           <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink="" no-label-float>
             <paper-listbox slot="dropdown-content" attr-for-selected="name" .selected="${this.pageSize}">
               ${(this.pageSizeOptions || []).map(
@@ -128,36 +131,55 @@ export class EtoolsDataTableFooter extends LitElement {
             </paper-listbox>
           </paper-dropdown-menu>
 
-          <span id="range">${`${this.visibleRange[0]}-${this.visibleRange[1]} of ${this.totalResults}`}</span>
+          <span id="range"
+            >${`${this.visibleRange[0]}-${this.visibleRange[1]} ${getTranslation(this.language, 'OF')} ${
+              this.totalResults
+            }`}</span
+          >
         </span>
 
         <span class="pagination-item pag-btns">
           <paper-icon-button
-            icon="first-page"
+            icon="${this.direction === 'ltr' ? 'first-page' : 'last-page'}"
             @click="${this._firstPage}"
             ?disabled="${this._pageBackDisabled(this.pageNumber)}"
           ></paper-icon-button>
 
           <paper-icon-button
-            icon="chevron-left"
+            icon="${this.direction === 'ltr' ? 'chevron-left' : 'chevron-right'}"
             @click="${this._pageLeft}"
             ?disabled="${this._pageBackDisabled(this.pageNumber)}"
           ></paper-icon-button>
 
           <paper-icon-button
-            icon="chevron-right"
+            icon="${this.direction === 'ltr' ? 'chevron-right' : 'chevron-left'}"
             @click="${this._pageRight}"
             ?disabled="${this._pageForwardDisabled(this.pageNumber, this.totalPages)}"
           ></paper-icon-button>
 
           <paper-icon-button
-            icon="last-page"
+            icon="${this.direction === 'ltr' ? 'last-page' : 'first-page'}"
             @click="${this._lastPage}"
             ?disabled="${this._pageForwardDisabled(this.pageNumber, this.totalPages)}"
           ></paper-icon-button>
         </span>
       </div>
     `;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    document.addEventListener('language-changed', this.handleLanguageChange.bind(this));
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    document.removeEventListener('language-changed', this.handleLanguageChange.bind(this));
+  }
+
+  handleLanguageChange(e) {
+    this.language = e.detail.language;
+    this.direction = this.language === 'ar' ? 'rtl' : 'ltr';
   }
 
   static get is() {
@@ -203,6 +225,12 @@ export class EtoolsDataTableFooter extends LitElement {
 
   static get properties() {
     return {
+      language: {
+        type: String
+      },
+      direction: {
+        type: String
+      },
       pageSize: {
         type: String
       },
@@ -240,12 +268,16 @@ export class EtoolsDataTableFooter extends LitElement {
   constructor() {
     super();
     this.initializeProperties();
-    this.rowsPerPageText = 'Rows per page:';
   }
 
   initializeProperties() {
     this.pageSizeOptions = [5, 10, 25, 50];
     this.lowResolutionLayout = false;
+    this.direction = 'ltr';
+    if (!this.language) {
+      this.language = window.localStorage.defaultLanguage || 'en';
+      this.direction = this.language === 'ar' ? 'rtl' : 'ltr';
+    }
   }
 
   _pageLeft() {
