@@ -3,6 +3,8 @@ import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
+import '@polymer/paper-input.js';
+import '@polymer/iron-icon.js';
 import {getTranslation} from './utils/translate.js';
 
 /**
@@ -143,11 +145,7 @@ export class EtoolsDataTableFooter extends LitElement {
             >
               <iron-icon icon="paper-dropdown-menu:arrow-drop-down" suffix="" slot="suffix"></iron-icon>
             </paper-input>
-            <iron-dropdown
-              horizontal-align="center"
-              vertical-align="bottom"
-              allow-outside-scroll
-            >
+            <iron-dropdown horizontal-align="center" vertical-align="bottom" allow-outside-scroll>
               <paper-listbox slot="dropdown-content" attr-for-selected="name" .selected="${this.pageSize}">
                 ${(this.pageSizeOptions || []).map(
                   (item) =>
