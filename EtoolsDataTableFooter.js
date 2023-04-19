@@ -73,10 +73,10 @@ export class EtoolsDataTableFooter extends LitElement {
           margin: 0 32px;
         }
 
-        paper-dropdown-menu {
+        .rows-per-page-dropdown {
           width: 40px;
-          bottom: 9px;
-
+          cursor: pointer;
+          position: relative;
           --paper-input-container-input: {
             color: var(--list-text-color, rgba(0, 0, 0, 0.54));
             font-size: 12px;
@@ -84,10 +84,21 @@ export class EtoolsDataTableFooter extends LitElement {
             align-items: strech;
             max-width: 24px;
           }
-
           --paper-input-container-underline: {
             display: none;
           }
+        }
+
+        .rows-per-page-dropdown iron-dropdown {
+          position: absolute !important;
+          bottom: 0 !important;
+          top: unset !important;
+          z-index: 1 !important;
+        }
+
+        .rows-per-page-dropdown paper-listbox {
+          max-height: unset !important;
+          box-shadow: var(--shadow-elevation-2dp_-_box-shadow);
         }
 
         .pagination-item {
@@ -122,14 +133,31 @@ export class EtoolsDataTableFooter extends LitElement {
       <div id="table-footer">
         <span class="pagination-item">
           <span id="rows">${this.rowsPerPageText || getTranslation(this.language, 'ROWS_PER_PAGE')}</span>
-          <paper-dropdown-menu vertical-align="bottom" horizontal-align="left" noink="" no-label-float>
-            <paper-listbox slot="dropdown-content" attr-for-selected="name" .selected="${this.pageSize}">
-              ${(this.pageSizeOptions || []).map(
-                (item) =>
-                  html` <paper-item name="${item}" @click="${() => (this.pageSize = item)}">${item}</paper-item>`
-              )}
-            </paper-listbox>
-          </paper-dropdown-menu>
+
+          <div class="rows-per-page-dropdown">
+            <paper-input
+              readonly
+              no-label-float
+              @click="${this._openRowsPerPageDropdown.bind(this)}"
+              .value="${this.pageSize}"
+            >
+              <iron-icon icon="paper-dropdown-menu:arrow-drop-down" suffix="" slot="suffix"></iron-icon>
+            </paper-input>
+            <iron-dropdown
+              horizontal-align="center"
+              vertical-align="bottom"
+              allow-outside-scroll
+            >
+              <paper-listbox slot="dropdown-content" attr-for-selected="name" .selected="${this.pageSize}">
+                ${(this.pageSizeOptions || []).map(
+                  (item) =>
+                    html` <paper-item name="${item}" @click="${() => this._selectRowsPerPage(item)}"
+                      >${item}</paper-item
+                    >`
+                )}
+              </paper-listbox>
+            </iron-dropdown>
+          </div>
 
           <span id="range"
             >${`${this.visibleRange[0]}-${this.visibleRange[1]} ${getTranslation(this.language, 'OF')} ${
@@ -357,5 +385,18 @@ export class EtoolsDataTableFooter extends LitElement {
         composed: true
       })
     );
+  }
+
+  _selectRowsPerPage(item) {
+    this.pageSize = item;
+    this._closeRowsPerPageDropdown();
+  }
+
+  _openRowsPerPageDropdown() {
+    this.shadowRoot.querySelector('.rows-per-page-dropdown iron-dropdown').open();
+  }
+
+  _closeRowsPerPageDropdown() {
+    this.shadowRoot.querySelector('.rows-per-page-dropdown iron-dropdown').close();
   }
 }
