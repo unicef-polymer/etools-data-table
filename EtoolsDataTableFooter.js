@@ -3,8 +3,8 @@ import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
-import '@polymer/paper-input.js';
-import '@polymer/iron-icon.js';
+import '@polymer/paper-input/paper-input.js';
+import '@polymer/iron-icon/iron-icon.js';
 import {getTranslation} from './utils/translate.js';
 
 /**
